@@ -2,7 +2,7 @@ let browser
 let page
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
 const { aiChat, aiCookieValue } = require('../../config.json')
 
 function generatePersonality(person, message) {
@@ -14,6 +14,7 @@ const ai = {
     start: async () => {
         try {
             browser = await puppeteer.launch({
+                executablePath: '/usr/bin/chromium',
                 headless: true,
                 args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
             })
