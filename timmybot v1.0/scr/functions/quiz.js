@@ -1,6 +1,7 @@
-const { ActionRowBuilder, Events, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js')
+const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js')
 const { verification } = require('./verification.js')
-const quizMessage = require('../../assets/quiz/quizMessage.json')
+const fs = require('fs')
+const quizMessage = fs.readFileSync('timmybot v1.0/assets/quiz/quizMessage.json', 'utf8')
 let questionnaireProgress = {
   bob: [
     's-001',
