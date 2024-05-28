@@ -3,7 +3,7 @@ let page
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 const puppeteer = require('puppeteer-core')
-const { aiChat, aiCookieValue } = require('../../config.json')
+const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
 
 function generatePersonality(person, message) {
     return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
@@ -53,8 +53,8 @@ const ai = {
             try {
                 let mentions
                 let filteredText
-                const guild = await client.guilds.fetch('1223767535242055782')
-                const channel = await guild.channels.fetch('1240705575239680052')
+                const guild = await client.guilds.fetch(guildID)
+                const channel = await guild.channels.fetch(aiChannelID)
                 
                 async function lastMessageNow() {
 
