@@ -11,6 +11,15 @@ if (supervisorPermissesBoolean) {
     
     if (supervisorPermissesBoolean) {
         try {
+            chalk = require('fs')
+            supervisor.succeed('fs module successfully loaded')
+        } catch (err) {
+            supervisor.fail(1, err, 'fs module failed to load')
+        }
+    }
+
+    if (supervisorPermissesBoolean) {
+        try {
             chalk = require('chalk')
             console.log(`[ ${chalk.green('OK')} ] chalk module successfully loaded`)
         } catch (err) {
