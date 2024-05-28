@@ -34,7 +34,7 @@ const quiz = {
           }
         }
         if (i.customId === 'S-001') { //* adult achievements
-          if (!(i.values == 's-002' || i.values == 's-003' || (i.values.includes('s-002') && i.values.includes('s-003') && i.values.length == 2))) {
+          if (!((i.values.includes('s-002') && i.values.length == 1))) {
             if (await verification.checkUserPreVerification(i)) {
               i.update(quizMessage.message[2])
             }
