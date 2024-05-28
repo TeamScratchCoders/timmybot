@@ -1,9 +1,9 @@
 const fs = require('fs')
-let verifiedMembers = require('../../assets/verirfication/verifiedMembers.json')
 const { Client, Events, GatewayIntentBits } = require("discord.js")
 const { token } = require('../../config.json')
 const { log } = require('console')
 const { role } = require('./role.js')
+let verifiedMembers = fs.readFileSync('timmybot v1.0/assets/verirfication/verifiedMembers.json', 'utf8')
 client = new Client({
     intents: [
         GatewayIntentBits.Guilds,

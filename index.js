@@ -42,17 +42,16 @@ if (supervisorPermissesBoolean) {
             }   
         }
 
-
-
         try {
             if (accessConif()) {
                 supervisor.succeed('config.json instated')
             } else {
-                fs.writeFileSync(path, JSON.stringify(jsonObj, null, 2), 'utf8')
-                if (accessConif()) {
+                try {
+                    fs.writeFileSync(path, JSON.stringify(jsonObj, null, 2), 'utf8')
+
                     supervisor.succeed('successful generated confit.json')
-                } else {
-                    supervisor.fail(1, "", 'failed to generate config.json')
+                } catch (err) {
+                    supervisor.fail(1, err, 'failed to generate config.json')
                 }
             }
         } catch (err) {
