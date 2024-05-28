@@ -1,0 +1,56 @@
+{
+  "content": "### Welcome to Troop 201, The best troop in the 🌌 UNIVERSE 🌟 and CDA. This is the Troop 201 Discord server. To serve all of your Troop communicational needs. Before you can continue There are some things you have to understand.",
+  "embeds": [
+    {
+      "id": 6083252,
+      "description": "",
+      "image": {
+        "url": "https://cdn.discordapp.com/attachments/1224086315436343318/1242334866549506150/welcome_background2.png?ex=664d7601&is=664c2481&hm=8a1afab2a708ba1edc90aa93699e0d7192a8e50a0af47b9d28e369760f62e9c3&"
+      },
+      "color": 1123408
+    },
+    {
+      "id": 349374394,
+      "description": "#  **ROLES**\n *In this discard server we have a variety of roles. All of the roles are to categorize Scouts by there achievements and position. Some rolls will grant you access to different parts of the server and as everyone knows the most important role is the <@&1223786340521480244>*\n\n═════════════════════════════════════════════════",
+      "color": 1777228,
+      "fields": [
+        {
+          "id": 964829279,
+          "name": " ",
+          "value": "**Senior leadership**\n*The senior leadership roles are filled with youth and adults alike.*\n\n- <@&1224115829239713812>\nThe scoutmaster is the head of the troops adult leadership.\n\n- <@&1224095354371178586>\n The senior patrol leader is the head of the troops youth leadership.\n\n- <@&1224096781160153139>\n The senior assistance patrol leader is the assistant to the senior patrol leader.\n\n- <@&1224099787603837160>\n The Scribe is third in command."
+        },
+        {
+          "id": 653496507,
+          "name": " ",
+          "value": "**Leadership**\n*The leadership roles are for youth.*\n\n- <@&1224097198787268759>\nA patroller is the head of his Patrol.\n\n- <@&1224098050348159068>\n The assistant patrol leader is the assistant of the patrol later.\n\n- <@&1224089445117202512>\n The webmaster is the chief administrator of the Discord server.",
+          "inline": true
+        },
+        {
+          "id": 687919602,
+          "name": " ",
+          "value": "**Ranks**\n*Our troop does not only have position roles we also have ranks*\n\n- <@&1224098788977934461>\nThe Scout rank is the first rank.\n- <@&1224102753735934064>\nAfter first class the requirements for the ranks change.\n- <@&1224102976919179386>\n Eagle Scout is the highest honor that can be a bestowed upon a Boy Scout.",
+          "inline": true
+        }
+      ]
+    },
+    {
+      "id": 659181326,
+      "title": " ",
+      "description": "# **PATROLS**\n *Each Patrol will have their own dedicated text and voice channels. Along with the patrols both the adult and Senior leadership will have dedicated text and voice channels. Patrols are encouraged to hold weekly Patrol meetings over Discord or in person.*\n\n═════════════════════════════════════════════════",
+      "color": 2496585,
+      "fields": [
+        {
+          "id": 206167241,
+          "name": " ",
+          "value": "**Patrol rolls**\n\nAll four of the patrols will have their own roles.\n\n- <@&1224097078423191603>\n \n- <@&1224098792782037082>\n \n- <@&1224100512048091199>\n \n- <@&1224101512469286942>\n** **"
+        }
+      ]
+    },
+    {
+      "id": 992824123,
+      "description": "# **RULES**\n *Rules on the Discord server must be followed at all times. Administrators have the privileges to enforce the rules and can timeout, kick, or ban you. Discord is a privilege*\n\n═════════════════════════════════════════════════\n\n\n1.  No one-on-one contact between a youth and adults under any circumstances.\n2. Follow the Scout Oath and Law when communicating.\n3. No racism with the exception of gingers\n4. Inappropriate conversation between ANY Scout is not permitted.\n5. Any bullying, name-calling, etc, is not allowed even if it is used as a joke. In any circumstance, it is defined as bullying and should not be used.\n6. Any spamming or annoying the server in important situations or discussions is not permitted.",
+      "color": 3085893,
+      "fields": []
+    }
+  ]
+}

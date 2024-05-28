@@ -1,0 +1,122 @@
+let browser
+let page
+let talking = false
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+const puppeteer = require('puppeteer')
+const { aiChat, aiCookieValue } = require('../../config.json')
+const { FrameTree } = require('puppeteer')
+
+function generatePersonality(person, message) {
+    return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
+}
+
+
+const ai = {
+    start: async () => {
+        try {
+            browser = await puppeteer.launch({
+                headless: true,
+                args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process']
+            })
+
+            page = await browser.newPage()
+
+            const cookie = {
+                name: 'web-next-auth',
+                value: aiCookieValue,
+                domain: 'character.ai',
+                path: '/',
+                expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 365,
+                httpOnly: true,
+                secure: true
+            }
+    
+            await page.setCookie(cookie)
+    
+            await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
+    
+            await page.goto(aiChat)
+    
+            await page.waitForSelector('.text-lg, .text-lg-chat')
+
+            return true
+
+        } catch (err) {
+            console.log(err);
+            return false
+        }
+    },
+    msg: async (i, nickname) => {
+        if (talking === false) {
+            talking = true
+
+            try {
+                let mentions
+                let filteredText
+                const guild = await client.guilds.fetch('1223767535242055782')
+                const channel = await guild.channels.fetch('1240705575239680052')
+                
+                async function lastMessageNow() {
+
+                    const element = await page.$$('p[node="[object Object]"]')
+                    
+                    const messag = await page.evaluate(el => el.textContent, element[0])
+
+                    return messag
+                }
+
+                async function lastMessageFind() {
+                    let lastMessagePast
+                    let lastMessage = await lastMessageNow()
+
+                    while (!(lastMessage === lastMessagePast)) {
+                        lastMessagePast = lastMessage
+                        await delay(1000)
+                        await channel.sendTyping()
+                        lastMessage = await lastMessageNow()
+                    }
+
+                    return lastMessage
+                }
+
+                function removeNewLines(e) {
+                    return e.replace(/\r?\n|\r/g, '');
+                }
+    
+                if (/<@!?(\d+)>/.test(i.content)) {
+                    mentions = `${i.content}\s\s`.match(/<@!?(\d+)>/g)
+                    filteredText = i.content.replace(mentions[0], `@${guild.members.cache.get(mentions[0].slice(2, -1)).nickname}`)
+                } else {
+                    filteredText = i.content
+                }
+
+                filteredText = await removeNewLines(filteredText)
+                
+                await page.type('.text-lg,.text-lg-chat', generatePersonality(nickname, filteredText) + `\n`)
+                
+                await page.waitForSelector('p[node="[object Object]"]')
+
+                await delay(2000)
+
+                while (/.*> ".*"$/.test(lastMessageNow())) {
+                    await delay(500)
+                }
+
+                await channel.sendTyping()
+
+                lastMessageFindVariable = await lastMessageFind()
+                
+                talking = false
+
+                return lastMessageFindVariable
+            } catch (err) {
+                console.log(err)
+                talking = false
+                return false
+            }
+
+        }
+    }
+}
+
+module.exports = { ai }

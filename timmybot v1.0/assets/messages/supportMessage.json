@@ -1,0 +1,25 @@
+{
+    "content": "",
+    "embeds": [
+      {
+        "description": "# :ticket: OPEN A SUPPORT TICKET\nIf you need help with the verification process open a support ticket.\n\n** **",
+        "color": 1123408
+      }
+    ],
+    "components": [
+      {
+        "type": 1,
+        "components": [
+          {
+            "customID": "b-001",
+            "type": 2,
+            "style": 3,
+            "label": "Support",
+            "emoji": {
+              "name": "🎫"
+            }
+          }
+        ]
+      }
+    ]
+  }

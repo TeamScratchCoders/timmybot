@@ -1,0 +1,783 @@
+{
+    "message": [
+        {
+            "content": "",
+            "flags": 64, 
+            "embeds": [
+                {
+                  "description": "# Age\n*What age are you? An adult or youth.*\n\n** **", 
+                  "color": 2167356
+                }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                    {
+                        "type": 3,
+                        "custom_id": "S-000",
+                        "options": [
+                            {
+                                "label": "Adult",
+                                "value": "s-000",
+                                "description": "In the BSA you're adult over the age of 21"
+                            },
+                            {
+                                "label": "Youth",
+                                "value": "s-001",
+                                "description": "In the BSA you're youth under the age of 21"
+                            }
+                        ],
+                        "placeholder": "Choose your age group"
+                    }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64,
+            "embeds": [
+                {
+                    "description": "# Position\n*What positions do you hold in the Troop.*\n\n** **", 
+                    "color": 2167356
+                }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 3,
+                            "custom_id": "S-001",
+                            "options": [
+                                {
+                                    "label": "Parent",
+                                    "value": "s-002",
+                                    "description": "You're a parent to a kid in the troop"
+                                },
+                                {
+                                    "label": "None",
+                                    "value": "s-003",
+                                    "description": "You have no position and you don't have any kids in it"
+                                },
+                                {
+                                    "label": "Troop Committee Member",
+                                    "value": "s-004",
+                                    "description": "You're a member of the committee"
+                                },
+                                {
+                                    "label": "Troop committee chair",
+                                    "value": "s-005",
+                                    "description": "You're the head of the committee"
+                                },
+                                {
+                                    "label": "Physician",
+                                    "value": "s-006",
+                                    "description": "You're a physician in The Troop"
+                                },
+                                {
+                                    "label": "Chaplain",
+                                    "value": "s-007",
+                                    "description": "You're the chaplain in The Troop"
+                                },
+                                {
+                                    "label": "Chartered organization representative",
+                                    "value": "s-008",
+                                    "description": "You're the representative of the chartered organization"
+                                }
+                            ],
+                            "placeholder": "Choose a Position",
+                            "min_values": 1,
+                            "max_values": 7
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64,
+            "embeds": [
+                {
+                    "description": "# Awards\n*What awards or accomplishments do you have?*\n\n** **", 
+                    "color": 2167356
+                }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 3,
+                            "custom_id": "S-002",
+                            "options": [
+                                {
+                                    "label": "None",
+                                    "value": "s-009"
+                                },
+                                {
+                                    "label": "Eagle Scout",
+                                    "value": "s-010",
+                                    "description": "You achieved the rank of Eagle Scout as a youth"
+                                },
+                                {
+                                    "label": "Religious Emblem",
+                                    "value": "s-011",
+                                    "description": "You are awarded a religious emblem as a youth"
+                                },
+                                {
+                                    "label": "Arrow of Light",
+                                    "value": "s-012",
+                                    "description": "You are awarded the Arrow of Light as a youth"
+                                },
+                                {
+                                    "label": "Wood Badge Training",
+                                    "value": "s-013",
+                                    "description": "You completed wood badge"
+                                },
+                                {
+                                    "label": "OA - Ordeal",
+                                    "value": "s-014",
+                                    "description": "You're the level of ordeal"
+                                },
+                                {
+                                    "label": "OA - Brotherhood",
+                                    "value": "s-015",
+                                    "description": "You're the level of Brotherhood"
+                                },
+                                {
+                                    "label": "OA - Vigil",
+                                    "value": "s-016",
+                                    "description": "You're the Honor of Vigil"
+                                }
+                            ],
+                            "placeholder": "Choose the awards you have earned",
+                            "min_values": 1,
+                            "max_values": 7
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64,
+            "embeds": [
+              {
+                "description": "# Wood badge Patrol\nWhat Patrol were you in Wood Badge",
+                "color": 2167356
+              }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 3,
+                            "custom_id": "S-003",
+                            "options": [
+                                {
+                                    "label": "Beaver",
+                                    "value": "s-017"
+                                },
+                                {
+                                    "label": "Bobwhite",
+                                    "value": "s-018"
+                                },
+                                {
+                                    "label": "Eagle",
+                                    "value": "s-019"
+                                },
+                                {
+                                    "label": "Fox",
+                                    "value": "s-020"
+                                },
+                                {
+                                    "label": "Owl",
+                                    "value": "s-021"
+                                },
+                                {
+                                    "label": "Bear",
+                                    "value": "s-022"
+                                },
+                                {
+                                    "label": "Buffalo",
+                                    "value": "s-023"
+                                },
+                                {
+                                    "label": "Antelope",
+                                    "value": "s-024"
+                                }
+                            ],
+                            "placeholder": "Choose your wood badge Patrol",
+                            "min_values": 1,
+                            "max_values": 8
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64,
+            "embeds": [
+                {
+                    "description": "# Patrol\n*What Patrol are you in?*\n\n** **", 
+                    "color": 2167356
+                }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 3,
+                            "custom_id": "S-004",
+                            "options": [
+                                {
+                                    "label": "Wolverines",
+                                    "value": "s-025"
+                                },
+                                {
+                                    "label": "Bounty Hunters",
+                                    "value": "s-026"
+                                },
+                                {
+                                    "label": "Flaming Compasses",
+                                    "value": "s-027"
+                                },
+                                {
+                                    "label": "Rusty Stingrays",
+                                    "value": "s-028"
+                                }
+                            ],
+                            "placeholder": "Choose a Patrol"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64, 
+            "embeds": [
+                {
+                  "description": "# Positions\n*What positions do you hold in The Troop?*\n\n** **", 
+                  "color": 2167356
+                }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 3,
+                            "custom_id": "S-005",
+                            "options": [
+                                {
+                                    "label": "None",
+                                    "value": "null"
+                                },
+                                {
+                                    "label": "Patrol Leader",
+                                    "value": "s-029"
+                                },
+                                {
+                                    "label": "Assistant Patrol Leader",
+                                    "value": "s-030"
+                                },
+                                {
+                                    "label": "Scribe",
+                                    "value": "s-031"
+                                },
+                                {
+                                    "label": "Quartermaster",
+                                    "value": "s-032"
+                                },
+                                {
+                                    "label": "Troop guide",
+                                    "value": "s-033"
+                                },
+                                {
+                                    "label": "Instructor",
+                                    "value": "s-034"
+                                },
+                                {
+                                    "label": "Den chief",
+                                    "value": "s-035"
+                                },
+                                {
+                                    "label": "Bugler",
+                                    "value": "s-036"
+                                },
+                                {
+                                    "label": "Chaplain aide",
+                                    "value": "s-037"
+                                },
+                                {
+                                    "label": "Troop historian",
+                                    "value": "s-038"
+                                },
+                                {
+                                    "label": "Librarian",
+                                    "value": "s-039"
+                                },
+                                {
+                                    "label": "Outdoor ethics guide",
+                                    "value": "s-040"
+                                }
+                            ],
+                            "placeholder": "Choose your position",
+                            "min_values": 1,
+                            "max_values": 12
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64, 
+            "embeds": [
+                {
+                  "description": "# Rank\n*What Rank do you hold?*\n\n** **", 
+                  "color": 2167356
+                }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 3,
+                            "custom_id": "S-006",
+                            "options": [
+                                {
+                                    "label": "None",
+                                    "value": "s-041"
+                                },
+                                {
+                                    "label": "Scout",
+                                    "value": "s-042"
+                                },
+                                {
+                                    "label": "Tenderfoot",
+                                    "value": "s-043"
+                                },
+                                {
+                                    "label": "Second class",
+                                    "value": "s-044"
+                                },
+                                {
+                                    "label": "First class",
+                                    "value": "s-045"
+                                },
+                                {
+                                    "label": "Star",
+                                    "value": "s-046"
+                                },
+                                {
+                                    "label": "Life",
+                                    "value": "s-047"
+                                },
+                                {
+                                    "label": "Eagle Scout",
+                                    "value": "s-048"
+                                }
+                            ],
+                            "placeholder": "Choose your rank"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64, 
+            "embeds": [
+                {
+                  "description": "# Accomplishments\n*what Accomplishments have you completed?*\n\n** **", 
+                  "color": 2167356
+                }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 3,
+                            "custom_id": "S-007",
+                            "options": [
+                                {
+                                    "label": "None",
+                                    "value": "s-50"
+                                },
+                                {
+                                    "label": "Arrow of Light",
+                                    "value": "s-051"
+                                },
+                                {
+                                    "label": "NYLT training",
+                                    "value": "s-052"
+                                },
+                                {
+                                    "label": "OA - Ordeal",
+                                    "value": "s-053"
+                                },
+                                {
+                                    "label": "OA - Brotherhood",
+                                    "value": "s-054"
+                                },
+                                {
+                                    "label": "OA - Vigil",
+                                    "value": "s-055"
+                                },
+                                {
+                                    "label": "Recruiter Strip",
+                                    "value": "s-056"
+                                },
+                                {
+                                    "label": "Religious Emblems",
+                                    "value": "s-057"
+                                },
+                                {
+                                    "label": "50 Miler Award",
+                                    "value": "s-058"
+                                },
+                                {
+                                    "label": "Historic Trails Award",
+                                    "value": "s-059"
+                                },
+                                {
+                                    "label": "Den Chief Service Award",
+                                    "value": "s-060"
+                                },
+                                {
+                                    "label": "Firem'n Chit",
+                                    "value": "s-061"
+                                },
+                                {
+                                    "label": "Totin' Chip",
+                                    "value": "s-062"
+                                },
+                                {
+                                    "label": "Paul Bunyan Award",
+                                    "value": "s-063"
+                                },
+                                {
+                                    "label": "Outdoor Ethics Awareness Award",
+                                    "value": "s-064"
+                                },
+                                {
+                                    "label": "Outdoor Ethics Action Award",
+                                    "value": "s-065"
+                                },
+                                {
+                                    "label": "Distinguished Conservation Service Award",
+                                    "value": "s-066"
+                                },
+                                {
+                                    "label": "World Conservation Award",
+                                    "value": "s-067"
+                                },
+                                {
+                                    "label": "Boardsailing",
+                                    "value": "s-068"
+                                },
+                                {
+                                    "label": "Mile Swim",
+                                    "value": "s-069"
+                                },
+                                {
+                                    "label": "Snorkeling",
+                                    "value": "s-070"
+                                },
+                                {
+                                    "label": "Kayaking",
+                                    "value": "s-071"
+                                },
+                                {
+                                    "label": "Scuba",
+                                    "value": "s-072"
+                                },
+                                {
+                                    "label": "StandUp Paddleboarding",
+                                    "value": "s-073"
+                                }
+                            ],
+                            "placeholder": "Choose your position",
+                            "min_values": 1,
+                            "max_values": 24
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64, 
+            "embeds": [
+                {
+                  "description": "# Accomplishmentsss\n*More achievements.*\n\n** **", 
+                  "color": 2167356
+                }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 3,
+                            "custom_id": "S-008",
+                            "options": [
+                                {
+                                    "label": "None",
+                                    "value": "s-074"
+                                },
+                                {
+                                    "label": "Whitewater Rafting",
+                                    "value": "s-075"
+                                },
+                                {
+                                    "label": "International Spirit Award",
+                                    "value": "s-076"
+                                },
+                                {
+                                    "label": "Honor Medal with Crossed Palms",
+                                    "value": "s-077"
+                                },
+                                {
+                                    "label": "Honor Medal",
+                                    "value": "s-078"
+                                },
+                                {
+                                    "label": "Heroism Award",
+                                    "value": "s-079"
+                                },
+                                {
+                                    "label": "Medal of Merit",
+                                    "value": "s-080"
+                                },
+                                {
+                                    "label": "National Certificate of Merit",
+                                    "value": "s-081"
+                                },
+                                {
+                                    "label": "Local Certificate of Merit",
+                                    "value": "s-082"
+                                }
+                            ],
+                            "placeholder": "Choose the achievements you've earned",
+                            "min_values": 1,
+                            "max_values": 9
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64, 
+            "embeds": [
+                {
+                  "description": "# Honorific\n*What honorific do you use?*\n\n** **", 
+                  "color": 2167356
+                }
+            ],
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 3,
+                            "custom_id": "S-009",
+                            "options": [
+                                {
+                                    "label": "Mr.",
+                                    "value": "s-083",
+                                    "description": "for men, regardless of marital status."
+                                },
+                                {
+                                    "label": "Mrs.",
+                                    "value": "s-084",
+                                    "description": "for married women who do not have another professional or academic title."
+                                },
+                                {
+                                    "label": "Ms.",
+                                    "value": "s-085",
+                                    "description": "for women, regardless of marital status."
+                                },
+                                {
+                                    "label": "Sir.",
+                                    "value": "s-086",
+                                    "description": "for men, formally if they have a British knighthood."
+                                },
+                                {
+                                    "label": "Lord",
+                                    "value": "s-087",
+                                    "description": "for male barons, viscounts, earls, and marquesses."
+                                },
+                                {
+                                    "label": "Lady",
+                                    "value": "s-088",
+                                    "description": "for female who are wives of men who hold the equivalent titles."
+                                },
+                                {
+                                    "label": "Esq.",
+                                    "value": "s-089",
+                                    "description": "for people who have a law degree."
+                                },
+                                {
+                                    "label": "Dr.",
+                                    "value": "s-090",
+                                    "description": "for the holder of a doctoral degree."
+                                },
+                                {
+                                    "label": "Prof.",
+                                    "value": "s-091",
+                                    "description": "for a person who holds the academic rank of professor in a university."
+                                },
+                                {
+                                    "label": "Rev.",
+                                    "value": "s-092",
+                                    "description": "used generally for members of the Christian clergy regardless of affiliation."
+                                },
+                                {
+                                    "label": "Fr.",
+                                    "value": "s-093",
+                                    "description": "(abbreviation for Father) for priests in Catholic and Eastern Christianity."
+                                },
+                                {
+                                    "label": "Pr.",
+                                    "value": "s-094",
+                                    "description": "(abbreviation for Pastor)"
+                                },
+                                {
+                                    "label": "Sr.",
+                                    "value": "s-095",
+                                    "description": "(abbreviation for Sister)"
+                                },
+                                {
+                                    "label": "Br.",
+                                    "value": "s-096",
+                                    "description": "(abbreviation for Brother)"
+                                }
+                            ],
+                            "placeholder": "Choose your age group"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": "",
+            "flags": 64, 
+            "embeds": [
+                {
+                  "description": "# :white_check_mark: You have been successfully verified", 
+                  "color": 2167356
+                }
+            ],
+            "components": []
+        }
+    ],
+    "rolls": {
+        "s-000": "1224095780793483284",
+        "s-001": "1224095089824104538",
+        "s-002": "1226261446631882776",
+        "s-003": null,
+        "s-004": "1237241647096659989",
+        "s-005": "1237241863912554496",
+        "s-006": "1237242640005599232",
+        "s-007": "1237242673748906056",
+        "s-008": "1237243122875105352",
+        "s-009": null,
+        "s-010": "Eagle Scout",
+        "s-011": "1237358871396352073",
+        "s-012": "1237358320659206154",
+        "s-013": "Wood Badge",
+        "s-014": "1237358785543143487",
+        "s-015": "1237358813208772669",
+        "s-016": "1237358838164750428",
+        "s-017": "1238015262586830870",
+        "s-018": "1238017313991692318",
+        "s-019": "1238017347919286374",
+        "s-020": "1238017379129098320",
+        "s-021": "1238017436457107516",
+        "s-022": "1238017472666275922",
+        "s-023": "1238017515020484618",
+        "s-024": "1238017554392285325",
+        "s-025": "1224097078423191603",
+        "s-026": "1224098792782037082",
+        "s-027": "1224100512048091199",
+        "s-028": "1224101512469286942",
+        "s-029": "1224097198787268759",
+        "s-030": "1224098050348159068",
+        "s-031": "1224099787603837160",
+        "s-032": "1224098590553800865",
+        "s-033": "1224603441876303903",
+        "s-034": "1224100084258443365",
+        "s-035": "1224099247285211299",
+        "s-036": "1224100942992113915",
+        "s-037": "1224100402060853258",
+        "s-038": "1224101353413152890",
+        "s-039": "1224603652925161523",
+        "s-040": "1224603708138983474",
+        "s-041": null,
+        "s-042": "1224098788977934461",
+        "s-043": "1224102408540393482",
+        "s-044": "1224102638367408148",
+        "s-045": "1224102753735934064",
+        "s-046": "1224102883876667512",
+        "s-047": "1224102918282805268",
+        "s-048": "Eagle Scout",
+        "s-050": null,
+        "s-051": "1237358320659206154",
+        "s-052": "1237358765838172263",
+        "s-053": "1237358785543143487",
+        "s-054": "1237358813208772669",
+        "s-055": "1237358838164750428",
+        "s-056": "1237358854451494932",
+        "s-057": "1237358871396352073",
+        "s-058": "1237358888307785758",
+        "s-059": "1237358914320732211",
+        "s-060": "1237358930859130900",
+        "s-061": "1237358945975275574",
+        "s-062": "1237358969484476508",
+        "s-063": "1237358984592363561",
+        "s-064": "1237359000929173524",
+        "s-065": "1237359015638601728",
+        "s-066": "1237359032180805632",
+        "s-067": "1237359048710688790",
+        "s-068": "1237359061129891863",
+        "s-069": "1237359089860739112",
+        "s-070": "1237359107623878677",
+        "s-071": "1237359120697524285",
+        "s-072": "1237359131267039282",
+        "s-073": "1237359150539735060",
+        "s-074": null,
+        "s-075": "1237359165098430527",
+        "s-076": "1237359186514411550",
+        "s-077": "1237359201584414752",
+        "s-078": "1237359218390990880",
+        "s-079": "1237359235080388648",
+        "s-080": "1237359251291242577",
+        "s-081": "1237359270153158676",
+        "s-082": "1237359288909955092",
+        "s-083": "Mr",
+        "s-084": "Mrs",
+        "s-085": "Ms",
+        "s-086": "Sir",
+        "s-087": "Lord",
+        "s-088": "Lady",
+        "s-089": "Esq",
+        "s-090": "Dr",
+        "s-091": "Prof",
+        "s-092": "Rev",
+        "s-093": "Fr",
+        "s-094": "Pr",
+        "s-095": "Sr",
+        "s-096": "Br"
+    }
+}
