@@ -1,14 +1,13 @@
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js')
 const { verification } = require('./verification.js')
 const fs = require('fs')
-const quizMessage = fs.readFileSync('timmybot v1.0/assets/quiz/quizMessage.json', 'utf8')
+const quizMessage = JSON.parse(fs.readFileSync('timmybot v1.0/assets/quiz/quizMessage.json', 'utf8'))
 let questionnaireProgress = {
   bob: [
     's-001',
     'm-001'
   ]
 }
-console.log('');
 const quiz = {
     answer: async function(i) {
         if (!questionnaireProgress[i.user.id]) {
