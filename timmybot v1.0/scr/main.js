@@ -13,7 +13,7 @@ if (supervisorPermissesBoolean) {
 
     if (supervisorPermissesBoolean) {
         try {
-            ({ Client, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message } = require("discord.js"))
+            ({ Client, Intents, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message } = require("discord.js"))
             supervisor.succeed('discord.js module successfully loaded')
         } catch (err) {
             supervisor.fail(1, err, 'discord.js module failed to load')
@@ -87,7 +87,19 @@ const timmybot = {
                 
                 setInterval(functions.verification.scanUsers, 60000)
 
+                const command1 = new SlashCommandBuilder()
+                    .setName('ping')
+                    .setDescription('Replies with pong to check bot latency!')
+
+                const command2 = new SlashCommandBuilder()
+                    .setName('massdelete')
+                    .setDescription('delete 100 messages')
+
+                await client.application.commands.set([command1, command2])
+
+                
                 client.on('interactionCreate', (i) => {
+                    commands.run(i)
                     functions.quiz.answer(i)
                     functions.supportTicket.answer(i)
                 })
