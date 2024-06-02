@@ -6,7 +6,15 @@ const puppeteer = require('puppeteer-core')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
 
 function generatePersonality(person, message) {
-    return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
+    if (person === 'Ian R.') {
+        return `*Timmy instinctually writes everything in one line* (your father)${person}> "${message}"`
+    } else if (person === 'Judah M.') {
+        return `*Timmy instinctually writes everything in one line* (A large muscular Burly Ginger with 14 knives the size of cougars and a beard all at age 16) ${person}> "${message}"`
+    } else if (person === 'Tyler Y.') {
+        return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
+    } else {
+        return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
+    }
 }
 
 
