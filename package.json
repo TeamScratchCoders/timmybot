@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "@discordjs/voice": "^0.17.0",
     "chalk": "^3.0.0",
     "discord.js": "^14.14.1",
+    "ffmpeg-static": "^5.2.0",
     "puppeteer": "^22.7.1"
   }
 }

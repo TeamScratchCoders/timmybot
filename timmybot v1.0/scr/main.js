@@ -10,6 +10,8 @@ if (supervisorPermissesBoolean) {
     var Client, Events, GatewayIntentBits;
     var client
     var token
+    var joinVoiceChannel, createAudioPlayer, createAudioResource
+    var ffmpgeg
 
     if (supervisorPermissesBoolean) {
         try {
@@ -47,6 +49,25 @@ if (supervisorPermissesBoolean) {
 
     if (supervisorPermissesBoolean) {
         try {
+            ffmpgeg = require('ffmpeg-static')
+            supervisor.succeed('successfully loaded ffmpeg-static.json')
+        } catch (err) {
+            supervisor.fail(1, err, 'failed to load ffmpeg-static.json')
+        }
+    }
+
+    if (supervisorPermissesBoolean) {
+        try {
+            ({ joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice'))
+            console.log(joinVoiceChannel);
+            supervisor.succeed('successfully loaded @discordjs/voice')
+        } catch (err) {
+            supervisor.fail(1, err, 'failed to load @discordjs/voice')
+        }
+    }
+
+    if (supervisorPermissesBoolean) {
+        try {
             ({ functions } = require('./functions/functions.js'))
             supervisor.succeed('successfully loaded functions.js')
         } catch (err) {
@@ -64,7 +85,6 @@ if (supervisorPermissesBoolean) {
     }
 }
 //* Actual Discord bot
-
 const timmybot = {
     start: function() {
         try {
@@ -95,7 +115,11 @@ const timmybot = {
                     .setName('massdelete')
                     .setDescription('delete 100 messages')
 
-                await client.application.commands.set([command1, command2])
+                const command3 = new SlashCommandBuilder()
+                    .setName('restart')
+                    .setDescription('restart the the ai browser session')
+
+                await client.application.commands.set([command1, command2, command3])
 
                 
                 client.on('interactionCreate', (i) => {

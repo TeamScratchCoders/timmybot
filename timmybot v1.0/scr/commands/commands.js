@@ -6,7 +6,8 @@ supervisorPermisses.on('fail', () => {
 
 const commandsNames = [
     'ping',
-    'massdelete'
+    'massdelete',
+    'restart',
 ]
 let commands = {
     run: (i) => {
