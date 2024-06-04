@@ -1,14 +1,14 @@
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js')
 const { verification } = require('./verification.js')
 const fs = require('fs')
-const quizMessage = fs.readFileSync('timmybot v1.0/assets/quiz/quizMessage.json', 'utf8')
+const quizMessage = JSON.parse(fs.readFileSync('timmybot v1.0/assets/quiz/quizMessage.json', 'utf8'))
+const { guildID } = require('../../config.json')
 let questionnaireProgress = {
   bob: [
     's-001',
     'm-001'
   ]
 }
-console.log('');
 const quiz = {
     answer: async function(i) {
         if (!questionnaireProgress[i.user.id]) {
@@ -34,7 +34,7 @@ const quiz = {
           }
         }
         if (i.customId === 'S-001') { //* adult achievements
-          if (!(i.values == 's-002' || i.values == 's-003' || (i.values.includes('s-002') && i.values.includes('s-003') && i.values.length == 2))) {
+          if (!((i.values.includes('s-002') && i.values.length == 1))) {
             if (await verification.checkUserPreVerification(i)) {
               i.update(quizMessage.message[2])
             }
@@ -91,6 +91,20 @@ const quiz = {
 
         if (i.isModalSubmit()) {
           if (await verification.checkUserPreVerification(i)) {
+            const guild = await client.guilds.fetch(guildID)
+            const member = await guild.members.fetch(i.user.id)
+
+            const honorific = quizMessage.rolls[(questionnaireProgress[i.user.id][questionnaireProgress[i.user.id].length - 1])]
+
+            const firstName = i.components[0].components[0].value
+            const lastName = i.components[1].components[0].value
+
+            if (honorific === null) {
+              await member.setNickname(`${firstName} ${lastName[0]}.`)
+            } else {
+              await member.setNickname(`${honorific}. ${lastName}`)
+            }
+
             i.update(quizMessage.message[10])
             calculateRoles(questionnaireProgress[i.user.id])
             verification.verifyUser(i)

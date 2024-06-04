@@ -10,10 +10,12 @@ if (supervisorPermissesBoolean) {
     var Client, Events, GatewayIntentBits;
     var client
     var token
+    var joinVoiceChannel, createAudioPlayer, createAudioResource
+    var ffmpgeg
 
     if (supervisorPermissesBoolean) {
         try {
-            ({ Client, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message } = require("discord.js"))
+            ({ Client, Intents, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message } = require("discord.js"))
             supervisor.succeed('discord.js module successfully loaded')
         } catch (err) {
             supervisor.fail(1, err, 'discord.js module failed to load')
@@ -47,6 +49,25 @@ if (supervisorPermissesBoolean) {
 
     if (supervisorPermissesBoolean) {
         try {
+            ffmpgeg = require('ffmpeg-static')
+            supervisor.succeed('successfully loaded ffmpeg-static.json')
+        } catch (err) {
+            supervisor.fail(1, err, 'failed to load ffmpeg-static.json')
+        }
+    }
+
+    if (supervisorPermissesBoolean) {
+        try {
+            ({ joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice'))
+            console.log(joinVoiceChannel);
+            supervisor.succeed('successfully loaded @discordjs/voice')
+        } catch (err) {
+            supervisor.fail(1, err, 'failed to load @discordjs/voice')
+        }
+    }
+
+    if (supervisorPermissesBoolean) {
+        try {
             ({ functions } = require('./functions/functions.js'))
             supervisor.succeed('successfully loaded functions.js')
         } catch (err) {
@@ -64,7 +85,6 @@ if (supervisorPermissesBoolean) {
     }
 }
 //* Actual Discord bot
-
 const timmybot = {
     start: function() {
         try {
@@ -87,13 +107,30 @@ const timmybot = {
                 
                 setInterval(functions.verification.scanUsers, 60000)
 
+                const command1 = new SlashCommandBuilder()
+                    .setName('ping')
+                    .setDescription('Replies with pong to check bot latency!')
+
+                const command2 = new SlashCommandBuilder()
+                    .setName('massdelete')
+                    .setDescription('delete 100 messages')
+
+                const command3 = new SlashCommandBuilder()
+                    .setName('restart')
+                    .setDescription('restart the the ai browser session')
+
+                await client.application.commands.set([command1, command2, command3])
+
+                
                 client.on('interactionCreate', (i) => {
+                    commands.run(i)
                     functions.quiz.answer(i)
                     functions.supportTicket.answer(i)
                 })
 
                 client.on('messageCreate', async i => {
                     if (!i.author.bot) {
+                        functions.messageTracking(i)
                         if (i.channelId == aiChannelID) {
                             try {
                                 const message = await functions.ai.msg(i ,guild.members.cache.get(i.author.id).nickname)

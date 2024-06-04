@@ -10,6 +10,7 @@ const functionNames = [
     'supportTicket',
     'ai',
     'role',
+    'messageTracking',
 ]
 let functions = {};
 

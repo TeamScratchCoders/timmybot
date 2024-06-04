@@ -3,10 +3,18 @@ let page
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 const puppeteer = require('puppeteer-core')
-const { aiChat, aiCookieValue } = require('../../config.json')
+const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
 
 function generatePersonality(person, message) {
-    return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
+    if (person === 'Ian R.') {
+        return `*Timmy instinctually writes everything in one line* (your father)${person}> "${message}"`
+    } else if (person === 'Judah M.') {
+        return `*Timmy instinctually writes everything in one line* (A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
+    } else if (person === 'Tyler Y.') {
+        return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
+    } else {
+        return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
+    }
 }
 
 
@@ -53,8 +61,8 @@ const ai = {
             try {
                 let mentions
                 let filteredText
-                const guild = await client.guilds.fetch('1223767535242055782')
-                const channel = await guild.channels.fetch('1240705575239680052')
+                const guild = await client.guilds.fetch(guildID)
+                const channel = await guild.channels.fetch(aiChannelID)
                 
                 async function lastMessageNow() {
 
@@ -113,6 +121,33 @@ const ai = {
                 console.log(err)
                 talking = false
                 return false
+            }
+
+        }
+    },
+    stop: async () => {
+        try {
+            await browser.close()
+        } catch (err) {}
+    },
+    systemMsg: async (message) => {
+        if (talking === false) {
+            talking = true
+
+            try {
+                const guild = await client.guilds.fetch(guildID)
+                const channel = await guild.channels.fetch(aiChannelID)
+                
+                await page.type('.text-lg,.text-lg-chat', message + `\n`)
+                
+                await page.waitForSelector('p[node="[object Object]"]')
+
+                await delay(2000)
+
+                await channel.sendTyping()
+            } catch (err) {
+                console.log(err)
+                talking = false
             }
 
         }
