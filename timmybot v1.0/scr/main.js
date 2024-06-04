@@ -130,6 +130,7 @@ const timmybot = {
 
                 client.on('messageCreate', async i => {
                     if (!i.author.bot) {
+                        functions.messageTracking(i)
                         if (i.channelId == aiChannelID) {
                             try {
                                 const message = await functions.ai.msg(i ,guild.members.cache.get(i.author.id).nickname)
