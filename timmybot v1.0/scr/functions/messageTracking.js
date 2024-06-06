@@ -39,8 +39,6 @@ const messageTracking = async (i) => {
         }
 
         await fs.writeFileSync(`timmybot v1.0/assets/users/message/${i.author.id}.json`, JSON.stringify(usermessage, null, 2))
-
-        console.log(usermessage);
     } catch (err) {
         console.log(err)
     }
