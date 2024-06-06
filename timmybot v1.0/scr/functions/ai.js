@@ -7,13 +7,13 @@ const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.js
 
 function generatePersonality(person, message) {
     if (person === 'Ian R.') {
-        return `*Timmy instinctually writes everything in one line* (your father)${person}> "${message}"`
+        return `(your father)${person}> "${message}"`
     } else if (person === 'Judah M.') {
-        return `*Timmy instinctually writes everything in one line* (A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
+        return `(A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
     } else if (person === 'Tyler Y.') {
-        return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
+        return `${person}> "${message}"`
     } else {
-        return `*Timmy instinctually writes everything in one line* ${person}> "${message}"`
+        return `${person}> "${message}"`
     }
 }
 
@@ -66,17 +66,19 @@ const ai = {
                 
                 async function lastMessageNow() {
 
-                    const element = await page.$$('p[node="[object Object]"]')
-                    
-                    const messag = await page.evaluate(el => el.textContent, element[0])
+                    const element = await page.$('div.mt-1.max-w-xl.rounded-2xl.px-3.min-h-12.flex.justify-center.py-3.bg-surface-elevation-2')
 
-                    return messag
+                    
+                    const allText = await page.evaluate(el => {
+                        return el.innerText;
+                    }, element)
+
+                    return allText
                 }
 
                 async function lastMessageFind() {
                     let lastMessagePast
                     let lastMessage = await lastMessageNow()
-
                     while (!(lastMessage === lastMessagePast)) {
                         lastMessagePast = lastMessage
                         await delay(1000)
@@ -104,10 +106,8 @@ const ai = {
                 
                 await page.waitForSelector('p[node="[object Object]"]')
 
-                await delay(2000)
-
-                while (/.*> ".*"$/.test(lastMessageNow())) {
-                    await delay(500)
+                while (await lastMessageNow() == "") {
+                    await delay(200)
                 }
 
                 await channel.sendTyping()
