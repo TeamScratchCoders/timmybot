@@ -132,7 +132,7 @@ const quiz = {
 
           const lNameInput = new TextInputBuilder()
             .setCustomId('m-001')
-            .setLabel('What is you\'r first Name?')
+            .setLabel('What is you\'r last Name?')
             .setStyle(TextInputStyle.Short)
 
           const actionRow1 = new ActionRowBuilder().addComponents(fNameInput)
