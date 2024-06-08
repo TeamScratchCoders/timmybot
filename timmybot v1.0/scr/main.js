@@ -59,7 +59,6 @@ if (supervisorPermissesBoolean) {
     if (supervisorPermissesBoolean) {
         try {
             ({ joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice'))
-            console.log(joinVoiceChannel);
             supervisor.succeed('successfully loaded @discordjs/voice')
         } catch (err) {
             supervisor.fail(1, err, 'failed to load @discordjs/voice')
