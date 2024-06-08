@@ -2,8 +2,10 @@ let browser
 let page
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-const puppeteer = require('puppeteer-core')
+const puppeteer = require('puppeteer')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
+const { FrameTree } = require('puppeteer')
+const regex = /\boh my god|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
 
 function generatePersonality(person, message) {
     if (person === 'Ian R.') {
@@ -17,13 +19,23 @@ function generatePersonality(person, message) {
     }
 }
 
+function censor(message) {
+    if (!(regex.test(message))) {
+        return message
+    } else {
+        return message.replace(regex, (match) => {
+            console.log(match);
+            return match[0] + '\\*'.repeat(match.length - 1)
+        })
+    }
+}
 
 const ai = {
     start: async () => {
         try {
             browser = await puppeteer.launch({
-                executablePath: '/usr/bin/chromium',
-                headless: true,
+                //executablePath: '/usr/bin/chromium',
+                headless: false,
                 args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
             })
 
@@ -113,10 +125,17 @@ const ai = {
                 await channel.sendTyping()
 
                 lastMessageFindVariable = await lastMessageFind()
+
+                if (/\b(Sometimes the AI generates a reply that doesn't meet our guidelines)/.test(lastMessageFindVariable)) {
+                    talking = false
+                    return false
+                }
                 
                 talking = false
 
-                return lastMessageFindVariable
+                console.log(censor(lastMessageFindVariable));
+
+                return censor(lastMessageFindVariable)
             } catch (err) {
                 console.log(err)
                 talking = false
