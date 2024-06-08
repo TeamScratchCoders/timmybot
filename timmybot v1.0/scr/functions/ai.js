@@ -139,12 +139,8 @@ const ai = {
                 const channel = await guild.channels.fetch(aiChannelID)
                 
                 await page.type('.text-lg,.text-lg-chat', message + `\n`)
-                
-                await page.waitForSelector('p[node="[object Object]"]')
 
-                await delay(2000)
-
-                await channel.sendTyping()
+                talking = false
             } catch (err) {
                 console.log(err)
                 talking = false
