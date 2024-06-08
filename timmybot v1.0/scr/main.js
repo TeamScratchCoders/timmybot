@@ -2,6 +2,17 @@
 const { supervisor, supervisorPermisses, } = require('../../supervisor.js');
 let supervisorPermissesBoolean = true
 
+const contentWarningMessage = {
+    content: ``,
+    embeds: [
+    {
+      id: 593955793,
+      description: `# 🚨  INAPPROPRIATE CONTENT   🚨\nThis is a warning, warns about Sussy wussy content that Timmy tried to generate. It's your fault isn't it. Anyways stop doing it! \n\n# NOW!\n** **`,
+      color: 16711680
+    }
+  ]
+}
+
 supervisorPermisses.on('fail', () => {
     supervisorPermissesBoolean = false
 })
@@ -59,7 +70,6 @@ if (supervisorPermissesBoolean) {
     if (supervisorPermissesBoolean) {
         try {
             ({ joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice'))
-            console.log(joinVoiceChannel);
             supervisor.succeed('successfully loaded @discordjs/voice')
         } catch (err) {
             supervisor.fail(1, err, 'failed to load @discordjs/voice')
@@ -124,6 +134,8 @@ const timmybot = {
                                 const message = await functions.ai.msg(i ,guild.members.cache.get(i.author.id).nickname)
                                 if (message) {
                                     aiChannel.send(message)
+                                } else if (message == false) {
+                                    aiChannel.send(contentWarningMessage)
                                 }
                             } catch (err) {
                                 console.log(err);

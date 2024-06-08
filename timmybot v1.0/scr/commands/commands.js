@@ -56,7 +56,6 @@ let commands = {
                     commandsBilt.push(tempcammand)
                 }
             }
-            console.log(commandsBilt)
             await client.application.commands.set(commandsBilt)
         } catch (err) {
             console.log(err);
