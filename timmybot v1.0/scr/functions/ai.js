@@ -34,7 +34,7 @@ const ai = {
         try {
             browser = await puppeteer.launch({
                 executablePath: '/usr/bin/chromium',
-                headless: false,
+                headless: true,
                 args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
             })
 
