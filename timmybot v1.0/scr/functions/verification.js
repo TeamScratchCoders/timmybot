@@ -81,7 +81,7 @@ const verification = {
         }
     },
     verifyUserByID: async (id) => {
-        console.log(id);
+        console.log(id)
         try {
             if (verifiedMembers.members.includes(id)) {
                 await client.users.fetch(id).then(user => user.send('It looks like you enabled direct messaging :rage:. Direct messaging is against our rules please re-enable it to gain access to the server. You will have to reverify.'));
@@ -92,12 +92,8 @@ const verification = {
         } catch (err) {
             if (err.message === 'Cannot send messages to this user') {
                 if (!(verifiedMembers.members.includes(id))) {
-                   try {
-                        verifiedMembers.members.push(id)
-                        fs.writeFileSync('timmybot v1.0/assets/verirfication/verifiedMembers.json', JSON.stringify(verifiedMembers, null, 2))
-                    } catch (err) {
-                        console.log(err);
-                    }
+                    verifiedMembers.members.push(id)
+                    fs.writeFileSync('timmybot v1.0/assets/verirfication/verifiedMembers.json', JSON.stringify(verifiedMembers, null, 2))
                 }
                 
                 return true
