@@ -107,19 +107,7 @@ const timmybot = {
                 
                 setInterval(functions.verification.scanUsers, 60000)
 
-                const command1 = new SlashCommandBuilder()
-                    .setName('ping')
-                    .setDescription('Replies with pong to check bot latency!')
-
-                const command2 = new SlashCommandBuilder()
-                    .setName('massdelete')
-                    .setDescription('delete 100 messages')
-
-                const command3 = new SlashCommandBuilder()
-                    .setName('restart')
-                    .setDescription('restart the the ai browser session')
-
-                await client.application.commands.set([command1, command2, command3])
+                commands.initialize()
 
                 
                 client.on('interactionCreate', (i) => {
