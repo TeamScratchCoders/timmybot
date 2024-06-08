@@ -55,8 +55,18 @@ const ai = {
             await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
     
             await page.goto(aiChat)
-    
-            await page.waitForSelector('.text-lg, .text-lg-chat')
+
+            try {
+                const waitInLineElement  = await page.$('h1')
+
+                const allText = await page.evaluate(el => el.innerText, waitInLineElement)
+
+                console.log(waitInLineElement);
+
+                console.log(allText);
+            } catch (err) {
+                await page.waitForSelector('.text-lg, .text-lg-chat')
+            }
 
             return true
 
@@ -138,7 +148,7 @@ const ai = {
             } catch (err) {
                 console.log(err)
                 talking = false
-                return false
+                return undefined
             }
 
         }
