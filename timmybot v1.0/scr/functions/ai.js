@@ -2,9 +2,8 @@ let browser
 let page
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
-const { FrameTree } = require('puppeteer')
 const regex = /\boh my god|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
 
 function generatePersonality(person, message) {
@@ -34,7 +33,7 @@ const ai = {
     start: async () => {
         try {
             browser = await puppeteer.launch({
-                //executablePath: '/usr/bin/chromium',
+                executablePath: '/usr/bin/chromium',
                 headless: false,
                 args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
             })
