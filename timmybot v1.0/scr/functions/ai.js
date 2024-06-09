@@ -8,7 +8,7 @@ const regex = /\boh my god|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cun
 
 function generatePersonality(person, message) {
     if (person === 'Ian R.') {
-        return `(your father)${person}> "${message}"`
+        return `(your father. 15 years old.)${person}> "${message}"`
     } else if (person === 'Judah M.') {
         return `(A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
     } else if (person === 'Tyler Y.') {
@@ -127,8 +127,20 @@ const ai = {
                 
                 await page.waitForSelector('p[node="[object Object]"]')
 
-                while (await lastMessageNow() == "") {
+                let whileLoopIndex = 1
+
+                while (await lastMessageNow() == "" && whileLoopIndex <= 50) {
                     await delay(200)
+
+                    whileLoopIndex += 1
+
+                    if (whileLoopIndex == 25) {
+                        await channel.sendTyping()
+                    }
+                }
+
+                if (whileLoopIndex >= 50) {
+                    return "system error Timmy timed out please come back later. Estimated time 3 - 5 minutes"
                 }
 
                 await channel.sendTyping()
