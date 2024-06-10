@@ -111,13 +111,14 @@ const timmybot = {
                 functions.joinMessage(ruleChannel, 1)
                 functions.joinMessage(supportChannel, 2)
                 
-                await functions.ai.start()
+                functions.ai.start()
+
+                commands.initialize()
                 
                 supervisor.fullyOperational()
                 
                 setInterval(functions.verification.scanUsers, 60000)
 
-                commands.initialize()
 
                 
                 client.on('interactionCreate', (i) => {

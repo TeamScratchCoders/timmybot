@@ -30,7 +30,7 @@ function censor(message) {
 }
 
 const ai = {
-    start: async () => {
+    start: async (i) => {
         try {
             browser = await puppeteer.launch({
                 executablePath: '/usr/bin/chromium',
@@ -56,23 +56,42 @@ const ai = {
     
             await page.goto(aiChat)
 
-            try {
-                const waitInLineElement  = await page.$('h1')
-
-                const allText = await page.evaluate(el => el.innerText, waitInLineElement)
-
-                console.log(waitInLineElement);
-
-                console.log(allText);
-            } catch (err) {
-                await page.waitForSelector('.text-lg, .text-lg-chat')
+            if (i) {
+                ai.connection(false)
+            } else {
+                ai.connection(true)
             }
 
-            return true
 
         } catch (err) {
             console.log(err);
             return false
+        }
+    },
+    connection: async (i) => {
+        try {
+            const guild = await client.guilds.fetch(guildID)
+            const channel = await guild.channels.fetch(aiChannelID)
+
+            const waitInLineElement  = await page.$('h2')
+    
+            const allText = await page.evaluate(el => el.innerText, waitInLineElement)
+    
+            const time  = parseInt(allText.match(/\d+/)[0], 10)
+
+            if (i) {
+                channel.send(`It appears Timmy about has been hit by a heavy load please wait the estimated ${time} minutes...`)
+            }
+
+            return false
+        } catch (err) {
+            try {
+                await page.waitForSelector('p[node="[object Object]"]')
+                return true
+            } catch (err) {
+                console.log(err);
+                return false
+            }
         }
     },
     msg: async (i, nickname) => {
@@ -80,6 +99,13 @@ const ai = {
             talking = true
 
             try {
+
+                if (await ai.connection(true) === false) {
+                    while (await ai.connection(false) === false) {
+                        await delay(1000)
+                    }
+                }
+
                 let mentions
                 let filteredText
                 const guild = await client.guilds.fetch(guildID)
@@ -102,7 +128,7 @@ const ai = {
                     let lastMessage = await lastMessageNow()
                     while (!(lastMessage === lastMessagePast)) {
                         lastMessagePast = lastMessage
-                        await delay(1000)
+                        await delay(200)
                         await channel.sendTyping()
                         lastMessage = await lastMessageNow()
                     }
@@ -130,7 +156,7 @@ const ai = {
                 let whileLoopIndex = 1
 
                 while (await lastMessageNow() == "" && whileLoopIndex <= 50) {
-                    await delay(200)
+                    await delay(1000)
 
                     whileLoopIndex += 1
 
@@ -175,8 +201,11 @@ const ai = {
             talking = true
 
             try {
-                const guild = await client.guilds.fetch(guildID)
-                const channel = await guild.channels.fetch(aiChannelID)
+                if (await ai.connection(false) === false) {
+                    while (await ai.connection(false) === false) {
+                        await delay(1000)
+                    }
+                }
                 
                 await page.type('.text-lg,.text-lg-chat', message + `\n`)
 
