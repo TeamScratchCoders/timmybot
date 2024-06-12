@@ -1,8 +1,7 @@
 const { functions } = require("../functions/functions")
 
 const restart = async (i) => {
-    const guild = client.guilds.cache.get(i.guildId)
-    const channel = guild.channels.cache.get(i.channelId)
+    try {await !(i.guild.members.cache.get(i.user.id).permissions.has('ADMINISTRATOR'))} catch (e) {i.reply({content: "You are not allowed to use this command.", flags: 64 });return}//* stops program if user does not have administrative privileges.
 
     try { 
         await i.deferReply()

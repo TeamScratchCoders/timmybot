@@ -11,6 +11,7 @@ const functionNames = [
     'ai',
     'role',
     'messageTracking',
+    'madlibFunc',
 ]
 let functions = {};
 

@@ -1,0 +1,292 @@
+{
+    "madlibs": [
+        {
+            "title": "Be Kind",
+            "words": [
+                "NOUN",
+                "NOUN (PLURAL)",
+                "NOUN",
+                "PLACE",
+                "ADJECTIVE",
+                "NOUN"
+            ],
+            "answer": "Be kind to your [1]-footed [2] \nFor a duck may be somebody's [3],\nBe kind to your [2] in [4]\nWhere the weather is always [5].\n\nYou may think that this is the [6],\nWell it is."
+        },
+        {
+            "title": "Letter From Camp",
+            "words": [
+                "RELATIVE",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "NAME OF PERSON IN ROOM",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "VERB ENDING IN \"ED\"",
+                "BODY PART",
+                "VERB ENDING IN \"ING\"",
+                "NOUN (PLURAL)",
+                "NOUN",
+                "ADVERB",
+                "VERB",
+                "VERB",
+                "RELATIVE",
+                "PERSON IN ROOM"
+            ],
+            "answer":  "Dear [1],\nI am having a(n) [2] time at camp. The counselour is [3] and the food is [4]. I met [5] and we became [6] friends. Unfortunately, [5] is [7] and I [8] my [9] so we couldn't go [10] like everybody else. I need more [11] and a [12] sharpener, so please [13] [14] more when you [15] back.\nYour [16],\n[17]"
+        },
+        {
+            "title": "Romeo and Juliet",
+            "words": [
+                "NOUN (PLURAL)",
+                "PLACE",
+                "NOUN",
+                "NOUN (PLURAL)",
+                "NOUN",
+                "ADJECTIVE",
+                "VERB",
+                "NUMBER",
+                "ADJECTIVE",
+                "BODY PART",
+                "VERB"
+            ],
+            "answer": "Two [1], both alike in dignity,\nIn fair [2], where we lay our scene,\nFrom ancient [3] break to new mutiny,\nWhere civil blood makes civil hands unclean.\nFrom forth the fatal loins of these two foes\nA pair of star-cross'd [4] take their life;\nWhole misadventured piteous overthrows\nDo with their [5] bury their parents' strife.\nThe fearful passage of their [6] love,\nAnd the continuance of their parents' rage,\nWhich, but their children's end, nought could [7],\nIs now the [8] hours' traffic of our stage;\nThe which if you with [9] [10] attend,\nWhat here shall [11], our toil shall strive to mend."
+        },
+        {
+            "title": "Personal Ad",
+            "words": [
+                "ADJECTIVE",
+                "VERB ENDING IN \"ED\"",
+                "NOUN (PLURAL)",
+                "LIQUID",
+                "NOUN (PLURAL)",
+                "FAMOUS PERSON",
+                "PLACE",
+                "OCCUPATION",
+                "NOUN",
+                "NATIONALITY",
+                "FEMALE CELEBRITY",
+                "NOUN",
+                "FEMALE FRIEND",
+                "NOUN (PLURAL)",
+                "NUMBER",
+                "ADJECTIVE"
+            ],
+            "answer": "I enjoy long, [1] walks on the beach, getting [2] in the rain and serendipitous encounters with [3]. I really like piña coladas mixed with [4], and romantic, candle-lit [5]. I am well-read from Dr. Seuss to [6]. I travel frequently, especially to [7], when I am not busy with work. (I am a [8].) I am looking for [9] and beauty in the form of a [10] goddess. She should have the physique of [11] and the [12] of [13]. I would prefer if she knew how to cook, clean, and wash my [14]. I know I'm not very attractive in my picture, but it was taken [15] days ago, and I have since become more [16]."
+        },
+        {
+            "title": "Rush Hour 3",
+            "words": [
+                "NUMBER",
+                "OCCUPATION",
+                "OCCUPATION",
+                "PLACE",
+                "PERSON IN ROOM (MALE)",
+                "PLACE",
+                "OCCUPATION",
+                "BODY PART",
+                "ADJECTIVE",
+                "NOUN",
+                "BODY PART",
+                "CELEBRITY",
+                "VERB ENDING IN \"ING\"",
+                "ADVERB",
+                "VERB ENDING IN \"S\""
+            ],
+            "answer": "[1] years after the end of Rush Hour 2, James Carter is no longer a [2], but a [3] on the streets of [4]. Lee is now the bodyguard for his friend [5]. Lee is still upset with Carter about an incident in [6] when Carter accidentally shot Lee's girlfriend, [7] Isabella Molina, in the [8].\nDuring the World Criminal Court discussions, as [5] addresses the importance to fight the Triad, he announces that he knows the [9] of the Triad leadership known as the Shy Shen. Suddenly, [5] takes a [10] in the [11], disrupting the conference. Lee pursues the assassin and corners him, discovering that the assassin is his brother, [12]. When Lee hesitates to shoot [12], Carter shows up [13] towards the two and [14] [15] Lee over, allowing [12] to escape."
+        },
+        {
+            "title": "Love Letter",
+            "words": [
+                "PERSON IN ROOM (FEMALE)",
+                "ADJECTIVE",
+                "VERB",
+                "BODY PART",
+                "NUMBER",
+                "NOUN",
+                "ADVERB",
+                "VERB",
+                "PRONOUN PLURAL",
+                "PERSON IN ROOM (MALE)"
+            ],
+            "answer": "Dear [1],\nYou are extremly [2] and I [3] you! I want kiss your [4] [5] times. You make my [6] burn with desire. When I first saw you, I [7] stared at you and fell in love. Will you [8] out with me? Don't let your parents discourage you, [9] are just jealous.\nYours forever, [10]"
+        },
+        {
+            "title": "War",
+            "words": [
+                "NOUN",
+                "NOUN",
+                "NOUN",
+                "OCCUPATION",
+                "VERB",
+                "PLACE",
+                "VERB ENDING IN \"ED\"",
+                "NOUN",
+                "VERB ENDING IN \"ING\"",
+                "NOUN (PLURAL)",
+                "NOUN",
+                "EMOTION"
+            ],
+            "answer": "It was during the battle of [1] when I was running through a [2] when a [3] went off right next to my platoon. Our [4] yelled for us to [5] to the nearest [6] we could find. When we got to the [6] we [7] to start a fire. As we were starting the fire the enemy saw the [8] from the fire and started [9] [10] at us. we all quickly ducked behind the [11] at the [6] and returned fire. we quickly eliminated the enemy and were [12] that we had won the battle."
+        },
+        {
+            "title": "Runaway Bride Proposal",
+            "words": [
+                "ADJECTIVE",
+                "NOUN",
+                "NUMBER",
+                "NOUN",
+                "ADJECTIVE",
+                "VERB",
+                "NOUN",
+                "BODY PART",
+                "ADJECTIVE"
+            ],
+            "answer": "Look, I guarantee there'll be [1] times. I guarantee that at some [2], [3] or both of us is gonna want to get out of this [4]. But I also guarantee that if I don't ask you to be [5], I'll [6] it for the rest of my [7], because I know, in my [8], you're the [9] one for me."
+        },
+        {
+            "title": "Sick Note",
+            "words": [
+                "SILLY WORD",
+                "LAST NAME",
+                "ILLNESS",
+                "NOUN (PLURAL)",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "SILLY WORD",
+                "PLACE",
+                "NUMBER",
+                "ADJECTIVE"
+            ],
+            "answer": "[1] [2] will not be attending school today. He/she has come down with a case of [3] and has horrible [4] and a/an [5] fever. We have made an appointment with the [6] Dr. [7], who studied for many years in [8] and has [9] degrees in pediatrics. He will send you all the information you need. Thank you!\nSincerely\nMrs. [10]."
+        },
+        {
+            "title": "Dragons",
+            "words": [
+                "COLOR",
+                "SUPERLATIVE (ENDING IS \"EST\")",
+                "ADJECTIVE",
+                "BODY PART (PLURAL)",
+                "BODY PART",
+                "NOUN",
+                "ANIMAL (PLURAL)",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "ADJECTIVE"
+            ],
+            "answer": "The [1] Dragon is the [2] Dragon of all. It has [3] [4], and a [5] shaped like a [6]. It loves to eat [7], although it will feast on nearly anything. It is [8] and [9]. You must be [10] around it, or you may end up as it's meal!"
+        },
+        {
+            "title": "My Dream Man",
+            "words": [
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "CELEBRITY",
+                "CELEBRITY",
+                "ANIMAL",
+                "VERB",
+                "NOUN",
+                "NOUN",
+                "PART OF BODY",
+                "ADVERB",
+                "ADJECTIVE",
+                "ADVERB",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "PART OF BODY",
+                "ADJECTIVE",
+                "NOUN",
+                "NOUN",
+                "PERSON IN ROOM (MALE)"
+            ],
+            "answer": "My \"Dream Man\" should, first of all be very [1] and [2]. He should have a physique like [3], a profile like [4], and the intelligence of a/an [5]. He must be polite and must always remember to [6] my [7], to tip his [8] and to take my [9] when crossing the street. He should move [10], have a/an [11] voice, and should always dress [12]. I would also like him to be a/an [13] dancer, and when we are alone he should whisper [14] nothings into my [15] and hold my [16] [17]. I know a/an [18] is hard to find. In fact the only one I can think of is [19]"
+        },
+        {
+            "title": "The Walmart Difference",
+            "words": [
+                "VERB",
+                "ADJECTIVE",
+                "NOUN (PLURAL)",
+                "ADJECTIVE",
+                "VERB ENDING IN \"ING\"",
+                "VERB",
+                "NUMBER",
+                "ADJECTIVE",
+                "NOUN (PLURAL)",
+                "NOUN (PLURAL)",
+                "NOUN (PLURAL)",
+                "RELATIVE (PLURAL)",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "NOUN (PLURAL)"
+            ],
+            "answer": "Come [1] at WALMART, where you`ll receive [2] discounts on all of your favorite brand name [3]. Our [4] and [5] associates are there to [6] you [7] hours a day. Here you will find [8] prices on the [9] you need. [10] for the moms, [11] for the kids and all the latest electronics for the [12]. So come on down to your [13] [14] WALMART where the [15] come first."
+        },
+        {
+            "title": "How To Wash Your Face",
+            "words": [
+                "ADVERB",
+                "NOUN",
+                "LIQUID",
+                "VERB",
+                "NUMBER",
+                "NOUN (PLURAL)",
+                "VERB",
+                "ADJECTIVE",
+                "NOUN",
+                "NOUN (PLURAL)",
+                "ILLNESS",
+                "OCCUPATION",
+                "BODY PART (PLURAL)",
+                "BODY PART"
+            ],
+            "answer": "In order to wash your face [1], you must wet your [2] in warm [3]. Then, [4] it across your face [5] times. This will wash off any remainig [6]. When you are done you should [7] the cloth in [8] water to clean it. You should also wash your face with a [9] to keep it smooth and shiny. This will keep also keep away [10]. Don`t worry. It is normal to experience [11] the first time you try this. Consult your [12] if you break out in [13]. This works well on your [14] too!"
+        },
+        {
+            "title": "Television",
+            "words": [
+                "NOUN",
+                "PLACE",
+                "SILLY WORD",
+                "VERB",
+                "NOUN",
+                "VERB",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "NUMBER",
+                "ADJECTIVE",
+                "ADVERB",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "NUMBER",
+                "MEASURMENT OF TIME",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "ADJECTIVE",
+                "NOUN",
+                "NUMBER",
+                "NUMBER"
+            ],
+            "answer": "Is your [1] making a mess of your [2]? Try [3]! It will [4] your whole [5] and [6] to unbelievable levels! Watch, as we demonstrate, the [7] capabilities of this [8] product! Everyone should have at least [9] of these!\n\nTo order, call the number on your screen. [10] phone attendants will [11] take your request. [12] and [13] service will be yours! Call within the next [14] [15], and you will receive a [16], [17], [18] [19] as a bonus, absolutely free for an additional value of [20] dollars, plus shipping and handling cost of [21] dollars. Act Now!!"
+        },
+        {
+            "title": "Weird Day",
+            "words": [
+                "NOUN",
+                "ADJECTIVE",
+                "NOUN (PLURAL)",
+                "FAMOUS PERSON",
+                "PLACE",
+                "VERB ENDING IN \"ING\"",
+                "ADJECTIVE",
+                "YOUR FAVORITE SONG",
+                "VERB ENDING IN \"ED\"",
+                "ADVERB",
+                "VERB ENDING IN \"ING\"",
+                "NAME OF SUPERMODEL",
+                "ADJECTIVE"
+            ],
+            "answer": "Once upon a time there was a [1]. It had [2] [3]! One day it met [4] on the side of the [5] they were [6]. It was very [7]; they both looked like hobos! All of the sudden they started singing [8] really loudly. They [9] really [10]! [4] started [11] with [12]. They looked really [13]!"
+        }
+    ]
+}

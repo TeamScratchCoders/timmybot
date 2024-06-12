@@ -10,13 +10,15 @@ const commandsNames = [
     'restart',
     'verifyuser',
     'unverifyuser',
+    'madlib',
 ]
 const commandsDescription = {
     "ping": 'pings the bot',
     "massdelete": 'massdeletes 100 messages',
     "restart": 'reboots the bot',
     "verifyuser": 'adds an user to the verified list',
-    "unverifyuser": 'removes an user from the verified list'
+    "unverifyuser": 'removes an user from the verified list',
+    "madlib": 'Creates a Mad Lib you can fill out.'
 }
 
 let commandsBilt

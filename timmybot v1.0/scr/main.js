@@ -51,7 +51,7 @@ if (supervisorPermissesBoolean) {
 
     if (supervisorPermissesBoolean) {
         try {
-            ({ token, guildID, verificationChannelID, ruleChannelID, supportChannelID, aiChannelID } = require('../config.json'))
+            ({ token, guildID, verificationChannelID, ruleChannelID, supportChannelID, aiChannelID, botCommandChannelID } = require('../config.json'))
             supervisor.succeed('successfully loaded config.json')
         } catch (err) {
             supervisor.fail(1, err, 'failed to load config.json')
@@ -142,6 +142,14 @@ const timmybot = {
                                 console.log(err);
                             }
                         }
+                        try {
+                            if (i.channelId == botCommandChannelID) {
+                                if (i.mentions.repliedUser.username == 'TimmyBot') {
+                                    functions.madlibFunc.addWord(i)
+                                    console.log(i.mentions.repliedUser.username);
+                                }
+                            } 
+                        } catch (err) {}
                     }
                 })
             })
