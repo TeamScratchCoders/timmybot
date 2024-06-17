@@ -28,11 +28,11 @@ function generateMadlib(inputObj) {
     for (let i = 0; i < madlibs[madlibsinputObj].words.length; i++) {
         const e = madlibs[madlibsinputObj].words[i];
         if (i == inputObj.length) {
-            madlibObj.embeds[0].description += `\n### > ${e}: ||blink||`
+            madlibObj.embeds[0].description += `\n### > ${e}: ||blank||`
         } else if (i < inputObj.length) {
             madlibObj.embeds[0].description += `\n### ${e}: \`${inputObj[i]}\``
         } else if (i > inputObj.length) {
-            madlibObj.embeds[0].description += `\n### ${e}: ||blink||`
+            madlibObj.embeds[0].description += `\n### ${e}: ||blank||`
         }
     }
 
@@ -59,6 +59,7 @@ function generateMadlib(inputObj) {
 const madlibFunc = {
     newStart: async (i) => {
         madlibsinputObj = getRandomNumber(0, (madlibs.length - 1))
+        //madlibsinputObj = madlibs.length -1
         madlibProgress = []
         i.reply(generateMadlib(madlibProgress))
     },

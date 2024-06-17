@@ -143,8 +143,10 @@ const timmybot = {
                             }
                         }
                         try {
-                            if (i.channelId == botCommandChannelID) {
+                            //if (i.channelId == botCommandChannelID) {
+                            if (i.channelId == '1248115163656360050') {
                                 if (i.mentions.repliedUser.username == 'TimmyBot') {
+                                    console.log(i);
                                     functions.madlibFunc.addWord(i)
                                     console.log(i.mentions.repliedUser.username);
                                 }
