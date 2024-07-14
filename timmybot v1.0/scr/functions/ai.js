@@ -119,7 +119,7 @@ const ai = {
                 await page.waitForSelector('p[node="[object Object]"]')
 
                 while (await lastMessageNow() == "") {
-                    await delay(200)
+                    await delay(1000)
                 }
 
                 await channel.sendTyping()
