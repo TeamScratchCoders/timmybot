@@ -33,7 +33,7 @@ let commands = {
     },
     initialize: async () => { 
         try {
-            await !(client.application == null)
+            while (client.application == null) await new Promise(resolve => setTimeout(resolve, 100))
             for (let i = 0; i < commandsNames.length; i++) {
                 const e = commandsNames[i]
                 const tempcammand = new SlashCommandBuilder()
