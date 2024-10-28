@@ -1,20 +1,21 @@
 let browser
 let page
+let lastMessageTimestamp
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-const puppeteer = require('puppeteer-core')
+const puppeteer = require('puppeteer')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
 const regex = /\boh my god|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
 
 function generatePersonality(person, message) {
     if (person === 'Ian R.') {
-        return `(your father. 15 years old.)${person}> "${message}"`
+        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (your father. 15 years old.)${person}> "${message}"`
     } else if (person === 'Judah M.') {
-        return `(A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
+        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
     } else if (person === 'Tyler Y.') {
-        return `${person}> "${message}"`
+        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
     } else {
-        return `${person}> "${message}"`
+        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
     }
 }
 
@@ -29,11 +30,38 @@ function censor(message) {
     }
 }
 
+function generateTime(unixTime) {
+    let diff = Math.floor((Date.now() - unixTime) / 1000); // Convert diff to seconds
+    let dateString = "";
+
+    const times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
+    const labels = ["year", "month", "week", "day", "hour", "minute", "second"];
+
+    for (let i = 0; i < times.length; i++) {
+        const timeValue = times[i];
+        const count = Math.floor(diff / timeValue);
+
+        if (count > 0) {
+            const label = labels[i] + (count > 1 ? "s" : "");
+            dateString += (dateString ? ", " : "") + `${count} ${label}`;
+            diff -= count * timeValue;
+        }
+    }
+
+    // Insert "and" before the last time unit only if dateString has multiple parts
+    const lastCommaIndex = dateString.lastIndexOf(", ");
+    if (lastCommaIndex !== -1) {
+        dateString = dateString.slice(0, lastCommaIndex) + " and" + dateString.slice(lastCommaIndex + 1);
+    }
+
+    return dateString || "just now";
+}
+
 const ai = {
     start: async (i) => {
         try {
             browser = await puppeteer.launch({
-                executablePath: '/usr/bin/chromium',
+                //executablePath: '/usr/bin/chromium',
                 headless: true,
                 args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
             })
@@ -102,7 +130,7 @@ const ai = {
 
                 if (await ai.connection(true) === false) {
                     while (await ai.connection(false) === false) {
-                        await delay(1000)
+                        await delay(2000)
                     }
                 }
 
@@ -128,7 +156,7 @@ const ai = {
                     let lastMessage = await lastMessageNow()
                     while (!(lastMessage === lastMessagePast)) {
                         lastMessagePast = lastMessage
-                        await delay(200)
+                        await delay(1000)
                         await channel.sendTyping()
                         lastMessage = await lastMessageNow()
                     }
@@ -150,6 +178,8 @@ const ai = {
                 filteredText = await removeNewLines(filteredText)
                 
                 await page.type('.text-lg,.text-lg-chat', generatePersonality(nickname, filteredText) + `\n`)
+
+                lastMessageTimestamp = Date.now()
                 
                 await page.waitForSelector('p[node="[object Object]"]')
 
