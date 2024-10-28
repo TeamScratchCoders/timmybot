@@ -51,7 +51,7 @@ if (supervisorPermissesBoolean) {
 
     if (supervisorPermissesBoolean) {
         try {
-            ({ token, guildID, verificationChannelID, ruleChannelID, supportChannelID, aiChannelID } = require('../config.json'))
+            ({ token, guildID, verificationChannelID, ruleChannelID, supportChannelID, aiChannelID, botCommandChannelID } = require('../config.json'))
             supervisor.succeed('successfully loaded config.json')
         } catch (err) {
             supervisor.fail(1, err, 'failed to load config.json')
@@ -111,13 +111,14 @@ const timmybot = {
                 functions.joinMessage(ruleChannel, 1)
                 functions.joinMessage(supportChannel, 2)
                 
-                await functions.ai.start()
+                functions.ai.start()
+
+                commands.initialize()
                 
                 supervisor.fullyOperational()
                 
                 setInterval(functions.verification.scanUsers, 60000)
 
-                commands.initialize()
 
                 
                 client.on('interactionCreate', (i) => {
@@ -141,6 +142,16 @@ const timmybot = {
                                 console.log(err);
                             }
                         }
+                        try {
+                            //if (i.channelId == botCommandChannelID) {
+                            if (i.channelId == '1248115163656360050') {
+                                if (i.mentions.repliedUser.username == 'TimmyBot') {
+                                    console.log(i);
+                                    functions.madlibFunc.addWord(i)
+                                    console.log(i.mentions.repliedUser.username);
+                                }
+                            } 
+                        } catch (err) {}
                     }
                 })
             })

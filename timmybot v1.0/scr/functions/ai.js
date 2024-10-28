@@ -1,21 +1,21 @@
 let browser
 let page
+let lastMessageTimestamp
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
-const { FrameTree } = require('puppeteer')
 const regex = /\boh my god|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
 
 function generatePersonality(person, message) {
     if (person === 'Ian R.') {
-        return `(your father)${person}> "${message}"`
+        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (your father. 15 years old.)${person}> "${message}"`
     } else if (person === 'Judah M.') {
-        return `(A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
+        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
     } else if (person === 'Tyler Y.') {
-        return `${person}> "${message}"`
+        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
     } else {
-        return `${person}> "${message}"`
+        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
     }
 }
 
@@ -30,12 +30,39 @@ function censor(message) {
     }
 }
 
+function generateTime(unixTime) {
+    let diff = Math.floor((Date.now() - unixTime) / 1000); // Convert diff to seconds
+    let dateString = "";
+
+    const times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
+    const labels = ["year", "month", "week", "day", "hour", "minute", "second"];
+
+    for (let i = 0; i < times.length; i++) {
+        const timeValue = times[i];
+        const count = Math.floor(diff / timeValue);
+
+        if (count > 0) {
+            const label = labels[i] + (count > 1 ? "s" : "");
+            dateString += (dateString ? ", " : "") + `${count} ${label}`;
+            diff -= count * timeValue;
+        }
+    }
+
+    // Insert "and" before the last time unit only if dateString has multiple parts
+    const lastCommaIndex = dateString.lastIndexOf(", ");
+    if (lastCommaIndex !== -1) {
+        dateString = dateString.slice(0, lastCommaIndex) + " and" + dateString.slice(lastCommaIndex + 1);
+    }
+
+    return dateString || "just now";
+}
+
 const ai = {
-    start: async () => {
+    start: async (i) => {
         try {
             browser = await puppeteer.launch({
-                //executablePath: '/usr/bin/chromium',
-                headless: false,
+                executablePath: '/usr/bin/chromium',
+                headless: true,
                 args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
             })
 
@@ -56,14 +83,43 @@ const ai = {
             await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
     
             await page.goto(aiChat)
-    
-            await page.waitForSelector('.text-lg, .text-lg-chat')
 
-            return true
+            if (i) {
+                ai.connection(false)
+            } else {
+                ai.connection(true)
+            }
+
 
         } catch (err) {
             console.log(err);
             return false
+        }
+    },
+    connection: async (i) => {
+        try {
+            const guild = await client.guilds.fetch(guildID)
+            const channel = await guild.channels.fetch(aiChannelID)
+
+            const waitInLineElement  = await page.$('h2')
+    
+            const allText = await page.evaluate(el => el.innerText, waitInLineElement)
+    
+            const time  = parseInt(allText.match(/\d+/)[0], 10)
+
+            if (i) {
+                channel.send(`It appears Timmy about has been hit by a heavy load please wait the estimated ${time} minutes...`)
+            }
+
+            return false
+        } catch (err) {
+            try {
+                await page.waitForSelector('p[node="[object Object]"]')
+                return true
+            } catch (err) {
+                console.log(err);
+                return false
+            }
         }
     },
     msg: async (i, nickname) => {
@@ -71,6 +127,13 @@ const ai = {
             talking = true
 
             try {
+
+                if (await ai.connection(true) === false) {
+                    while (await ai.connection(false) === false) {
+                        await delay(2000)
+                    }
+                }
+
                 let mentions
                 let filteredText
                 const guild = await client.guilds.fetch(guildID)
@@ -93,7 +156,7 @@ const ai = {
                     let lastMessage = await lastMessageNow()
                     while (!(lastMessage === lastMessagePast)) {
                         lastMessagePast = lastMessage
-                        await delay(1000)
+                        await delay(500)
                         await channel.sendTyping()
                         lastMessage = await lastMessageNow()
                     }
@@ -115,11 +178,25 @@ const ai = {
                 filteredText = await removeNewLines(filteredText)
                 
                 await page.type('.text-lg,.text-lg-chat', generatePersonality(nickname, filteredText) + `\n`)
+
+                lastMessageTimestamp = Date.now()
                 
                 await page.waitForSelector('p[node="[object Object]"]')
 
-                while (await lastMessageNow() == "") {
+                let whileLoopIndex = 1
+
+                while (await lastMessageNow() == "" && whileLoopIndex <= 50) {
                     await delay(1000)
+
+                    whileLoopIndex += 1
+
+                    if (whileLoopIndex == 25) {
+                        await channel.sendTyping()
+                    }
+                }
+
+                if (whileLoopIndex >= 50) {
+                    return "system error Timmy timed out please come back later. Estimated time 3 - 5 minutes"
                 }
 
                 await channel.sendTyping()
@@ -139,7 +216,7 @@ const ai = {
             } catch (err) {
                 console.log(err)
                 talking = false
-                return false
+                return undefined
             }
 
         }
@@ -154,8 +231,11 @@ const ai = {
             talking = true
 
             try {
-                const guild = await client.guilds.fetch(guildID)
-                const channel = await guild.channels.fetch(aiChannelID)
+                if (await ai.connection(false) === false) {
+                    while (await ai.connection(false) === false) {
+                        await delay(1000)
+                    }
+                }
                 
                 await page.type('.text-lg,.text-lg-chat', message + `\n`)
 

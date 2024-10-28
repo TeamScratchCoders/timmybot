@@ -10,13 +10,17 @@ const commandsNames = [
     'restart',
     'verifyuser',
     'unverifyuser',
+    'madlib',
+    'scoutskills'
 ]
 const commandsDescription = {
     "ping": 'pings the bot',
     "massdelete": 'massdeletes 100 messages',
     "restart": 'reboots the bot',
     "verifyuser": 'adds an user to the verified list',
-    "unverifyuser": 'removes an user from the verified list'
+    "unverifyuser": 'removes an user from the verified list',
+    "madlib": 'Creates a Mad Lib you can fill out.',
+    "scoutskills": 'Test you scout skills'
 }
 
 let commandsBilt
@@ -29,6 +33,7 @@ let commands = {
     },
     initialize: async () => { 
         try {
+            while (client.application == null) await new Promise(resolve => setTimeout(resolve, 100))
             for (let i = 0; i < commandsNames.length; i++) {
                 const e = commandsNames[i]
                 const tempcammand = new SlashCommandBuilder()
