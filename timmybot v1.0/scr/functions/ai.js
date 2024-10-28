@@ -3,7 +3,7 @@ let page
 let lastMessageTimestamp
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
 const regex = /\boh my god|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
 
@@ -61,7 +61,7 @@ const ai = {
     start: async (i) => {
         try {
             browser = await puppeteer.launch({
-                //executablePath: '/usr/bin/chromium',
+                executablePath: '/usr/bin/chromium',
                 headless: true,
                 args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
             })
@@ -156,7 +156,7 @@ const ai = {
                     let lastMessage = await lastMessageNow()
                     while (!(lastMessage === lastMessagePast)) {
                         lastMessagePast = lastMessage
-                        await delay(1000)
+                        await delay(500)
                         await channel.sendTyping()
                         lastMessage = await lastMessageNow()
                     }
