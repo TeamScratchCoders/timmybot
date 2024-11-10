@@ -11,7 +11,6 @@ const commandsNames = [
     'verifyuser',
     'unverifyuser',
     'madlib',
-    'scoutskills'
 ]
 const commandsDescription = {
     "ping": 'pings the bot',
@@ -20,7 +19,6 @@ const commandsDescription = {
     "verifyuser": 'adds an user to the verified list',
     "unverifyuser": 'removes an user from the verified list',
     "madlib": 'Creates a Mad Lib you can fill out.',
-    "scoutskills": 'Test you scout skills'
 }
 
 let commandsBilt
