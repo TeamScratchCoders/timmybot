@@ -129,6 +129,10 @@ const timmybot = {
 
                 client.on('messageCreate', async i => {
                     if (!i.author.bot) {
+                    if (/cook/gi.test(i.content)) {
+                        i.reply({ content: "Jesse we need to cook."})
+                    }
+
                         functions.messageTracking(i)
                         if (i.channelId == aiChannelID) {
                             try {
