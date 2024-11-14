@@ -73,7 +73,7 @@ const ai = {
         On the website is a large language model that is designed to represent Timmy.
         The Puppeteer instance logs into the character.ai account by injecting a cookie with the login token*/
             browser = await puppeteer.launch({
-                //executablePath: '/usr/bin/chromium',
+                executablePath: '/usr/bin/chromium',
                 headless: true,
                 args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
             })
@@ -178,7 +178,7 @@ const ai = {
                     let lastMessage = await lastMessageNow()
                     while (!(lastMessage === lastMessagePast)) {
                         lastMessagePast = lastMessage
-                        await delay(1000)
+                        await delay(500)
                         await channel.sendTyping()
                         lastMessage = await lastMessageNow()
                     }
