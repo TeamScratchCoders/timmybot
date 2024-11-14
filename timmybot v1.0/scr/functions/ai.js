@@ -1,21 +1,29 @@
 let browser
-let page
+let aiText
+let aiImage
 let lastMessageTimestamp
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-const puppeteer = require('puppeteer-core')
+const puppeteer = require('puppeteer-extra')
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+puppeteer.use(StealthPlugin())
+const axios = require('axios')
+const fs = require('fs')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
-const regex = /\boh my god|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
+const { supervisor } = require('../../../supervisor')
+const { log } = require('console')
+const regex = /\bfucker|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
 
-function generatePersonality(person, message) {
+//* Functions:
+function generatePersonality(person, message, imageDescription) {
     if (person === 'Ian R.') {
-        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (your father. 15 years old.)${person}> "${message}"`
+        return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (your father. 15 years old.)${person}> "${message}"`
     } else if (person === 'Judah M.') {
-        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
+        return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
     } else if (person === 'Tyler Y.') {
-        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
+        return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
     } else {
-        return `Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
+        return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
     }
 }
 
@@ -57,16 +65,25 @@ function generateTime(unixTime) {
     return dateString || "just now";
 }
 
+//* Functionality:
+
 const ai = {
     start: async (i) => {
-        try {
+        /*This function starts up a headless Puppeteer function and web scrapes the website character.ai.
+        On the website is a large language model that is designed to represent Timmy.
+        The Puppeteer instance logs into the character.ai account by injecting a cookie with the login token*/
             browser = await puppeteer.launch({
                 executablePath: '/usr/bin/chromium',
                 headless: true,
                 args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
             })
+        supervisor.succeed("AI browser instance started")
 
-            page = await browser.newPage()
+        aiText = await browser.newPage()
+        supervisor.succeed("aiText instance started")
+
+        aiImage = await browser.newPage()
+        supervisor.succeed("aiImage instance started")
 
             const cookie = {
                 name: 'web-next-auth',
@@ -78,11 +95,16 @@ const ai = {
                 secure: true
             }
     
-            await page.setCookie(cookie)
+        //* aiText
+
+        await aiText.setCookie(cookie)
+        supervisor.succeed("Cookie successfully injected for aiText")
     
-            await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
+        await aiText.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
+        supervisor.succeed("Successfully set user argument for aiText")
     
-            await page.goto(aiChat)
+        await aiText.goto(aiChat)
+        supervisor.succeed("Requested AI website for aiText")
 
             if (i) {
                 ai.connection(false)
@@ -90,22 +112,26 @@ const ai = {
                 ai.connection(true)
             }
 
+        //* aiImage
 
-        } catch (err) {
-            console.log(err);
-            return false
-        }
+        await aiText.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
+        supervisor.succeed("Successfully set user argument for aiText")
+
+        await aiImage.goto('https://imagecaptiongenerator.com/')
+        supervisor.succeed("Requested AI website for aiText")
     },
     connection: async (i) => {
+        /*This function checks the availability of the website.*/
+
         try {
             const guild = await client.guilds.fetch(guildID)
             const channel = await guild.channels.fetch(aiChannelID)
 
-            const waitInLineElement  = await page.$('h2')
+            const waitInLineElement = await aiText.$('h2')
     
-            const allText = await page.evaluate(el => el.innerText, waitInLineElement)
+            const allText = await aiText.evaluate(el => el.innerText, waitInLineElement)
     
-            const time  = parseInt(allText.match(/\d+/)[0], 10)
+            const time = parseInt(allText.match(/\d+/)[0], 10)
 
             if (i) {
                 channel.send(`It appears Timmy about has been hit by a heavy load please wait the estimated ${time} minutes...`)
@@ -114,7 +140,7 @@ const ai = {
             return false
         } catch (err) {
             try {
-                await page.waitForSelector('p[node="[object Object]"]')
+                await aiText.waitForSelector('p[node="[object Object]"]')
                 return true
             } catch (err) {
                 console.log(err);
@@ -122,18 +148,14 @@ const ai = {
             }
         }
     },
-    msg: async (i, nickname) => {
+    msg: async (i, nickname, imageUrl) => {
+        /*This function emulates a keyboard through Puppeteer and types in a prompt to the AI and reads it back.*/
+
         if (talking === false) {
             talking = true
 
             try {
-
-                if (await ai.connection(true) === false) {
-                    while (await ai.connection(false) === false) {
-                        await delay(2000)
-                    }
-                }
-
+                let imageDescription
                 let mentions
                 let filteredText
                 const guild = await client.guilds.fetch(guildID)
@@ -141,10 +163,10 @@ const ai = {
                 
                 async function lastMessageNow() {
 
-                    const element = await page.$('div.mt-1.max-w-xl.rounded-2xl.px-3.min-h-12.flex.justify-center.py-3.bg-surface-elevation-2')
+                    const element = await aiText.$('div.mt-1.max-w-xl.rounded-2xl.px-3.min-h-12.flex.justify-center.py-3.bg-surface-elevation-2')
 
                     
-                    const allText = await page.evaluate(el => {
+                    const allText = await aiText.evaluate(el => {
                         return el.innerText;
                     }, element)
 
@@ -168,6 +190,13 @@ const ai = {
                     return e.replace(/\r?\n|\r/g, '');
                 }
     
+
+                if (await ai.connection(true) === false) {
+                    while (await ai.connection(false) === false) {
+                        await delay(2000)
+                    }
+                }
+
                 if (/<@!?(\d+)>/.test(i.content)) {
                     mentions = `${i.content}\s\s`.match(/<@!?(\d+)>/g)
                     filteredText = i.content.replace(mentions[0], `@${guild.members.cache.get(mentions[0].slice(2, -1)).nickname}`)
@@ -177,11 +206,25 @@ const ai = {
 
                 filteredText = await removeNewLines(filteredText)
                 
-                await page.type('.text-lg,.text-lg-chat', generatePersonality(nickname, filteredText) + `\n`)
+                if (imageUrl.length > 0) {
+                    imageDescription = `${nickname} sent you an image.`;
+
+                    for (const [i, e] of imageUrl.entries()) {
+                        const description = await ai.describeImage(e);
+
+                        imageDescription = `${imageDescription}, image number ${i + 1} can be best described as: "${description[0]}"`;
+                    }
+
+                    imageDescription += ".";
+                } else {
+                    imageDescription = "No images were sent";
+                }
+
+                await aiText.type('.text-lg,.text-lg-chat', generatePersonality(nickname, filteredText, imageDescription) + `\n`)
 
                 lastMessageTimestamp = Date.now()
                 
-                await page.waitForSelector('p[node="[object Object]"]')
+                await aiText.waitForSelector('p[node="[object Object]"]')
 
                 let whileLoopIndex = 1
 
@@ -210,8 +253,6 @@ const ai = {
                 
                 talking = false
 
-                console.log(censor(lastMessageFindVariable));
-
                 return censor(lastMessageFindVariable)
             } catch (err) {
                 console.log(err)
@@ -222,11 +263,15 @@ const ai = {
         }
     },
     stop: async () => {
+        /*This function closes the Puppeteer instance*/
+
         try {
             await browser.close()
-        } catch (err) {}
+        } catch (err) { }
     },
     systemMsg: async (message) => {
+        /*This function sends a message without any of the boilerplate*/
+
         if (talking === false) {
             talking = true
 
@@ -237,7 +282,7 @@ const ai = {
                     }
                 }
                 
-                await page.type('.text-lg,.text-lg-chat', message + `\n`)
+                await aiText.type('.text-lg,.text-lg-chat', message + `\n`)
 
                 talking = false
             } catch (err) {
@@ -246,6 +291,44 @@ const ai = {
             }
 
         }
+    },
+    describeImage: async (url) => {
+        try {
+
+            await aiImage.reload()
+
+            const response = await axios.get(url, { responseType: 'arraybuffer' })
+
+            fs.writeFileSync('timmybot v1.0/assets/temp/functionAIDescribeImageTempImage.jpg', response.data)
+
+            await aiImage.waitForSelector('input');
+
+            const input = await aiImage.$('input');
+
+            await input.uploadFile('timmybot v1.0/assets/temp/functionAIDescribeImageTempImage.jpg');
+
+            await aiImage.select('select#tone', 'accurate');
+
+            await aiImage.waitForSelector('button');
+
+            await aiImage.click('button');
+
+            await aiImage.waitForSelector('div.rounded-lg.text-lg.bg-white.dark\\:bg-gray-800.p-4.my-2.flex.flex-col.gap-1.mt-4');
+
+            const divElements = await aiImage.$$('div.rounded-lg.text-lg.bg-white.dark\\:bg-gray-800.p-4.my-2.flex.flex-col.gap-1.mt-4');
+
+            const allText = await Promise.all(
+                divElements.map(async (div) => {
+                    const text = await div.evaluate(el => el.innerText);
+                    return text.replace(/\n?Copy/g, '').trim();
+                })
+            );
+
+            return allText;
+        } catch (err) {
+            console.log(err);
+        }
+
     }
 }
 
