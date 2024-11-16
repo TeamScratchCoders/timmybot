@@ -11,7 +11,6 @@ const axios = require('axios')
 const fs = require('fs')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
 const { supervisor } = require('../../../supervisor')
-const { log } = require('console')
 const regex = /\bfucker|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
 
 //* Functions:
@@ -22,6 +21,8 @@ function generatePersonality(person, message, imageDescription) {
         return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (A large muscular Burly Ginger with 14 knives the size to kill a cougars and a beard all at age 16. Also your brother) ${person}> "${message}"`
     } else if (person === 'Tyler Y.') {
         return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
+    } else if (person === 'Jake H.') {
+        return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, (the man how feed you 100,000,000,000,000,000,000,000,000,000,000 everyday for Easter and Christmas) new message: ${person}> "${message}"`
     } else {
         return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
     }
@@ -114,7 +115,7 @@ const ai = {
 
         //* aiImage
 
-        await aiText.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
+        await aiImage.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
         supervisor.succeed("Successfully set user argument for aiText")
 
         await aiImage.goto('https://imagecaptiongenerator.com/')
@@ -212,7 +213,7 @@ const ai = {
                     for (const [i, e] of imageUrl.entries()) {
                         const description = await ai.describeImage(e);
 
-                        imageDescription = `${imageDescription}, image number ${i + 1} can be best described as: "${description[0]}"`;
+                        imageDescription = `${imageDescription}, image number ${i + 1} can be best described as: "${description}"`;
                     }
 
                     imageDescription += ".";
@@ -313,9 +314,9 @@ const ai = {
 
             await aiImage.click('button');
 
-            await aiImage.waitForSelector('div.rounded-lg.text-lg.bg-white.dark\\:bg-gray-800.p-4.my-2.flex.flex-col.gap-1.mt-4');
+            await aiImage.waitForSelector('[class="rounded-lg text-lg bg-white dark:bg-gray-900 p-4 my-2 flex flex-col gap-1 mt-4 border border-gray-200 dark:border-gray-700"]');
 
-            const divElements = await aiImage.$$('div.rounded-lg.text-lg.bg-white.dark\\:bg-gray-800.p-4.my-2.flex.flex-col.gap-1.mt-4');
+            const divElements = await aiImage.$$('[class="rounded-lg text-lg bg-white dark:bg-gray-900 p-4 my-2 flex flex-col gap-1 mt-4 border border-gray-200 dark:border-gray-700"]');
 
             const allText = await Promise.all(
                 divElements.map(async (div) => {
