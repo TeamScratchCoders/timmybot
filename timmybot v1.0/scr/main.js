@@ -72,7 +72,9 @@ function imageToUrl(i) {
     try {
         return [
             ...Array.from(i.attachments.values()).filter(att => att.contentType === 'image/png').map(att => att.url),
-            ...Array.from(i.attachments.values()).filter(att => att.contentType === 'image/jpeg').map(att => att.url)
+            ...Array.from(i.attachments.values()).filter(att => att.contentType === 'image/jpeg').map(att => att.url),
+            ...Array.from(i.attachments.values()).filter(att => att.contentType === 'image/webp').map(att => att.url),
+            ...Array.from(i.attachments.values()).filter(att => att.contentType === 'image/gif').map(att => att.url)
         ]
     } catch (err) {
         return null
