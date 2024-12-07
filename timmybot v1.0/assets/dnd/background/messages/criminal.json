@@ -1,0 +1,50 @@
+{
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Background\n### Criminal \nYou are an experienced criminal with a history of breaking the law. You have spent a lot of time among other criminals and still have contacts within the criminal underworld. You’re far closer than most people to the world of murder, theft, and violence that pervades the underbelly of civilization, and you have survived up to this point by flouting the rules and regulations of society.",
+            "fields": [
+                {
+                    "name": "• Skill Proficiencies",
+                    "value": "Deception, Stealth",
+                    "inline": false
+                },
+                {
+                    "name": "• Tool Proficiencies",
+                    "value": "One type of gaming set, thieves tools",
+                    "inline": false
+                },
+                {
+                    "name": "• Equipment",
+                    "value": "A crowbar, a set of dark common clothes including a hood, and a pouch containing 15 gp",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndBackgroundPrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndBackground1"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndBackgroundNext"
+                }
+            ]
+        }
+    ]
+}

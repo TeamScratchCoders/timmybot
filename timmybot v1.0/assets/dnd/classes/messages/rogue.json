@@ -1,0 +1,50 @@
+{
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Class\n### Fighter\nSignaling for her companions to wait, a halfling creeps\nforward through the dungeon hall. She presses an ear\nto the door, then pulls out a set of tools and picks the\nlock in the blink of an eye. Then she disappears into the\nshadows as her fighter friend moves forward to kick the\ndoor open.\nA human lurks in the shadows of an alley while his\naccomplice prepares for her part in the ambush. When\ntheir target—a notorious slaver—passes the alleyway,\nthe accomplice cries out, the slaver comes to investigate,\nand the assassin’s blade cuts his throat before he can\nmake a sound.\nSuppressing a giggle, a gnome waggles her fingers and\nmagically lifts the key ring from the guard’s belt. In a moment, the keys are in her hand, the cell door is open, and\nshe and her companions are free to make their escape.\nRogues rely on skill, stealth, and their foes’ vulnerabilities to get the upper hand in any situation. They have a\nknack for finding the solution to just about any problem,\ndemonstrating a resourcefulness and versatility that is\nthe cornerstone of any successful adventuring party.",
+            "fields": [
+                {
+                    "name": "• Class Features",
+                    "value": "**Hit Dice:** 1d8 per rogue level\n**Hit Points at 1st Level:** 8 + your Constitution modifier\n**Hit Points at Higher Levels:** 1d8 (or 5) + your\nConstitution modifier per rogue level after 1st",
+                    "inline": false
+                },
+                {
+                    "name": "• Proficiencies",
+                    "value": "**Armor:** Light armor\n**Weapons:** Simple weapons, hand crossbows,\nlongswords, rapiers, shortswords\n**Tools:** Thieves’ tools\n**Saving Throws:** Dexterity, Intelligence\n**Skills:** Choose four from Acrobatics, Athletics,\nDeception, Insight, Intimidation, Investigation,\nPerception, Performance, Persuasion, Sleight of\nHand, and Stealth",
+                    "inline": false
+                },
+                {
+                    "name": "• Equipment",
+                    "value": "• (a) a rapier or (b) a shortsword\n• (a) a shortbow and quiver of 20 arrows or (b)\na shortsword\n• (a) a burglar’s pack, (b) a dungeoneer’s pack, or (c) an\nexplorer’s pack\n• Leather armor, two daggers, and thieves’ tools",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndClassPrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndClass2"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndClassNext"
+                }
+            ]
+        }
+    ]
+}

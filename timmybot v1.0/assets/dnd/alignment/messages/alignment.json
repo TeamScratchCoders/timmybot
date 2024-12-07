@@ -1,0 +1,68 @@
+{
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose Your Alignment\n\nAlignment describes a character's moral and ethical outlook, balancing their sense of Good vs. Evil and Law vs. Chaos. It helps define whether a character is compassionate and follows rules (Good and Lawful), self-serving and disruptive (Evil and Chaotic), or somewhere in between. This framework shapes how they make decisions, interact with others, and approach challenges in the game world.",
+            "fields": []
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 3,
+                    "custom_id": "dndAlignment",
+                    "options": [
+                        {
+                            "label": "Lawful Good",
+                            "description": "Follows the rules and seeks to do what's right, helping others and upholding justice.",
+                            "value": "lg"
+                        },
+                        {
+                            "label": "Neutral Good",
+                            "description": "Does what's right according to their conscience, without being bound by laws or chaos.",
+                            "value": "ng"
+                        },
+                        {
+                            "label": "Chaotic Good",
+                            "description": "Fights for good but rejects authority and rules in favor of freedom.",
+                            "value": "cg"
+                        },
+                        {
+                            "label": "Lawful Neutral",
+                            "description": "Strictly follows laws and order, believing structure is key to a stable society.",
+                            "value": "ln"
+                        },
+                        {
+                            "label": "Neutral",
+                            "description": "Strives for balance, not swayed by good, evil, law, or chaos.",
+                            "value": "n"
+                        },
+                        {
+                            "label": "Chaotic Neutral",
+                            "description": "Values freedom and individuality, avoiding restrictions or commitments to any cause.",
+                            "value": "cn"
+                        },
+                        {
+                            "label": "Lawful Evil",
+                            "description": "Uses laws and structure to manipulate and control for personal gain.",
+                            "value": "le"
+                        },
+                        {
+                            "label": "Neutral Evil",
+                            "description": "Self-serving and opportunistic, doing whatever benefits them, regardless of laws or morals.",
+                            "value": "ne"
+                        },
+                        {
+                            "label": "Chaotic Evil",
+                            "description": "Seeks destruction and personal gain with little regard for rules, order, or others.",
+                            "value": "ce"
+                        }
+                    ],
+                    "placeholder": "Alignment"
+                }
+            ]
+        }
+    ]
+}

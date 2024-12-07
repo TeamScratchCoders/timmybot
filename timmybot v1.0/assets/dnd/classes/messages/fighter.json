@@ -1,0 +1,50 @@
+{
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Class\n### Fighter\nA human in clanging plate armor holds her shield before\nher as she runs toward the massed goblins. An elf behind\nher, clad in studded leather armor, peppers the goblins\nwith arrows loosed from his exquisite bow. The half-orc\nnearby shouts orders, helping the two combatants coordinate their assault to the best advantage.\nA dwarf in chain mail interposes his shield between the\nogre’s club and his companion, knocking the deadly blow\naside. His companion, a half-elf in scale armor, swings\ntwo scimitars in a blinding whirl as she circles the ogre,\nlooking for a blind spot in its defenses.\nA gladiator fights for sport in an arena, a master with\nhis trident and net, skilled at toppling foes and moving\nthem around for the crowd’s delight—and his own tactical\nadvantage. His opponent’s sword flares with blue light\nan instant before she sends lightning flashing forth to\nsmite him.\nAll of these heroes are fighters, perhaps the most diverse class of characters in the worlds of Dungeons &\nDragons. Questing knights, conquering overlords, royal\nchampions, elite foot soldiers, hardened mercenaries,\nand bandit kings—as fighters, they all share an unparalleled mastery with weapons and armor, and a thorough\nknowledge of the skills of combat. And they are well\nacquainted with death, both meting it out and staring it\ndefiantly in the face.",
+            "fields": [
+                {
+                    "name": "• Class Features",
+                    "value": "**Hit Dice:** 1d10 per fighter level\n**Hit Points at 1st Level:** 10 + your Constitution modifier\n**Hit Points at Higher Levels:** 1d10 (or 6) + your\nConstitution modifier per fighter level after 1st",
+                    "inline": false
+                },
+                {
+                    "name": "• Proficiencies",
+                    "value": "**Armor:** All armor, shields\n**Weapons:** Simple weapons, martial weapons\n**Tools:** None\n**Saving Throws:** Strength, Constitution\n**Skills:** Choose two skills from Acrobatics, Animal\nHandling, Athletics, History, Insight, Intimidation,\nPerception, and Survival",
+                    "inline": false
+                },
+                {
+                    "name": "• Equipment",
+                    "value": "• (a) chain mail or (b) leather armor, longbow,\nand 20 arrows\n• (a) a martial weapon and a shield or (b) two\nmartial weapons\n• (a) a light crossbow and 20 bolts or (b) two handaxes\n• (a) a dungeoneer’s pack or (b) an explorer’s pack",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndClassPrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndClass1"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndClassNext"
+                }
+            ]
+        }
+    ]
+}

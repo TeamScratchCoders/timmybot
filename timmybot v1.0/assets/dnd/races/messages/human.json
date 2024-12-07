@@ -1,0 +1,61 @@
+{
+    "flags": 64,
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Race\n### Human\nIn the reckonings of most worlds, humans are the youngest of the common races, late to arrive on the world scene\nand short-lived in comparison to dwarves, elves, and\ndragons. Perhaps it is because of their shorter lives that\nthey strive to achieve as much as they can in the years\nthey are given. Or maybe they feel they have something\nto prove to the elder races, and that’s why they build their\nmighty empires on the foundation of conquest and trade.\nWhatever drives them, humans are the innovators, the\nachievers, and the pioneers of the worlds.",
+            "fields": [
+                {
+                    "name": "• Ability Score Increase",
+                    "value": "*+1 to all ability scores.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Languages",
+                    "value": "*Common.\n+1 language of your choice choice.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Speed",
+                    "value": "*3 feet.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Age",
+                    "value": "*Adolescence: 100\nExpected maximum age: 750*",
+                    "inline": false
+                },
+                {
+                    "name": "• Size",
+                    "value": "*Medium (5–6 feet tall, about 150–250 pounds)*",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndRacePrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndRace2"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndRaceNext"
+                }
+            ]
+        }
+    ]
+}

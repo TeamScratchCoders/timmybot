@@ -1,0 +1,753 @@
+{
+    "simpleWeapon": [
+        "club",
+        "dagger",
+        "greatclub",
+        "handaxe",
+        "javelin",
+        "lightHammer",
+        "mace",
+        "quarterstaff",
+        "sickle",
+        "spear"
+    ],
+    "simpleRangedWeapon": [
+        "lightCrossbow",
+        "dart",
+        "shortbow",
+        "sling"
+    ],
+    "marshallWeapon": [
+        "battleaxe",
+        "flail",
+        "glaive",
+        "greataxe",
+        "greatsword",
+        "halberd",
+        "lance",
+        "longsword",
+        "maul",
+        "morningstar",
+        "pike",
+        "rapier",
+        "scimitar",
+        "shortsword",
+        "trident",
+        "warPick",
+        "warhammer",
+        "whip"
+    ],
+    "marshallRangedWeapon": [
+        "blowgun",
+        "handCrossbow",
+        "heavyCrossbow",
+        "longbow",
+        "net"
+    ],
+    "properties": {
+        "light": " Light",
+        "finesse": " Finesse",
+        "thrown": " Thrown",
+        "twoHanded": " Two-Handed",
+        "versatile": " Versatile",
+        "ammunition": " Ammunition",
+        "loading": " Loading",
+        "heavy": " Heavy",
+        "reach": " Reach",
+        "special": " Special"
+    },
+    "club": {
+        "type": "weapon",
+        "name": "Club",
+        "cost": 1,
+        "coin": "sp",
+        "weight": 2,
+        "damage": 4,
+        "damageMultiplier": 1,
+        "damageType": "bludgeoning",
+        "properties": [
+            "light"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A club is a simple weapon consisting of a length of wood, bone or metal, used as a bludgeoning weapon. It is often the first weapon used by a warrior, and is a popular choice for those who prefer close combat."
+    },
+    "dagger": {
+        "type": "weapon",
+        "name": "Dagger",
+        "cost": 2,
+        "coin": "gp",
+        "weight": 1,
+        "damage": 4,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "finesse",
+            "light",
+            "thrown"
+        ],
+        "rang": 20,
+        "longRange": 60,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A dagger is a short, double-edged blade used for close combat. It is a popular choice for rogues and assassins, as it is quick and deadly."
+    },
+    "greatclub": {
+        "type": "weapon",
+        "name": "Greatclub",
+        "cost": 2,
+        "coin": "sp",
+        "weight": 10,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "bludgeoning",
+        "properties": [
+            "twoHanded"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A greatclub is a large, heavy wooden weapon used for delivering powerful bludgeoning blows."
+    },
+    "handaxe": {
+        "type": "weapon",
+        "name": "Handaxe",
+        "cost": 5,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "slashing",
+        "properties": [
+            "light",
+            "thrown"
+        ],
+        "rang": 20,
+        "longRange": 60,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A handaxe is a small axe used for chopping and slashing. It is a popular choice for warriors, as it is versatile and easy to use."
+    },
+    "javelin": {
+        "type": "weapon",
+        "name": "Javelin",
+        "cost": 5,
+        "coin": "sp",
+        "weight": 2,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "thrown"
+        ],
+        "rang": 30,
+        "longRange": 120,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A javelin is a light spear used for throwing. It is a popular choice for warriors, as it is light and easy to use."
+    },
+    "lightHammer": {
+        "type": "weapon",
+        "name": "Light Hammer",
+        "cost": 2,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 4,
+        "damageMultiplier": 1,
+        "damageType": "bludgeoning",
+        "properties": [
+            "light",
+            "thrown"
+        ],
+        "rang": 20,
+        "longRange": 60,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A light hammer is a small hammer used for throwing or close combat. It is commonly used by warriors for its balance and utility."
+    },
+    "mace": {
+        "type": "weapon",
+        "name": "Mace",
+        "cost": 5,
+        "coin": "gp",
+        "weight": 4,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "bludgeoning",
+        "properties": [],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A mace is a heavy club used for bludgeoning. It is a popular choice for warriors, as it is powerful and easy to use."
+    },
+    "quarterstaff": {
+        "type": "weapon",
+        "name": "Quarterstaff",
+        "cost": 2,
+        "coin": "sp",
+        "weight": 4,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "bludgeoning",
+        "properties": [
+            "versatile"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 8,
+        "versatileMultiplier": 1,
+        "description": "A quarterstaff is a versatile, long wooden staff used for defense and combat, often favored by monks and spellcasters."
+    },
+    "sickle": {
+        "type": "weapon",
+        "name": "Sickle",
+        "cost": 1,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 4,
+        "damageMultiplier": 1,
+        "damageType": "slashing",
+        "properties": [
+            "light"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A sickle is a curved blade primarily used for cutting crops, but it can also serve as a slashing weapon in combat."
+    },
+    "spear": {
+        "type": "weapon",
+        "name": "Spear",
+        "cost": 1,
+        "coin": "gp",
+        "weight": 3,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "thrown",
+            "versatile"
+        ],
+        "rang": 20,
+        "longRange": 60,
+        "versatile": 8,
+        "versatileMultiplier": 1,
+        "description": "A spear is a long, slender blade used for piercing. It is a popular choice for warriors, as it is versatile and easy to use."
+    },
+    "lightCrossbow": {
+        "type": "weapon",
+        "name": "Light Crossbow",
+        "cost": 25,
+        "coin": "gp",
+        "weight": 5,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "ammunition",
+            "loading",
+            "twoHanded"
+        ],
+        "rang": 80,
+        "longRange": 320,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A light crossbow is a small, handheld crossbow used for piercing. It is a popular choice for rogues and assassins, as it is quick and deadly."
+    },
+    "dart": {
+        "type": "weapon",
+        "name": "Dart",
+        "cost": 5,
+        "coin": "cp",
+        "weight": 0.25,
+        "damage": 4,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "finesse",
+            "thrown"
+        ],
+        "rang": 20,
+        "longRange": 60,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A dart is a small, lightweight missile used for piercing. It is a popular choice for rogues and assassins, as it is quick and deadly."
+    },
+    "shortbow": {
+        "type": "weapon",
+        "name": "Shortbow",
+        "cost": 25,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "ammunition",
+            "twoHanded"
+        ],
+        "rang": 80,
+        "longRange": 320,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A shortbow is a compact ranged weapon favored for its lightweight design and quick draw speed."
+    },
+    "sling": {
+        "type": "weapon",
+        "name": "Sling",
+        "cost": 1,
+        "coin": "sp",
+        "weight": 2,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "bludgeoning",
+        "properties": [
+            "ammunition"
+        ],
+        "rang": 30,
+        "longRange": 60,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A sling is a simple ranged weapon used to hurl stones. It is favored for its simplicity and ease of use."
+    },
+    "battleaxe": {
+        "type": "weapon",
+        "name": "Battleaxe",
+        "cost": 10,
+        "coin": "gp",
+        "weight": 4,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "slashing",
+        "properties": [
+            "versatile"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 10,
+        "versatileMultiplier": 1,
+        "description": "A battleaxe is a large, heavy axe used for slashing. It is a popular choice for warriors, as it is versatile and easy to use."
+    },
+    "flail": {
+        "type": "weapon",
+        "name": "Flail",
+        "cost": 10,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "bludgeoning",
+        "properties": [
+            0
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A flail is a weapon consisting of a spiked or blunt head attached to a handle by a chain, used for bludgeoning and overcoming shields."
+    },
+    "glaive": {
+        "type": "weapon",
+        "name": "Glaive",
+        "cost": 20,
+        "coin": "gp",
+        "weight": 6,
+        "damage": 10,
+        "damageMultiplier": 1,
+        "damageType": "slashing",
+        "properties": [
+            "heavy",
+            "reach",
+            "twoHanded"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A glaive is a polearm with a long blade at the end, used for slashing from a distance."
+    },
+    "greataxe": {
+        "type": "weapon",
+        "name": "Greataxe",
+        "cost": 30,
+        "coin": "gp",
+        "weight": 7,
+        "damage": 12,
+        "damageMultiplier": 1,
+        "damageType": "slashing",
+        "properties": [
+            "heavy",
+            "twoHanded"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A greataxe is a large, heavy axe used for slashing. It is a popular choice for warriors, as it is powerful and easy to use."
+    },
+    "greatsword": {
+        "type": "weapon",
+        "name": "Greatsword",
+        "cost": 50,
+        "coin": "gp",
+        "weight": 6,
+        "damage": 6,
+        "damageMultiplier": 2,
+        "damageType": "slashing",
+        "properties": [
+            "heavy",
+            "twoHanded"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A greatsword is a large, double-edged sword used for slashing. It is a popular choice for warriors, as it is powerful and requires two hands to wield."
+    },
+    "halberd": {
+        "type": "weapon",
+        "name": "Halberd",
+        "cost": 20,
+        "coin": "gp",
+        "weight": 6,
+        "damage": 10,
+        "damageMultiplier": 1,
+        "damageType": "slashing",
+        "properties": [
+            "heavy",
+            "reach",
+            "twoHanded"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A halberd is a long, heavy polearm used for slashing. It is a popular choice for warriors, as it is powerful and has a long reach."
+    },
+    "lance": {
+        "type": "weapon",
+        "name": "Lance",
+        "cost": 10,
+        "coin": "gp",
+        "weight": 6,
+        "damage": 12,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "reach",
+            "special"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A lance is a long, heavy polearm used for piercing. It is a popular choice for warriors, as it is powerful and has a long reach."
+    },
+    "longsword": {
+        "type": "weapon",
+        "name": "Longsword",
+        "cost": 15,
+        "coin": "gp",
+        "weight": 3,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "slashing",
+        "properties": [
+            "versatile"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 10,
+        "versatileMultiplier": 1
+    },
+    "maul": {
+        "type": "weapon",
+        "name": "Maul",
+        "cost": 10,
+        "coin": "gp",
+        "weight": 10,
+        "damage": 6,
+        "damageMultiplier": 2,
+        "damageType": "bludgeoning",
+        "properties": [
+            "heavy",
+            "twoHanded"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A maul is a large, heavy club used for bludgeoning. It is a popular choice for warriors, as it is powerful and easy to use."
+    },
+    "morningstar": {
+        "type": "weapon",
+        "name": "Morningstar",
+        "cost": 15,
+        "coin": "gp",
+        "weight": 4,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A morningstar is a heavy polearm used for piercing. It is a popular choice for warriors, as it is powerful and easy to use."
+    },
+    "pike": {
+        "type": "weapon",
+        "name": "Pike",
+        "cost": 5,
+        "coin": "gp",
+        "weight": 18,
+        "damage": 10,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "heavy",
+            "reach",
+            "twoHanded"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A pike is a long, heavy polearm used for piercing. It is a popular choice for warriors, as it is powerful and has a long reach."
+    },
+    "rapier": {
+        "type": "weapon",
+        "name": "Rapier",
+        "cost": 25,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "finesse"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A rapier is a short, light sword used for piercing. It is a popular choice for assassins, as it is quick and easy to use."
+    },
+    "scimitar": {
+        "type": "weapon",
+        "name": "Scimitar",
+        "cost": 25,
+        "coin": "gp",
+        "weight": 3,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "slashing",
+        "properties": [
+            "finesse",
+            "light"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A scimitar is a short, light sword used for slashing. It is a popular choice for Assasses, as it is quick and easy to use."
+    },
+    "shortsword": {
+        "type": "weapon",
+        "name": "Shortsword",
+        "cost": 10,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "finesse",
+            "light"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A shortsword is a short, light sword used for piercing. It is a popular choice for assassins, as it is quick and easy to use."
+    },
+    "trident": {
+        "type": "weapon",
+        "name": "Trident",
+        "cost": 5,
+        "coin": "gp",
+        "weight": 4,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "thrown",
+            "versatile"
+        ],
+        "rang": 20,
+        "longRange": 60,
+        "versatile": 8,
+        "versatileMultiplier": 1,
+        "description": "A trident is a short, light polearm used for piercing. It is a popular choice for assassins, as it is quick and easy to use."
+    },
+    "warPick": {
+        "type": "weapon",
+        "name": "War pick",
+        "cost": 5,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            0
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A war pick is a short, light polearm used for piercing. It is a popular choice for assassins, as it is quick and easy to use."
+    },
+    "warhammer": {
+        "type": "weapon",
+        "name": "Warhammer",
+        "cost": 15,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "bludgeoning",
+        "properties": [
+            "versatile"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 10,
+        "versatileMultiplier": 1
+    },
+    "whip": {
+        "type": "weapon",
+        "name": "Whip",
+        "cost": 2,
+        "coin": "gp",
+        "weight": 3,
+        "damage": 4,
+        "damageMultiplier": 1,
+        "damageType": "slashing",
+        "properties": [
+            "finesse",
+            "reach"
+        ],
+        "rang": 0,
+        "longRange": 0,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A whip is a short, light polearm used for slashing. It is a popular choice for assassins, as it is quick and easy to use."
+    },
+    "blowgun": {
+        "type": "weapon",
+        "name": "Blowgun",
+        "cost": 10,
+        "coin": "gp",
+        "weight": 1,
+        "damage": 1,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "ammunition",
+            "loading"
+        ],
+        "rang": 25,
+        "longRange": 100,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A blowgun is a short, light crossbow used for piercing. It is a popular choice for assassins, as it is quick and easy to use."
+    },
+    "handCrossbow": {
+        "type": "weapon",
+        "name": "Hand Crossbow",
+        "cost": 75,
+        "coin": "gp",
+        "weight": 3,
+        "damage": 6,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "ammunition",
+            "light",
+            "loading"
+        ],
+        "rang": 30,
+        "longRange": 120,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A hand crossbow is a short, light crossbow used for piercing. It is a popular choice for assassins, as it is quick and easy to use."
+    },
+    "heavyCrossbow": {
+        "type": "weapon",
+        "name": "heavy Crossbow",
+        "cost": 50,
+        "coin": "pg",
+        "weight": 18,
+        "damage": 10,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "ammunition",
+            "heavy",
+            "loading",
+            "twoHanded"
+        ],
+        "rang": 100,
+        "longRange": 400,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A heavy crossbow is a short, light crossbow used for piercing. It is a popular choice for assassins, as it is quick and easy to use."
+    },
+    "longbow": {
+        "type": "weapon",
+        "name": "Longbow",
+        "cost": 50,
+        "coin": "gp",
+        "weight": 2,
+        "damage": 8,
+        "damageMultiplier": 1,
+        "damageType": "piercing",
+        "properties": [
+            "ammunition",
+            "heavy",
+            "loading",
+            "twoHanded"
+        ],
+        "rang": 150,
+        "longRange": 600,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A longbow is a short, light crossbow used for piercing. It is a popular choice for assassins, as it is quick and easy to use."
+    },
+    "net": {
+        "type": "weapon",
+        "name": "Net",
+        "cost": 1,
+        "coin": "gp",
+        "weight": 3,
+        "damage": 0,
+        "damageMultiplier": 0,
+        "damageType": 0,
+        "properties": [
+            "special",
+            "thrown"
+        ],
+        "rang": 5,
+        "longRange": 15,
+        "versatile": 0,
+        "versatileMultiplier": 0,
+        "description": "A net is a short, light crossbow used for piercing. It is a popular choice for assassins, as it is quick and easy to use."
+    }
+}

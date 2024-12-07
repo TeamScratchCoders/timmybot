@@ -1,0 +1,50 @@
+{
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Class\n### Wizard\nClad in the silver robes that denote her station, an elf\ncloses her eyes to shut out the distractions of the battlefield and begins her quiet chant. Fingers weaving in front\nof her, she completes her spell and launches a tiny bead\nof fire toward the enemy ranks, where it erupts into a conflagration that engulfs the soldiers.\nChecking and rechecking his work, a human scribes\nan intricate magic circle in chalk on the bare stone\nfloor, then sprinkles powdered iron along every line and\ngraceful curve. When the circle is complete, he drones\na long incantation. A hole opens in space inside the circle, bringing a whiff of brimstone from the otherworldly\nplane beyond.\nCrouching on the floor in a dungeon intersection, a\ngnome tosses a handful of small bones inscribed with\nmystic symbols, muttering a few words of power over\nthem. Closing his eyes to see the visions more clearly,\nhe nods slowly, then opens his eyes and points down the\npassage to his left.\nWizards are supreme magic-users, defined and united\nas a class by the spells they cast. Drawing on the subtle\nweave of magic that permeates the cosmos, wizards cast\nspells of explosive fire, arcing lightning, subtle deception,\nand brute-force mind control. Their magic conjures monsters from other planes of existence, glimpses the future,\nor turns slain foes into zombies. Their mightiest spells\nchange one substance into another, call meteors down\nfrom the sky, or open portals to other worlds.",
+            "fields": [
+                {
+                    "name": "• Class Features",
+                    "value": "**Hit Dice:** 1d6 per wizard level\n**Hit Points at 1st Level:** 6 + your Constitution modifier\n**Hit Points at Higher Levels:** 1d6 (or 4) + your\nConstitution modifier per wizard level after 1st",
+                    "inline": false
+                },
+                {
+                    "name": "• Proficiencies",
+                    "value": "**Armor:** Light armor\n**Weapons:** Simple weapons, hand crossbows,\nlongswords, rapiers, shortswords\n**Tools:** Thieves’ tools\n**Saving Throws:** Dexterity, Intelligence\n**Skills:** Choose four from Acrobatics, Athletics,\nDeception, Insight, Intimidation, Investigation,\nPerception, Performance, Persuasion, Sleight of\nHand, and Stealth",
+                    "inline": false
+                },
+                {
+                    "name": "• Equipment",
+                    "value": "• (a) a quarterstaff or (b) a dagger\n• (a) a component pouch or (b) an arcane focus\n• (a) a scholar’s pack or (b) an explorer’s pack\n• A spellbook",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndClassPrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndClass3"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndClassNext"
+                }
+            ]
+        }
+    ]
+}

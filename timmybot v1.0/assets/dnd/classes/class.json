@@ -1,0 +1,282 @@
+{
+    "cleric": {
+        "description": "A priestly champion who wields divine magic in service of ahigher power",
+        "hitDie": "1d8",
+        "primaryAbility": ["wisdom"],
+        "savingThrow": ["wisdom", "charisma"],
+        "proficiency": {
+            "armor": ["lightArmor", "mediumArmor", "shields"],
+            "weapons": ["simpleWeapon"],
+            "tools": [],
+            "numberOfSkills": 2,
+            "skills": ["history", "insight", "medicine", "persuasion", "religion"]
+        },
+        "equipmentList": {
+            "0": [["shield"], ["holySymbol"]],
+            "1": [["mace"], ["*warhammer"]],
+            "2": [["scaleMail"], ["leatherArmor"], ["*chainMail"]],
+            "3": [["simpleWeapon"], ["lightCrossbow"]],
+            "4": [["explorersPack"], ["priestsPack"]]
+        },
+        "questions": [
+            {
+                "numberOfChoices": 1,
+                "choices": [
+                    {
+                        "items": [
+                            {
+                                "id": "mace",
+                                "type": "weapon",
+                                "quantity": 1,
+                                "displayName": "Mace",
+                                "requiresProficiency": false
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "warhammer",
+                                "type": "weapon",
+                                "quantity": 1,
+                                "displayName": "Warhammer",
+                                "requiresProficiency": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "numberOfChoices": 2,
+                "choices": [
+                    {
+                        "items": [
+                            {
+                                "id": "scaleMail",
+                                "type": "armor",
+                                "quantity": 1,
+                                "displayName": "Scale Mail",
+                                "requiresProficiency": false
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "leatherArmor",
+                                "type": "armor",
+                                "quantity": 1,
+                                "displayName": "Leather Armor",
+                                "requiresProficiency": false
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "chainMail",
+                                "type": "armor",
+                                "quantity": 1,
+                                "displayName": "Chain Mail",
+                                "requiresProficiency": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "fighter": {
+        "description": "A master of martial combat, skilled with a variety of weapons and armor",
+        "hitDie": "1d10",
+        "primaryAbility": ["strength", "constitution"],
+        "savingThrow": ["strength", "constitution"],
+        "proficiency": {
+            "armor": ["*", "shields"],
+            "weapons": ["simpleWeapon", "marshallWeapon"],
+            "tools": [],
+            "numberOfSkills": 2,
+            "skills": ["acrobatics", "animalHandling", "athletics", "history", "insight", "intimidation", "perception", "survival"]
+        },
+        "equipmentList": {
+            "1": [["chainMail"], ["leatherArmor", "longbow"]],
+            "2": [["marshallWeapon", "shield"], ["marshallWeapon", "marshallWeapon"]],
+            "3": [["lightCrossbow"], ["handaxe", "handaxe"]],
+            "4": [["dungeoneersPack"], ["explorersPack"]]
+        }
+    },
+    "rogue": {
+        "description": "A scoundrel who uses stealth and trickery to overcome obstacles and enemies",
+        "hitDie": "1d8",
+        "primaryAbility": ["dexterity"],
+        "savingThrow": ["dexterity", "intelligence"],
+        "proficiency": {
+            "armor": ["lightArmor"],
+            "weapons": ["simpleWeapon", "handCrossbow", "longsword", "rapier", "shortsword"],
+            "tools": ["thievesTools"],
+            "numberOfSkills": 4,
+            "skills": ["acrobatics", "athletics", "deception", "insight", "intimidation", "perception", "sleightOfHand", "stealth"]
+        },
+        "equipmentList": {
+            "0": [["leatherArmor"], ["thievesTools"], ["daggers"], ["daggers"]],
+            "1": [["rapier"], ["shortsword"]],
+            "2": [["shortbow"], ["shortsword"]],
+            "3": [["burglarsPack"], ["dungeoneersPack"], ["explorersPack"]]
+        }
+    },
+    "wizard": {
+        "description": "A scholarly magic-user capable of manipulating the structures of reality",
+        "hitDie": "1d6",
+        "primaryAbility": ["intelligence"],
+        "savingThrow": ["intelligence", "wisdom"],
+        "proficiency": {
+            "armor": [],
+            "weapons": ["daggers", "darts", "sling", "quarterstaffs", "lightCrossbow"],
+            "tools": [],
+            "numberOfSkills": 2,
+            "skills": ["arcana", "history", "insight", "investigation", "medicine", "religion"]
+        },
+        "equipmentList": {
+            "0": [["spellbook"]],
+            "1": [["dagger"], ["quarterstaff"]],
+            "2": [["componentPouch"], ["arcaneFocus"]],
+            "3": [["explorersPack"], ["scholarsPack"]]
+        }
+    },
+    "test": {
+        "proficiency": {
+            "weapons": ["daggers", "darts", "sling", "quarterstaffs"],
+            "numberOfSkills": 2,
+            "skills": ["history", "insight", "medicine", "persuasion", "religion"]
+        },
+        "equipmentList": {
+            "0": [["spellbook"]],
+            "1": [["dagger"], ["leatherArmor"], ["quarterstaff", "shortsword"], ["*sling", "*lightCrossbow"], ["marshallWeapon", "simpleWeapon"], ["dagger", "dagger"], ["*chainMail"]],
+            "2": [["componentPouch"], ["arcaneFocus"]],
+            "3": [["explorersPack"], ["scholarsPack"]]
+        },
+        "questions": [
+            {
+                "numberOfChoices": 7,
+                "choices": [
+                    {
+                        "items": [
+                            {
+                                "id": "dagger",
+                                "type": "weapon",
+                                "quantity": 1,
+                                "displayName": "Dagger",
+                                "requiresProficiency": false
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "leatherArmor",
+                                "type": "armor",
+                                "quantity": 1,
+                                "displayName": "Leather Armor",
+                                "requiresProficiency": false
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "quarterstaff",
+                                "type": "weapon",
+                                "quantity": 1,
+                                "displayName": "Quarterstaff",
+                                "requiresProficiency": false
+                            },
+                            {
+                                "id": "shortsword",
+                                "type": "weapon",
+                                "quantity": 1,
+                                "displayName": "Shortsword",
+                                "requiresProficiency": false
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "sling",
+                                "type": "weapon",
+                                "quantity": 1,
+                                "displayName": "Sling",
+                                "requiresProficiency": true
+                            },
+                            {
+                                "id": "lightCrossbow",
+                                "type": "weapon",
+                                "quantity": 1,
+                                "displayName": "Light Crossbow",
+                                "requiresProficiency": true
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "marshallWeapon",
+                                "type": "marshallWeapon",
+                                "quantity": 1,
+                                "displayName": "Marshall Weapon",
+                                "requiresProficiency": false
+                            },
+                            {
+                                "id": "simpleWeapon",
+                                "type": "simpleWeapon",
+                                "quantity": 1,
+                                "displayName": "Simple Weapon",
+                                "requiresProficiency": false
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "dagger",
+                                "type": "weapon",
+                                "quantity": 2,
+                                "displayName": "Dagger",
+                                "requiresProficiency": false
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "chainMail",
+                                "type": "armor",
+                                "quantity": 1,
+                                "displayName": "Chain Mail",
+                                "requiresProficiency": true
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "shortsword",
+                                "type": "weapon",
+                                "quantity": 1,
+                                "displayName": "Shortsword",
+                                "requiresProficiency": false
+                            },
+                            {
+                                "id": "chainMail",
+                                "type": "armor",
+                                "quantity": 1,
+                                "displayName": "Chain Mail",
+                                "requiresProficiency": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

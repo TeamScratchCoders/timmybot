@@ -11,7 +11,7 @@ const axios = require('axios')
 const fs = require('fs')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
 const { supervisor } = require('../../../supervisor')
-const regex = /\bfucker|damn|shit|bastard|bitch|ass\b|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
+const regex = /\bfucker|damn|shit|bastard|bitch|\bass\b|(?<=\b(bad|hard|jack|dumb|smart|wise|lazy|fat|skinny|kick|cheap|hard|classy|boss|pain-in-the-|kiss-|smart-|hard-|jack-))ass|cock\b|blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore|goon\b/g
 
 //* Functions:
 function generatePersonality(person, message, imageDescription) {
@@ -73,11 +73,11 @@ const ai = {
         /*This function starts up a headless Puppeteer function and web scrapes the website character.ai.
         On the website is a large language model that is designed to represent Timmy.
         The Puppeteer instance logs into the character.ai account by injecting a cookie with the login token*/
-            browser = await puppeteer.launch({
-                //executablePath: '/usr/bin/chromium',
-                headless: true,
-                args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
-            })
+        browser = await puppeteer.launch({
+            //executablePath: '/usr/bin/chromium',
+            headless: true,
+            args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
+        })
         supervisor.succeed("AI browser instance started")
 
         aiText = await browser.newPage()
@@ -86,32 +86,32 @@ const ai = {
         aiImage = await browser.newPage()
         supervisor.succeed("aiImage instance started")
 
-            const cookie = {
-                name: 'web-next-auth',
-                value: aiCookieValue,
-                domain: 'character.ai',
-                path: '/',
-                expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 365,
-                httpOnly: true,
-                secure: true
-            }
-    
+        const cookie = {
+            name: 'web-next-auth',
+            value: aiCookieValue,
+            domain: 'character.ai',
+            path: '/',
+            expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 365,
+            httpOnly: true,
+            secure: true
+        }
+
         //* aiText
 
         await aiText.setCookie(cookie)
         supervisor.succeed("Cookie successfully injected for aiText")
-    
+
         await aiText.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
         supervisor.succeed("Successfully set user argument for aiText")
-    
+
         await aiText.goto(aiChat)
         supervisor.succeed("Requested AI website for aiText")
 
-            if (i) {
-                ai.connection(false)
-            } else {
-                ai.connection(true)
-            }
+        if (i) {
+            ai.connection(false)
+        } else {
+            ai.connection(true)
+        }
 
         //* aiImage
 
@@ -127,11 +127,8 @@ const ai = {
         try {
             const guild = await client.guilds.fetch(guildID)
             const channel = await guild.channels.fetch(aiChannelID)
-
             const waitInLineElement = await aiText.$('h2')
-    
             const allText = await aiText.evaluate(el => el.innerText, waitInLineElement)
-    
             const time = parseInt(allText.match(/\d+/)[0], 10)
 
             if (i) {
@@ -161,12 +158,10 @@ const ai = {
                 let filteredText
                 const guild = await client.guilds.fetch(guildID)
                 const channel = await guild.channels.fetch(aiChannelID)
-                
                 async function lastMessageNow() {
 
                     const element = await aiText.$('div.mt-1.max-w-xl.rounded-2xl.px-3.min-h-12.flex.justify-center.py-3.bg-surface-elevation-2')
 
-                    
                     const allText = await aiText.evaluate(el => {
                         return el.innerText;
                     }, element)
@@ -190,7 +185,7 @@ const ai = {
                 function removeNewLines(e) {
                     return e.replace(/\r?\n|\r/g, '');
                 }
-    
+
 
                 if (await ai.connection(true) === false) {
                     while (await ai.connection(false) === false) {
@@ -206,7 +201,7 @@ const ai = {
                 }
 
                 filteredText = await removeNewLines(filteredText)
-                
+
                 if (imageUrl.length > 0) {
                     imageDescription = `${nickname} sent you an image.`;
 
@@ -224,7 +219,7 @@ const ai = {
                 await aiText.type('.text-lg,.text-lg-chat', generatePersonality(nickname, filteredText, imageDescription) + `\n`)
 
                 lastMessageTimestamp = Date.now()
-                
+
                 await aiText.waitForSelector('p[node="[object Object]"]')
 
                 let whileLoopIndex = 1
@@ -251,7 +246,7 @@ const ai = {
                     talking = false
                     return false
                 }
-                
+
                 talking = false
 
                 return censor(lastMessageFindVariable)
@@ -282,7 +277,7 @@ const ai = {
                         await delay(1000)
                     }
                 }
-                
+
                 await aiText.type('.text-lg,.text-lg-chat', message + `\n`)
 
                 talking = false

@@ -2,34 +2,34 @@
     "message": [
         {
             "content": "",
-            "flags": 64, 
+            "flags": 64,
             "embeds": [
                 {
-                  "description": "# Age\n*What age are you? An adult or youth.*\n\n** **", 
-                  "color": 2167356
+                    "description": "# Age\n*What age are you? An adult or youth.*\n\n** **",
+                    "color": 2167356
                 }
             ],
             "components": [
                 {
                     "type": 1,
                     "components": [
-                    {
-                        "type": 3,
-                        "custom_id": "S-000",
-                        "options": [
-                            {
-                                "label": "Adult",
-                                "value": "s-000",
-                                "description": "In the BSA you're adult over the age of 21"
-                            },
-                            {
-                                "label": "Youth",
-                                "value": "s-001",
-                                "description": "In the BSA you're youth under the age of 21"
-                            }
-                        ],
-                        "placeholder": "Choose your age group"
-                    }
+                        {
+                            "type": 3,
+                            "custom_id": "S-000",
+                            "options": [
+                                {
+                                    "label": "Adult",
+                                    "value": "s-000",
+                                    "description": "In the BSA you're adult over the age of 21"
+                                },
+                                {
+                                    "label": "Youth",
+                                    "value": "s-001",
+                                    "description": "In the BSA you're youth under the age of 21"
+                                }
+                            ],
+                            "placeholder": "Choose your age group"
+                        }
                     ]
                 }
             ]
@@ -39,7 +39,7 @@
             "flags": 64,
             "embeds": [
                 {
-                    "description": "# Position\n*What positions do you hold in the Troop.*\n\n** **", 
+                    "description": "# Position\n*What positions do you hold in the Troop.*\n\n** **",
                     "color": 2167356
                 }
             ],
@@ -100,7 +100,7 @@
             "flags": 64,
             "embeds": [
                 {
-                    "description": "# Awards\n*What awards or accomplishments do you have?*\n\n** **", 
+                    "description": "# Awards\n*What awards or accomplishments do you have?*\n\n** **",
                     "color": 2167356
                 }
             ],
@@ -164,10 +164,10 @@
             "content": "",
             "flags": 64,
             "embeds": [
-              {
-                "description": "# Wood badge Patrol\nWhat Patrol were you in Wood Badge",
-                "color": 2167356
-              }
+                {
+                    "description": "# Wood badge Patrol\nWhat Patrol were you in Wood Badge",
+                    "color": 2167356
+                }
             ],
             "components": [
                 {
@@ -223,7 +223,7 @@
             "flags": 64,
             "embeds": [
                 {
-                    "description": "# Patrol\n*What Patrol are you in?*\n\n** **", 
+                    "description": "# Patrol\n*What Patrol are you in?*\n\n** **",
                     "color": 2167356
                 }
             ],
@@ -260,11 +260,11 @@
         },
         {
             "content": "",
-            "flags": 64, 
+            "flags": 64,
             "embeds": [
                 {
-                  "description": "# Positions\n*What positions do you hold in The Troop?*\n\n** **", 
-                  "color": 2167356
+                    "description": "# Positions\n*What positions do you hold in The Troop?*\n\n** **",
+                    "color": 2167356
                 }
             ],
             "components": [
@@ -338,11 +338,11 @@
         },
         {
             "content": "",
-            "flags": 64, 
+            "flags": 64,
             "embeds": [
                 {
-                  "description": "# Rank\n*What Rank do you hold?*\n\n** **", 
-                  "color": 2167356
+                    "description": "# Rank\n*What Rank do you hold?*\n\n** **",
+                    "color": 2167356
                 }
             ],
             "components": [
@@ -394,11 +394,11 @@
         },
         {
             "content": "",
-            "flags": 64, 
+            "flags": 64,
             "embeds": [
                 {
-                  "description": "# Accomplishments\n*what Accomplishments have you completed?*\n\n** **", 
-                  "color": 2167356
+                    "description": "# Accomplishments\n*what Accomplishments have you completed?*\n\n** **",
+                    "color": 2167356
                 }
             ],
             "components": [
@@ -516,11 +516,11 @@
         },
         {
             "content": "",
-            "flags": 64, 
+            "flags": 64,
             "embeds": [
                 {
-                  "description": "# Accomplishmentsss\n*More achievements.*\n\n** **", 
-                  "color": 2167356
+                    "description": "# Accomplishmentsss\n*More achievements.*\n\n** **",
+                    "color": 2167356
                 }
             ],
             "components": [
@@ -578,11 +578,11 @@
         },
         {
             "content": "",
-            "flags": 64, 
+            "flags": 64,
             "embeds": [
                 {
-                  "description": "# Honorific\n*What honorific do you use?*\n\n** **", 
-                  "color": 2167356
+                    "description": "# Honorific\n*What honorific do you use?*\n\n** **",
+                    "color": 2167356
                 }
             ],
             "components": [
@@ -672,11 +672,11 @@
         },
         {
             "content": "",
-            "flags": 64, 
+            "flags": 64,
             "embeds": [
                 {
-                  "description": "# :white_check_mark: You have been successfully verified", 
-                  "color": 2167356
+                    "description": "# :white_check_mark: You have been successfully verified",
+                    "color": 2167356
                 }
             ],
             "components": []

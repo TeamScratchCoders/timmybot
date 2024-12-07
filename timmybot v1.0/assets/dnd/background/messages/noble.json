@@ -1,0 +1,55 @@
+{
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Background\n### Noble\nYou understand wealth, power, and privilege. You carry\na noble title, and your family owns land, collects taxes,\nand wields significant political influence. You might be\na pampered aristocrat unfamiliar with work or discomfort, a former merchant just elevated to the nobility, or\na disinherited scoundrel with a disproportionate sense\nof entitlement. Or you could be an honest, hard-working\nlandowner who cares deeply about the people who live\nand work on your land, keenly aware of your responsibility to them.\nWork with your DM to come up with an appropriate title and determine how much authority that title carries. A\nnoble title doesn’t stand on its own—it’s connected to an\nentire family, and whatever title you hold, you will pass it\ndown to your own children. Not only do you need to determine your noble title, but you should also work with the\nDM to describe your family and their influence on you.\nIs your family old and established, or was your title only\nrecently bestowed? How much influence do they wield,\nand over what area? What kind of reputation does your\nfamily have among the other aristocrats of the region?\nHow do the common people regard them?\nWhat’s your position in the family? Are you the heir to\nthe head of the family? Have you already inherited the title? How do you feel about that responsibility? Or are you\nso far down the line of inheritance that no one cares what\nyou do, as long as you don’t embarrass the family? How\ndoes the head of your family feel about your adventuring\ncareer? Are you in your family’s good graces, or shunned\nby the rest of your family?\nDoes your family have a coat of arms? An insignia you\nmight wear on a signet ring? Particular colors you wear\nall the time? An animal you regard as a symbol of your\nline or even a spiritual member of the family?\nThese details help establish your family and your title\nas features of the world of the campaign.",
+            "fields": [
+                {
+                    "name": "• Skill Proficiencies",
+                    "value": "History, Persuasion",
+                    "inline": false
+                },
+                {
+                    "name": "• Tool Proficiencies",
+                    "value": "One type of gaming set",
+                    "inline": false
+                },
+                {
+                    "name": "• Languages",
+                    "value": "One of your choice",
+                    "inline": false
+                },
+                {
+                    "name": "• Equipment",
+                    "value": "A set of fine clothes, a signet ring, a scroll of\npedigree, and a purse containing 25 gp",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndBackgroundPrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndBackground3"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndBackgroundNext"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,86 @@
+{
+    "flags": 64,
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Race\n### High Elf\nAs a high elf, you have a keen mind and a mastery of\nat least the basics of magic. In many of the worlds of\nD&D, there are two kinds of high elves. One type (which\nincludes the gray elves and valley elves of Greyhawk,\nthe Silvanesti of Dragonlance, and the sun elves of the\nForgotten Realms) is haughty and reclusive, believing\nthemselves to be superior to non-elves and even other\nelves. The other type (including the high elves of Greyhawk, the Qualinesti of Dragonlance, and the moon elves\nof the Forgotten Realms) are more common and more\nfriendly, and often encountered among humans and\nother races.",
+            "fields": [
+                {
+                    "name": "• Ability Score Increase",
+                    "value": "*+2 Dexterity\n+1 Intelligence.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Darkvision",
+                    "value": "*Elves can see in dim light within 60 feet as if it were bright light and in darkness as if it were dim light. They can't discern colors in darkness, only shades of gray.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Cantrip",
+                    "value": "*Cantrip Learn one cantrip from the wizard spell list. Intelligence is the spellcasting ability for this cantrip.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Keen Senses",
+                    "value": "*Proficiency in the Perception skill, representing their heightened awareness.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Fey Ancestry",
+                    "value": "*Advantage on saving throws against being charmed, and magic cannot put them to sleep. This stems from their fey heritage.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Trance",
+                    "value": "*Instead of sleeping for 8 hours, elves meditate deeply for 4 hours to gain the same benefits as a long rest. They remain semi-conscious during this time, so they are harder to surprise.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Languages",
+                    "value": "*Common.\nElvish.\n+1 language of your choice choice.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Speed",
+                    "value": "*30 feet.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Age",
+                    "value": "*Adolescence: 100\nExpected maximum age: 750*",
+                    "inline": false
+                },
+                {
+                    "name": "• Size",
+                    "value": "*Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.*",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndRacePrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndRace0"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndRaceNext"
+                }
+            ]
+        }
+    ]
+}

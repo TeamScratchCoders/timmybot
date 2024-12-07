@@ -1,0 +1,85 @@
+{
+    "flags": 64,
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Race\n### Hill Dwarf\nAs a hill dwarf, you have keen senses, deep intuition, and\nremarkable resilience. The gold dwarves of Faerûn in\ntheir mighty southern kingdom are hill dwarves, as are\nthe exiled Neidar and the debased Klar of Krynn in the\nDragonlance setting.",
+            "fields": [
+                {
+                    "name": "• Ability Score Increase",
+                    "value": "+2 Constitution\n+1 Wisdom.",
+                    "inline": false
+                },
+                {
+                    "name": "• Age",
+                    "value": "*Adolescence: 50\nExpected maximum age: 350*",
+                    "inline": false
+                },
+                {
+                    "name": "• Speed",
+                    "value": "*25 feet.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Darkvision",
+                    "value": "*Accustomed to life underground, dwarves can see in dim light within 60 feet as if it were bright light and in darkness as if it were dim light. Colors can’t be discerned in darkness, only shades of gray.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Dwarven Resilience",
+                    "value": "*Dwarves have advantage on saving throws against poison and resistance to poison damage.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Dwarven Combat Training",
+                    "value": "*Proficiency with battleaxes, handaxes, light hammers, and warhammers, representing their traditional martial training.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Tool Proficiency",
+                    "value": "*Proficiency with one type of artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.*",
+                    "inline": false
+                },
+                {
+                    "name": "• Stonecunning",
+                    "value": "*Whenever a dwarf makes an Intelligence (History) check related to the origin of stonework, they are considered proficient in the skill and add double their proficiency bonus to the check. This reflects their innate knowledge of stone and its craftsmanship.*",
+                    "inline": false
+                },
+                {
+                    "name": "Dwarven Toughness",
+                    "value": "*Your hit point maximum increases by 1, and it increases by 1 every time you gain a level. This makes Hill Dwarves particularly resilient*"
+                },
+                {
+                    "name": "• Languages",
+                    "value": "*Common.\nDwarvish.*",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndRacePrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndRace1"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndRaceNext"
+                }
+            ]
+        }
+    ]
+}
