@@ -18,7 +18,7 @@ var token
 var joinVoiceChannel, createAudioPlayer, createAudioResource
 var ffmpgeg
 try {
-    ({ Client, Intents, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message } = require("discord.js"))
+    ({ Client, Intents, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message, StringSelectMenuBuilder, ActionRowBuilder, EmbedBuilder  } = require("discord.js"))
     supervisor.succeed('discord.js module successfully loaded')
 } catch (err) {
     supervisor.fail(1, err, 'discord.js module failed to load')
@@ -93,21 +93,21 @@ const timmybot = {
             const aiChannel = await guild.channels.fetch(aiChannelID)
 
             
-            await functions.joinMessage(verificationChannel, 0)
-            await functions.joinMessage(ruleChannel, 1)
-            await functions.joinMessage(supportChannel, 2)
+            //TODOawait functions.joinMessage(verificationChannel, 0)
+            //TODOawait functions.joinMessage(ruleChannel, 1)
+            //TODOawait functions.joinMessage(supportChannel, 2)
             
             try {
-                await functions.ai.start()
+                //functions.ai.start()
                 supervisor.succeed('AI successfully started')
             } catch (err) {
                 supervisor.fail(1, err, 'AI failed to start')
             }
             
-            await functions.peepingTom.initializeInstance()
+            functions.peepingTom.initializeInstance()
             
             try {
-                await commands.initialize()
+                commands.initialize()
                 supervisor.succeed('commands successfully started')
             } catch (err) {
                 supervisor.fail(1, err, 'commands failed to start')
@@ -117,15 +117,9 @@ const timmybot = {
             
             client.on('interactionCreate', (i) => {
                 commands.run(i)
-                functions.scoutskills.processInput(i)
+                functions.dnd.processInteraction(i)
                 functions.quiz.answer(i)
                 functions.supportTicket.answer(i)
-            })
-            
-            client.on('typingStart', (i) => {
-                console.log('Typing...');
-                if (i.channel.id === aiChannelID) {
-                }
             })
             
             client.on('messageCreate', async i => {
@@ -149,16 +143,14 @@ const timmybot = {
                         }
                     }
 
-                    if (i.channelId == "1300952736497406065") {
-                        console.log([...guild.channels.cache.get("1300952736497406065").members.keys()]);
+                    //TODO FIX
 
+                    if (i.channelId == "1248115163656360050") {
+                        functions.dnd.test(i)
                     }
 
-
-
                     try {
-                        //if (i.channelId == botCommandChannelID) {
-                        if (i.channelId == '1248115163656360050') {
+                        if (i.channelId == botCommandChannelID) {
                             if (i.mentions.repliedUser.username == 'TimmyBot') {
                                 console.log(i);
                                 functions.madlibFunc.addWord(i)

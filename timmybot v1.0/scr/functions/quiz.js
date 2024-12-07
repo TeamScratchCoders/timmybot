@@ -90,24 +90,26 @@ const quiz = {
 
 
         if (i.isModalSubmit()) {
-          if (await verification.checkUserPreVerification(i)) {
-            const guild = await client.guilds.fetch(guildID)
-            const member = await guild.members.fetch(i.user.id)
-
-            const honorific = quizMessage.rolls[(questionnaireProgress[i.user.id][questionnaireProgress[i.user.id].length - 1])]
-
-            const firstName = i.components[0].components[0].value
-            const lastName = i.components[1].components[0].value
-
-            if (honorific === null) {
-              await member.setNickname(`${firstName} ${lastName[0]}.`)
-            } else {
-              await member.setNickname(`${honorific}. ${lastName}`)
+          if (i.customId === 'M-000') {
+            if (await verification.checkUserPreVerification(i)) {
+              const guild = await client.guilds.fetch(guildID)
+              const member = await guild.members.fetch(i.user.id)
+  
+              const honorific = quizMessage.rolls[(questionnaireProgress[i.user.id][questionnaireProgress[i.user.id].length - 1])]
+  
+              const firstName = i.components[0].components[0].value
+              const lastName = i.components[1].components[0].value
+  
+              if (honorific === null) {
+                await member.setNickname(`${firstName} ${lastName[0]}.`)
+              } else {
+                await member.setNickname(`${honorific}. ${lastName}`)
+              }
+  
+              i.update(quizMessage.message[10])
+              calculateRoles(questionnaireProgress[i.user.id])
+              verification.verifyUser(i)
             }
-
-            i.update(quizMessage.message[10])
-            calculateRoles(questionnaireProgress[i.user.id])
-            verification.verifyUser(i)
           }
         }
 
@@ -123,7 +125,7 @@ const quiz = {
         async function callModal(i) {
           const modal = new ModalBuilder()
             .setCustomId('M-000')
-            .setTitle('My Modal');
+            .setTitle('');
 
           const fNameInput = new TextInputBuilder()
             .setCustomId('m-000')

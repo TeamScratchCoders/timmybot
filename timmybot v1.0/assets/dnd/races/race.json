@@ -1,0 +1,72 @@
+{
+    "highElf": {
+        "abilityScore": [0, 2, 0, 1, 0, 0],
+        "languages": ["common", "elvish"],
+        "proficiency": {
+            "skills": ["perception"],
+            "weapons": ["longsword", "shortsword", "shortbow", "longbow"],
+            "armor": [],
+            "tools": []
+        }
+    },
+    "hillDwarf": {
+        "abilityScore": [0, 0, 2, 0, 1, 0],
+        "languages": ["common", "dwarvish"],
+        "proficiency": {
+            "skills": [],
+            "weapons": ["battleaxe", "handaxe", "lightHammer", "warhammer"],
+            "armor": [],
+            "tool": ["smith's tools", "brewer's supplies", "mason's tools"]
+        }
+    },
+    "Human": {
+        "abilityScore": [1, 1, 1, 1, 1, 1],
+        "languages": ["common", "unset"],
+        "proficiency": {
+            "skills": [],
+            "weapons": [],
+            "armor": [],
+            "tools": []
+        }
+    },
+    "lightfootHalfling": {
+        "abilityScore": [0, 2, 0, 0, 0, 1],
+        "languages": ["common", "halfling"],
+        "proficiency": {
+            "skills": [],
+            "weapons": [],
+            "armor": [],
+            "tools": []
+        }
+    },
+    "mountainDwarf": {
+        "abilityScore": [2, 0, 2, 0, 0, 0],
+        "languages": ["common", "dwarvish"],
+        "proficiency": {
+            "skills": [],
+            "weapons": ["battleaxe", "handaxe", "lightHammer", "warhammer"],
+            "armor": ["lightArmor", "mediumArmor"],
+            "tool": ["smith's tools", "brewer's supplies", "mason's tools"]
+        }
+    },
+    "stoutHalfling": {
+        "abilityScore": [0, 2, 0, 0, 0, 1],
+        "languages": ["common", "halfling"],
+        "proficiency": {
+            "skills": [],
+            "weapons": [],
+            "armor": [],
+            "tools": []
+        }
+    },
+    "woodElf": {
+        "abilityScore": [0, 2, 0, 0, 1, 0],
+        "languages": ["common", "elvish"],
+        "proficiency": {
+            "skills": ["perception"],
+            "weapons": ["longsword", "shortsword", "shortbow", "longbow"],
+            "armor": [],
+            "tools": []
+        }
+    }
+}

@@ -1,0 +1,50 @@
+{
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Background\n### Acolyte\nYou have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine. You are not necessarily a cleric—performing sacred rites is not the same thing as channeling divine power. Choose a god, a pantheon of gods, or some other quasidivine being, and work with your DM to detail the nature of your religious service. Appendix B contains a sample pantheon, from the Forgotten Realms setting. Were you a lesser functionary in a temple, raised from childhood to assist the priests in the sacred rites? Or were you a high priest who suddenly experienced a call to serve your god in a different way? Perhaps you were the leader of a small cult outside of any established temple structure, or even an occult group that served a fiendish master that you now deny.",
+            "fields": [
+                {
+                    "name": "• Skill Proficiencies",
+                    "value": "Insight, Religion",
+                    "inline": false
+                },
+                {
+                    "name": "• Languages",
+                    "value": "Two of your choice",
+                    "inline": false
+                },
+                {
+                    "name": "• Equipment",
+                    "value": "A holy symbol (a gift to you when you entered the priesthood), a prayer book or prayer wheel, 5 sticks of incense, vestments, a set of common clothes, and a pouch containing 15 gp",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndBackgroundPrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndBackground0"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndBackgroundNext"
+                }
+            ]
+        }
+    ]
+}

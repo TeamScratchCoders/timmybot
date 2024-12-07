@@ -5,4 +5,7 @@ timmybot v1.0/config.json
 timmybot v1.0/assets/verirfication/verifiedMembers.json
 timmybot v1.0/assets/users/message/*
 !timmybot v1.0/assets/users/message/example.json
+/timmybot v1.0/assets/dnd/characters/*
+!/timmybot v1.0/assets/dnd/characters/example.json
+/timmybot v1.0/assets/temp/*
 EAI.js

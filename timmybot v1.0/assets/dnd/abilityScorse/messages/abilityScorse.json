@@ -1,0 +1,96 @@
+{
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Ability Score\n\nMuch of what your character does\nin the game depends on his or her\nsix abilities: Strength, Dexterity,\nConstitution, Intelligence, Wisdom,\nand Charisma. Each ability has a\nscore, which is a number you\nrecord on your character sheet.\nYou'll start off with eight points in\neach score. You are able to add a\ntotal of 24 more points To one of\nyour six scores. Different races\nwill often add to your score.\n# %pointsLeft%\nPoints left",
+            "fields": [
+                {
+                    "name": "一一一一一  STRENGTH  一一一一一",
+                    "value": "**一一一一一一≍{%strength%}≍一一一一一一**\n "
+                },
+                {
+                    "name": "一一一一一  DEXTERITY 一一一一一",
+                    "value": "**一一一一一一≍{%dexterity%}≍一一一一一一**\n "
+                },
+                {
+                    "name": "一一一一 CONSTITUTION 一一一一",
+                    "value": "**一一一一一一≍{%constitution%}≍一一一一一一**\n "
+                },
+                {
+                    "name": "一一一一   INTELLIGENCE  一一一一",
+                    "value": "**一一一一一一≍{%intelligence%}≍一一一一一一**\n "
+                },
+                {
+                    "name": "一一一一一一WISDOM一一一一一一",
+                    "value": " **一一一一一一≍{%wisdom%}≍一一一一一一**\n "
+                },
+                {
+                    "name": "一一一一一  CHARISMA  一一一一一",
+                    "value": " **一一一一一一≍{%charisma%}≍一一一一一一**\n "
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 3,
+                    "custom_id": "dndAbilityScoreModPoints",
+                    "options": [
+                        {
+                            "label": "+1 💪 STRENGTH",
+                            "value": "dndAbilityScoreStrengthIncrease"
+                        },
+                        {
+                            "label": "-1 💪 STRENGTH",
+                            "value": "dndAbilityScoreStrengthDecrease"
+                        },
+                        {
+                            "label": "+1 🤸‍♂️ DEXTERITY",
+                            "value": "dndAbilityScoreDexterityIncrease"
+                        },
+                        {
+                            "label": "-1 🤸‍♂️ DEXTERITY",
+                            "value": "dndAbilityScoreDexterityDecrease"
+                        },
+                        {
+                            "label": "+1 💖 CONSTITUTION",
+                            "value": "dndAbilityScoreConstitutionIncrease"
+                        },
+                        {
+                            "label": "-1 💖 CONSTITUTION",
+                            "value": "dndAbilityScoreConstitutionDecrease"
+                        },
+                        {
+                            "label": "+1 🧠 INTELLIGENCE",
+                            "value": "dndAbilityScoreIntelligenceIncrease"
+                        },
+                        {
+                            "label": "-1 🧠 INTELLIGENCE",
+                            "value": "dndAbilityScoreIntelligenceDecrease"
+                        },
+                        {
+                            "label": "+1 📖 WISDOM",
+                            "value": "dndAbilityScoreWisdomIncrease"
+                        },
+                        {
+                            "label": "-1 📖 WISDOM",
+                            "value": "dndAbilityScoreWisdomDecrease"
+                        },
+                        {
+                            "label": "+1 😉 CHARISMA",
+                            "value": "dndAbilityScoreCharismaIncrease"
+                        },
+                        {
+                            "label": "-1 😉 CHARISMA",
+                            "value": "dndAbilityScoreCharismaDecrease"
+                        }
+                    ],
+                    "placeholder": "Add Points"
+                }
+            ]
+        }
+    ]
+}

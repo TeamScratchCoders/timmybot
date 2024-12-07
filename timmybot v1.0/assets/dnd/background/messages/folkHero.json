@@ -1,0 +1,50 @@
+{
+    "content": "",
+    "embeds": [
+        {
+            "description": "# Choose a Background\n### Folk Hero\nYou come from a humble social rank, but you are destined for so much more. Already the people of your home village regard you as their champion, and your destiny calls you to stand against the tyrants andmonsters that threaten the common folk everywhere.",
+            "fields": [
+                {
+                    "name": "• Skill Proficiencies",
+                    "value": "Animal Handling, Survival",
+                    "inline": false
+                },
+                {
+                    "name": "• Tool Proficiencies",
+                    "value": "One type of artisan's tools, vehicles (land)",
+                    "inline": false
+                },
+                {
+                    "name": "• Equipment",
+                    "value": "A set of artisan's tools (one of your choice), a shovel, an iron pot, a set of common clothes, and a pouch containing 10 gp",
+                    "inline": false
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "< Previous",
+                    "custom_id": "dndBackgroundPrevious"
+                },
+                {
+                    "type": 2,
+                    "style": 3,
+                    "label": "Select",
+                    "custom_id": "dndBackground2"
+                },
+                {
+                    "type": 2,
+                    "style": 1,
+                    "label": "Next >",
+                    "custom_id": "dndBackgroundNext"
+                }
+            ]
+        }
+    ]
+}
