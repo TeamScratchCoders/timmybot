@@ -174,7 +174,7 @@ const ai = {
                     let lastMessage = await lastMessageNow()
                     while (!(lastMessage === lastMessagePast)) {
                         lastMessagePast = lastMessage
-                        await delay(1000)
+                        await delay(500)
                         await channel.sendTyping()
                         lastMessage = await lastMessageNow()
                     }
