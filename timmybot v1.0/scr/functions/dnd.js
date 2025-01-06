@@ -26,7 +26,7 @@ const backgrounds = [
     "sage",
     "soldier"
 ]
-let promptEquipmentIndex = 1
+let generateEquipmentMessageIndex = 1
 
 function loadJsonFiles(dirPath) {
     const result = {};
@@ -71,7 +71,8 @@ const dnd = {
         } catch (err) { }
         const armorData = JSON.parse(fs.readFileSync(`timmybot v1.0/assets/dnd/equipment/armor.json`, 'utf8'))
         const weaponData = JSON.parse(fs.readFileSync(`timmybot v1.0/assets/dnd/equipment/weapons.json`, 'utf8'))
-        const equipmentData = { ...armorData, ...weaponData }
+        const gearData = JSON.parse(fs.readFileSync(`timmybot v1.0/assets/dnd/equipment/gear.json`, 'utf8'))
+        const equipmentData = {...armorData, ...weaponData, ...gearData}
         const raceData = JSON.parse(fs.readFileSync(`timmybot v1.0/assets/dnd/races/race.json`, 'utf8'))
         const classData = JSON.parse(fs.readFileSync(`timmybot v1.0/assets/dnd/classes/class.json`, 'utf8'))
         const racesDir = loadJsonFiles("timmybot v1.0/assets/dnd/races/messages");
@@ -374,7 +375,7 @@ const dnd = {
                 wrightToCharacter([...userCharacter.armorProficiency, ...armorData.heavyArmor], i.user.id, "armorProficiency");
             }
         }
-        function promptEquipment(user, classQuestionIndex) {//*Generates a dynamic message based off of the equipment the user can choose
+        function generateEquipmentMessage(user, classQuestionIndex) {//*Generates a dynamic message based off of the equipment the user can choose
             let fields = []
             let selectorMenuOptions = []
             filterChoices(classData[userCharacter.class].questions[classQuestionIndex])
@@ -426,7 +427,7 @@ const dnd = {
                 wrightToCharacter(classData[userCharacter.class].questions.length, user.user.id, "equipmentProgressMax")
                 if (index.length <= 1) {
                     wrightToCharacter(classQuestionIndex + 1, user.user.id, "equipmentProgress")
-                    promptEquipment(user, classQuestionIndex + 1)
+                    generateEquipmentMessage(user, classQuestionIndex + 1)
                     return
                 }
                 wrightToCharacter(classQuestionIndex, user.user.id, "equipmentProgress")
@@ -598,7 +599,7 @@ const dnd = {
             }
         }
 
-        function processEquipmentMessages(user) {
+        function handleEquipmentMessageInteraction (user) {
             try {
                 let quantityItem = []
                 let userValue = user.values// This transforms a menus value into a usable item IDs and quantities
@@ -622,18 +623,17 @@ const dnd = {
                         } else {
                             userCharacter.equipment.push({ id: item, quantity: 1 })
                         }
-
                         wrightToCharacter(userCharacter.equipment, user.user.id, "equipment")
-
-                        if ((userCharacter.equipmentProgress + 1) < userCharacter.equipmentProgressMax) {// This iterates through all choices the player can make for equipment
-                            user.update(promptEquipment(user, userCharacter.equipmentProgress + 1))// Reruns function
-                        } else {
-                            console.log("Finished");
-                            //TODO: Next question
-                            
-                            user.update({content: "Finished", embeds: [], components: []})// Finished function
-                        }
                     })
+
+
+                    if ((userCharacter.equipmentProgress + 1) < userCharacter.equipmentProgressMax) {// This iterates through all choices the player can make for equipment
+                        generateEquipmentMessage(user, userCharacter.equipmentProgress + 1)// Reruns function
+                    } else {
+                        console.log("Finished");
+                        //TODO: Next question
+                        user.update({content: "Finished", embeds: [], components: []})// Finished function
+                    }
                 } else {
                     user.update(chooseWeapon(userValue))// This prompts the player to choose a weapon
                 }
@@ -661,9 +661,9 @@ const dnd = {
         } else if (i.customId === "dndAlignment") {
             alignmentMessage(i)
         } else if (i.customId === "dndModal") {
-            promptEquipment(i, 0)
+            generateEquipmentMessage(i, 0)
         } else if (i.customId === "dndEquipment") {
-            processEquipmentMessages(i)
+            handleEquipmentMessageInteraction (i)
         }
 
         //TODO Equipment proficiency
