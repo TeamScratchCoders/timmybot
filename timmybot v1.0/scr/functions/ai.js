@@ -1,6 +1,7 @@
 let browser
 let aiText
 let aiImage
+let aiMemory
 let lastMessageTimestamp
 let talking = false
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
@@ -9,7 +10,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 const axios = require('axios')
 const fs = require('fs')
-const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
+const { aiChat, aiCookieValue, aiMemoryCookieValue, guildID, aiChannelID } = require('../../config.json')
 const { supervisor } = require('../../../supervisor')
 const regex = /\bfucker|damn|shit|bastard|bitch|\bass\b|(?<=\b(bad|hard|jack|dumb|smart|wise|lazy|fat|skinny|kick|cheap|hard|classy|boss|pain-in-the-|kiss-|smart-|hard-|jack-))ass|cock\b|blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore|goon\b/g
 
@@ -22,7 +23,9 @@ function generatePersonality(person, message, imageDescription) {
     } else if (person === 'Tyler Y.') {
         return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
     } else if (person === 'Jake H.') {
-        return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, (the man how feed you 100,000,000,000,000,000,000,000,000,000,000 everyday for Easter and Christmas) new message: ${person}> "${message}"`
+        return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, (the man how feed you 100,000,000,000,000,000,000,000,000,000,000 bananas everyday for Easter and Christmas) new message: ${person}> "${message}"`
+    } else if (person === 'Luke R.') {
+        return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: (Boy known for claiming PP Island Timmy's home and then later nuclear striking it. #sexy #breedable he is sexy and breedable) ${person}> "${message}"`
     } else {
         return `Image: ${imageDescription}. Last message you received was ${generateTime(lastMessageTimestamp)} ago, new message: ${person}> "${message}"`
     }
@@ -75,51 +78,108 @@ const ai = {
         The Puppeteer instance logs into the character.ai account by injecting a cookie with the login token*/
         browser = await puppeteer.launch({
             //executablePath: '/usr/bin/chromium',
-            headless: true,
+            headless: false,
             args: ['--disable-web-security', '--disable-features=IsolateOrigins,site-per-process', '--no-sandbox', '--disable-setuid-sandbox']
         })
         supervisor.succeed("AI browser instance started")
+        
+        //* AI Text
+        async function initializeAiText() {
+            const aiTextCookie = {
+                name: 'web-next-auth',
+                value: aiCookieValue,
+                domain: 'character.ai',
+                path: '/',
+                expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 365,
+                httpOnly: true,
+                secure: true
+            }
 
-        aiText = await browser.newPage()
-        supervisor.succeed("aiText instance started")
+            aiText = await browser.newPage()
+            supervisor.succeed("aiText instance started")
 
-        aiImage = await browser.newPage()
-        supervisor.succeed("aiImage instance started")
+            await aiText.setCookie(aiTextCookie)
+            supervisor.succeed("Cookie successfully injected for aiText")
+    
+            await aiText.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
+            supervisor.succeed("Successfully set user argument for aiText")
+    
+            await aiText.goto(aiChat)
+            supervisor.succeed("Requested AI website for aiText")
+    
+            if (i) {
+                ai.connection(false)
+            } else {
+                ai.connection(true)
+            }
+        }
+        
+        //* AI Image
+        async function initializeAiImage() {
+            aiImage = await browser.newPage()
+            supervisor.succeed("aiImage instance started")
 
-        const cookie = {
-            name: 'web-next-auth',
-            value: aiCookieValue,
-            domain: 'character.ai',
-            path: '/',
-            expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 365,
-            httpOnly: true,
-            secure: true
+            await aiImage.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
+            supervisor.succeed("Successfully set user argument for aiText")
+    
+            await aiImage.goto('https://imagecaptiongenerator.com/')
+            supervisor.succeed("Requested AI website for aiText")
         }
 
-        //* aiText
+        //* AI Memory
+        async function initializeAiMemory() {
+            const aiMemoryCookie = {
+                name: '__Secure-next-auth.session-token',
+                value: aiMemoryCookieValue,
+                domain: '.chatgpt.com',
+                path: '/',
+                expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 365,
+                httpOnly: true,
+                secure: true
+            }
 
-        await aiText.setCookie(cookie)
-        supervisor.succeed("Cookie successfully injected for aiText")
+            aiMemory = await browser.newPage()
+            supervisor.succeed("aiMemory instance started")
 
-        await aiText.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
-        supervisor.succeed("Successfully set user argument for aiText")
+            await aiMemory.setCookie(aiMemoryCookie)
+            supervisor.succeed("Cookie successfully injected for aiMemory")
 
-        await aiText.goto(aiChat)
-        supervisor.succeed("Requested AI website for aiText")
+            await aiMemory.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
+            supervisor.succeed("Successfully set user argument for aiMemory")
 
-        if (i) {
-            ai.connection(false)
-        } else {
-            ai.connection(true)
+            await aiMemory.goto('https://chatgpt.com/', { waitUntil: 'domcontentloaded' })
+            supervisor.succeed("Requested AI website for aiMemory")
         }
 
-        //* aiImage
+        await initializeAiText()
+        await initializeAiImage()
+        await initializeAiMemory()
 
-        await aiImage.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36')
-        supervisor.succeed("Successfully set user argument for aiText")
+        let aiMemoryTitle = await aiMemory.title()
+        let aiMemoryAttempts = 1
+        
+        await delay(1000)
 
-        await aiImage.goto('https://imagecaptiongenerator.com/')
-        supervisor.succeed("Requested AI website for aiText")
+        while (["Just a moment...", ""].includes(aiMemoryTitle) && aiMemoryAttempts <= 5) {
+            if (aiMemoryTitle == "") {
+                await delay(1000)
+            } else {
+                aiMemory.close()
+                await delay(1000)
+                await initializeAiMemory()
+            }
+            supervisor.fail(null, null, `Failed to load AI memory... Restarting (${aiMemoryAttempts}/5)`)
+            aiMemoryTitle = await aiMemory.title()
+            aiMemoryAttempts++
+        }
+
+        if (aiMemoryAttempts > 5) {
+            supervisor.fail(null, null, `Failed to secure connection to ChatGPT... Rebooting Browser`)
+            await browser.close()
+            ai.start()
+        } else if (aiMemoryTitle == "ChatGPT") {
+            supervisor.succeed("Successfully loaded AI memory")
+        }
     },
     connection: async (i) => {
         /*This function checks the availability of the website.*/
@@ -225,7 +285,7 @@ const ai = {
                 let whileLoopIndex = 1
 
                 while (await lastMessageNow() == "" && whileLoopIndex <= 50) {
-                    await delay(1000)
+                    await delay(2000)
 
                     whileLoopIndex += 1
 
@@ -303,7 +363,7 @@ const ai = {
 
             await input.uploadFile('timmybot v1.0/assets/temp/functionAIDescribeImageTempImage.jpg');
 
-            await aiImage.select('select#tone', 'accurate');
+            await aiImage.select('select#tone', 'alt');
 
             await aiImage.waitForSelector('button');
 
@@ -325,6 +385,30 @@ const ai = {
             console.log(err);
         }
 
+    },
+    probeMemory: async (msg) => {
+        async function extractChat(aiMemoryDOM) {
+            let output = await aiMemory.$$eval('article', els => els.map(el => el.innerText.trim()))
+            return output
+                .map(article => article.replace(/^ChatGPT said:\n|ChatGPT\n|4o mini|\n/g, '').trim())
+                .filter(i => !i.includes('You said:'))
+        }
+        async function parseChat(aiMemoryDOM) {
+            let ChatMessages = await extractChat(aiMemoryDOM)
+            let currentChatMessage = ChatMessages[ChatMessages.length - 1]
+            let previousChatMessage = ""
+            while (currentChatMessage != previousChatMessage) {
+                previousChatMessage = currentChatMessage
+                await delay(1000)
+                ChatMessages = await extractChat(aiMemoryDOM)
+                currentChatMessage = ChatMessages[ChatMessages.length - 1]
+            } 
+            return currentChatMessage
+        }
+        await delay(5000)
+        await aiMemory.type('*', msg)
+        await delay(500)
+        return await parseChat(aiMemory)
     }
 }
 

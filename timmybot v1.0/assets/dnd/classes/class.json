@@ -18,6 +18,10 @@
             "3": [["simpleWeapon"], ["lightCrossbow"]],
             "4": [["explorersPack"], ["priestsPack"]]
         },
+        "givenItems": [
+            "shield",
+            "holySymbol"
+        ],
         "questions": [
             {
                 "numberOfChoices": 1,
@@ -79,6 +83,33 @@
                                 "quantity": 1,
                                 "displayName": "Chain Mail",
                                 "requiresProficiency": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "numberOfChoices": 1,
+                "choices": [
+                    {
+                        "items": [
+                            {
+                                "id": "simpleWeapon",
+                                "type": "simpleWeapon",
+                                "quantity": 1,
+                                "displayName": "Simple Weapon",
+                                "requiresProficiency": false
+                            }
+                        ]
+                    },
+                    {
+                        "items": [
+                            {
+                                "id": "lightCrossbow",
+                                "type": "weapon",
+                                "quantity": 1,
+                                "displayName": "Light Crossbow",
+                                "requiresProficiency": false
                             }
                         ]
                     }

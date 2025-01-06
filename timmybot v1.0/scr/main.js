@@ -98,11 +98,13 @@ const timmybot = {
             //TODOawait functions.joinMessage(supportChannel, 2)
             
             try {
-                //functions.ai.start()
+                await functions.ai.start()
                 supervisor.succeed('AI successfully started')
             } catch (err) {
                 supervisor.fail(1, err, 'AI failed to start')
             }
+
+            await functions.ai.probeMemory("Test abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 -=!@#$%^&*()[]{};\':\",./<>?`~</>\\| \n")
             
             functions.peepingTom.initializeInstance()
             
@@ -133,9 +135,9 @@ const timmybot = {
                         try {
                             const message = await functions.ai.msg(i, guild.members.cache.get(i.author.id).nickname, imageToUrl(i))
                             if (message) {
-                                aiChannel.send(message)
+                                i.reply(message)
                             } else if (message == false) {
-                                aiChannel.send(contentWarningMessage)
+                                i.reply(contentWarningMessage)
                                 functions.peepingTom.notify(`${guild.members.cache.get(i.author.id).nickname} has trigerd the content filter.`)
                             }
                         } catch (err) {
@@ -146,7 +148,9 @@ const timmybot = {
                     //TODO FIX
 
                     if (i.channelId == "1248115163656360050") {
-                        functions.dnd.test(i)
+                        //functions.dnd.test(i)
+                        aiChannel.send(i.content)
+                        i.delete()
                     }
 
                     try {
