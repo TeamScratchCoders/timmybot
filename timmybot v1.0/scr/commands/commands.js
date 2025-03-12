@@ -11,6 +11,7 @@ const commandsNames = [
     'verifyuser',
     'unverifyuser',
     'madlib',
+    'timeout'
 ]
 const commandsDescription = {
     "ping": 'pings the bot',
@@ -19,6 +20,7 @@ const commandsDescription = {
     "verifyuser": 'adds an user to the verified list',
     "unverifyuser": 'removes an user from the verified list',
     "madlib": 'Creates a Mad Lib you can fill out.',
+    "timeout": 'Times out people.',
 }
 
 let commandsBilt
@@ -52,6 +54,26 @@ let commands = {
                             .setDescription('Select a user to remove from the verified list')
                             .setRequired(true)
                     )
+                } else if (e == 'timeout') {
+                    tempcammand
+                        .addUserOption(option =>
+                            option
+                                .setName('user')
+                                .setDescription('Select a user to timeout')
+                                .setRequired(true)
+                        )
+                        .addIntegerOption(option =>
+                            option
+                                .setName('duration')
+                                .setDescription('Set the Minutes the user is timed out by')
+                                .setRequired(true)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('reason')
+                                .setDescription('Reason for the timeout')
+                                .setRequired(false)
+                        )
                 }
                 if (commandsBilt == undefined) {
                     commandsBilt = [tempcammand]

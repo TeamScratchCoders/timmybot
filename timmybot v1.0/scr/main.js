@@ -18,7 +18,7 @@ var token
 var joinVoiceChannel, createAudioPlayer, createAudioResource
 var ffmpgeg
 try {
-    ({ Client, Intents, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message } = require("discord.js"))
+    ({ Client, Intents, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message, CommandInteraction } = require("discord.js"))
     supervisor.succeed('discord.js module successfully loaded')
 } catch (err) {
     supervisor.fail(1, err, 'discord.js module failed to load')
@@ -93,9 +93,9 @@ const timmybot = {
             const aiChannel = await guild.channels.fetch(aiChannelID)
 
             
-            await functions.joinMessage(verificationChannel, 0)
-            await functions.joinMessage(ruleChannel, 1)
-            await functions.joinMessage(supportChannel, 2)
+            //await functions.joinMessage(verificationChannel, 0)
+            //await functions.joinMessage(ruleChannel, 1)
+            //await functions.joinMessage(supportChannel, 2)
             
             try {
                 await functions.ai.start()
@@ -117,7 +117,7 @@ const timmybot = {
             
             client.on('interactionCreate', (i) => {
                 commands.run(i)
-                functions.scoutskills.processInput(i)
+                //functions.scoutskills.processInput(i)
                 functions.quiz.answer(i)
                 functions.supportTicket.answer(i)
             })
@@ -125,6 +125,7 @@ const timmybot = {
             client.on('typingStart', (i) => {
                 console.log('Typing...');
                 if (i.channel.id === aiChannelID) {
+                    functions.ai.setTimer(8500)
                 }
             })
             
