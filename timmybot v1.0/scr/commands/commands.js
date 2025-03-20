@@ -1,8 +1,6 @@
-const { supervisor, supervisorPermisses } = require('../../../supervisor.js')
-let supervisorPermissesBoolean = true
-supervisorPermisses.on('fail', () => {
-    supervisorPermissesBoolean = false
-})
+const { supervisor } = require('../../../supervisor.js')
+const { client } = require('../main.js')
+const { SlashCommandBuilder } = require('discord.js')
 
 const commandsNames = [
     'ping',
@@ -23,17 +21,16 @@ const commandsDescription = {
     "timeout": 'Times out people.',
 }
 
-let commandsBilt
+let commandAccumulator = []
 
-let commands = {
+const commands = {
     run: (i) => {
         if (i.isCommand()) {
             commands[i.commandName](i)
         }
     },
-    initialize: async () => { 
+    initialize: async () => {
         try {
-            while (client.application == null) await new Promise(resolve => setTimeout(resolve, 100))
             for (let i = 0; i < commandsNames.length; i++) {
                 const e = commandsNames[i]
                 const tempcammand = new SlashCommandBuilder()
@@ -62,7 +59,7 @@ let commands = {
                                 .setDescription('Select a user to timeout')
                                 .setRequired(true)
                         )
-                        .addIntegerOption(option =>
+                        .addStringOption(option =>
                             option
                                 .setName('duration')
                                 .setDescription('Set the Minutes the user is timed out by')
@@ -75,29 +72,22 @@ let commands = {
                                 .setRequired(false)
                         )
                 }
-                if (commandsBilt == undefined) {
-                    commandsBilt = [tempcammand]
-                } else {
-                    commandsBilt.push(tempcammand)
-                }
+                commandAccumulator.push(tempcammand)
             }
-            await client.application.commands.set(commandsBilt)
+            await client.application.commands.set(commandAccumulator)
         } catch (err) {
             console.log(err);
         }
     }
 }
 
-if (supervisorPermissesBoolean) {
-    for (let i = 0; i < commandsNames.length; i++) {
-        const e = commandsNames[i];
-        try {
-            ( { [e]: commands[e] } = require(`./${e}`))
-            supervisor.succeed(`successfully loaded ${e} command`)
-        } catch (err) {
-            supervisor.fail(1, err, `failed to load ${e} command`)
-        }
-
+for (let i = 0; i < commandsNames.length; i++) {
+    const e = commandsNames[i];
+    try {
+        ({ [e]: commands[e] } = require(`./${e}`))
+        supervisor.succeed(`successfully loaded ${e} command`)
+    } catch (err) {
+        supervisor.fail(1, err, `failed to load ${e} command`)
     }
 }
 
