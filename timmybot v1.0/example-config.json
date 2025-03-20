@@ -16,5 +16,6 @@
     "email": "",
     "emailHost": "",
     "emailservice": "",
-    "adminEmail": ""
+    "adminEmail": "",
+    "testMode": false
 }

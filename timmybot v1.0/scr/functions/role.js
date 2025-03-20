@@ -1,4 +1,7 @@
-const { guildID } = require('../../config.json')
+const fs = require('fs')
+const { guildID } = require('../../config.json');
+const path = require('path');
+const rolePath = "timmybot v1.0/assets/users/roles/"
 
 const role = {
     unverify: async (id) => {
@@ -14,6 +17,9 @@ const role = {
         } catch (error) {
             console.error(`Error removing roles from user with ID ${id}:`)
         }
+    },
+    updateUsersRole: (currentMemberStatus) => {
+        const usersRoles = JSON.parse(fs.readFileSync(`${rolePath}/${currentMemberStatus.user.id}.json`, 'utf8'))
     }
 }
 

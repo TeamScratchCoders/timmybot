@@ -1,72 +1,19 @@
 //* gets all modules
 const { supervisor } = require('../../supervisor.js');
-
-const contentWarningMessage = {
-    content: ``,
-    embeds: [
-        {
-            id: 593955793,
-            description: `# 🚨  INAPPROPRIATE CONTENT   🚨\nThis is a warning, warns about Sussy wussy content that Timmy tried to generate. It's your fault isn't it. Anyways stop doing it! \n\n# NOW!\n** **`,
-            color: 16711680
-        }
+const chalk = require('chalk');
+const { Client, Intents, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message, CommandInteraction } = require("discord.js")
+const { token, guildID, verificationChannelID, ruleChannelID, supportChannelID, aiChannelID, botCommandChannelID } = require('../config.json');
+const { importDebug } = require('puppeteer');
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMessageTyping
     ]
-}
+})
 
-var Client, Events, GatewayIntentBits;
-var client
-var token
-var joinVoiceChannel, createAudioPlayer, createAudioResource
-var ffmpgeg
-try {
-    ({ Client, Intents, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message, CommandInteraction } = require("discord.js"))
-    supervisor.succeed('discord.js module successfully loaded')
-} catch (err) {
-    supervisor.fail(1, err, 'discord.js module failed to load')
-}
-try {
-    client = new Client({
-        intents: [
-            GatewayIntentBits.Guilds,
-            GatewayIntentBits.GuildMembers,
-            GatewayIntentBits.GuildMessages,
-            GatewayIntentBits.MessageContent,
-            GatewayIntentBits.GuildMessageTyping,
-        ],
-    })
-    supervisor.succeed('discord.js intense established')
-} catch (err) {
-    supervisor.fail(1, err, 'discord.js intense failed to load')
-}
-try {
-    ({ token, guildID, verificationChannelID, ruleChannelID, supportChannelID, aiChannelID, botCommandChannelID } = require('../config.json'))
-    supervisor.succeed('successfully loaded config.json')
-} catch (err) {
-    supervisor.fail(1, err, 'failed to load config.json')
-}
-try {
-    ffmpgeg = require('ffmpeg-static')
-    supervisor.succeed('successfully loaded ffmpeg-static.json')
-} catch (err) {
-    supervisor.fail(1, err, 'failed to load ffmpeg-static.json')
-}
-try {
-    ({ joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice'))
-    supervisor.succeed('successfully loaded @discordjs/voice')
-} catch (err) {
-    supervisor.fail(1, err, 'failed to load @discordjs/voice')
-}
-try {
-    ({ functions } = require('./functions/functions.js'))
-    supervisor.succeed('successfully loaded functions.js')
-} catch (err) {
-    supervisor.fail(1, err, 'failed to load functions.js')
-}
-try {
-    ({ commands } = require('./commands/commands.js'))
-    supervisor.succeed('successfully loaded commands.js')
-} catch (err) {
-    supervisor.fail(1, err, 'failed to load commands.js')
-}
 
 function imageToUrl(i) {
     try {
@@ -81,10 +28,67 @@ function imageToUrl(i) {
     }
 }
 
+function timmy() {
+    console.log(String.raw`
+                       uuuuuuuuuuuuuuuuuuuuu.
+                   .u$$$$$$$$$$$$$$$$$$$$$$$$$$W.
+                 u$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$Wu.
+               $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$i
+              $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+             .$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+           .i$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$i
+           $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$W
+          .$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$W
+         .$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$i
+         #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$.
+         W$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$u       #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$~
+$#      '"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$i        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$        #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$         $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#$.        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#
+ $$      $iW$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$!
+ $$i      $$$$$$$#"" '"""#$$$$$$$$$$$$$$$$$#""""""#$$$$$$$$$$$$$$$W
+ #$$W    '$$$#"            "       !$$$$$'           '"#$$$$$$$$$$#
+  $$$     ''                 ! !iuW$$$$$                 #$$$$$$$#
+  #$$    $u                  $   $$$$$$$                  $$$$$$$~
+   "#    #$$i.               #   $$$$$$$.                 '$$$$$$
+          $$$$$i.                """#$$$$i.               .$$$$#
+          $$$$$$$$!         .   '    $$$$$$$$$i           $$$$$
+          '$$$$$  $iWW   .uW'        #$$$$$$$$$W.       .$$$$$$#
+            "#$$$$$$$$$$$$#'          $$$$$$$$$$$iWiuuuW$$$$$$$$W
+               !#""    ""             '$$$$$$$##$$$$$$$$$$$$$$$$
+          i$$$$    .                   !$$$$$$ .$$$$$$$$$$$$$$$#
+         $$$$$$$$$$'                    $$$$$$$$$Wi$$$$$$#"#$$'
+         #$$$$$$$$$W.                   $$$$$$$$$$$#   ''
+          '$$$$##$$$$!       i$u.  $. .i$$$$$$$$$#""
+             "     '#W       $$$$$$$$$$$$$$$$$$$'      u$#
+                            W$$$$$$$$$$$$$$$$$$      $$$$W
+                            $$'!$$$##$$$$''$$$$      $$$$!
+                           i$" $$$$  $$#"'  """     W$$$$
+                                                   W$$$$!
+                      uW$$  uu  uu.  $$$  $$$Wu#   $$$$$$
+                     ~$$$$iu$$iu$$$uW$$! $$$$$$i .W$$$$$$
+             ..  !   "#$$$$$$$$$$##$$$$$$$$$$$$$$$$$$$$#"
+             $$W  $     "#$$$$$$$iW$$$$$$$$$$$$$$$$$$$$$W
+             $#'   '       ""#$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                              !$$$$$$$$$$$$$$$$$$$$$#'
+                              $$$$$$$$$$$$$$$$$$$$$$!
+                            $$$$$$$$$$$$$$$$$$$$$$$'
+                             $$$$$$$$$$$$$$$$$$$$"
+                           ${chalk.bold.redBright('Timmy is ready to Rumble')}
+
+        `)
+}
+
 //* Actual Discord bot
 const timmybot = {
-    start: function () {
+    start: async () => {
         client.on('ready', async () => { //! Client Ready
+            const { functions } = require('./functions/functions.js')
+            const { commands } = require('./commands/commands.js')
+            const contentWarningMessage = { content: ``, embeds: [{ id: 593955793, description: `# 🚨  INAPPROPRIATE CONTENT   🚨\nThis is a warning, warns about Sussy wussy content that Timmy tried to generate. It's your fault isn't it. Anyways stop doing it! \n\n# NOW!\n** **`, color: 16711680 }] }
 
             const guild = await client.guilds.fetch(guildID)
             const verificationChannel = await guild.channels.fetch(verificationChannelID)
@@ -92,43 +96,41 @@ const timmybot = {
             const supportChannel = await guild.channels.fetch(supportChannelID)
             const aiChannel = await guild.channels.fetch(aiChannelID)
 
-            
             //await functions.joinMessage(verificationChannel, 0)
             //await functions.joinMessage(ruleChannel, 1)
             //await functions.joinMessage(supportChannel, 2)
-            
-            try {
-                await functions.ai.start()
-                supervisor.succeed('AI successfully started')
-            } catch (err) {
-                supervisor.fail(1, err, 'AI failed to start')
-            }
-            
+
+            await functions.ai.start()
+                .then(supervisor.succeed('AI successfully started'))
+                .catch((err) => supervisor.fail(1, err, 'AI failed to start'))
+
             await functions.peepingTom.initializeInstance()
-            
-            try {
-                await commands.initialize()
-                supervisor.succeed('commands successfully started')
-            } catch (err) {
-                supervisor.fail(1, err, 'commands failed to start')
-            }
-            
-            setInterval(functions.verification.scanUsers, 60000)
-            
+                .then(supervisor.succeed('AI successfully peepingTom'))
+                .catch((err) => supervisor.fail(1, err, 'AI peepingTom to start'))
+
+
+            await commands.initialize()
+                .then(supervisor.succeed('commands successfully started'))
+                .catch((err) => supervisor.fail(1, err, 'commands failed to start'))
+
+            timmy()
+
+            //setInterval(functions.verification.scanUsers, 60000)
+
             client.on('interactionCreate', (i) => {
                 commands.run(i)
                 //functions.scoutskills.processInput(i)
-                functions.quiz.answer(i)
+                //functions.quiz.answer(i)
                 functions.supportTicket.answer(i)
             })
-            
+
             client.on('typingStart', (i) => {
                 console.log('Typing...');
                 if (i.channel.id === aiChannelID) {
-                    functions.ai.setTimer(8500)
+                    //*functions.ai.typing(i)
                 }
             })
-            
+
             client.on('messageCreate', async i => {
                 if (!i.author.bot) {
                     if (/cook/gi.test(i.content)) {
@@ -155,8 +157,6 @@ const timmybot = {
 
                     }
 
-
-
                     try {
                         //if (i.channelId == botCommandChannelID) {
                         if (i.channelId == '1248115163656360050') {
@@ -169,10 +169,42 @@ const timmybot = {
                     } catch (err) { }
                 }
             })
-            supervisor.fullyOperational()
+
+            //TODO: client.on 'guildMemberUpdate'
+        })
+    },
+    test: function () {
+
+        client.on('ready', async () => { //! Client Ready
+            const { verification } = require("./functions/verification.js")
+            const guild = await client.guilds.fetch(guildID)
+            const member = await guild.members.fetch('715043871503024218')
+            
+            // client.on('guildMemberUpdate', (previousMemberStatus, currentMemberStatus) => {
+            //      console.log(previousMemberStatus.roles.cache);
+            //      console.log("----------------------");
+            //      console.log(currentMemberStatus.roles.cache);
+            //      updateUsersRole(currentMemberStatus)
+                
+            // });
+
+            while (true) {
+                const channel = await guild.channels.fetch("1347982554476843171")
+
+                channel.send('KILL <@1258964185782550631>')
+
+                await new Promise(resolve => setTimeout(resolve, 1500));
+            }
+
+            try {
+                console.log(chalk.green("--TEST PASSED--"));
+            } catch (error) {
+                console.log(chalk.red("--TEST FAILED--"));
+                throw new Error(error)
+            }
         })
     }
 }
 
-module.exports = { timmybot }
+module.exports = { timmybot, client }
 client.login(token)

@@ -5,4 +5,6 @@ timmybot v1.0/config.json
 timmybot v1.0/assets/verirfication/verifiedMembers.json
 timmybot v1.0/assets/users/message/*
 !timmybot v1.0/assets/users/message/example.json
+timmybot v1.0/assets/users/roles/*
+!timmybot v1.0/assets/users/roles/example.json
 EAI.js
