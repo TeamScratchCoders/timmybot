@@ -1,9 +1,8 @@
 //* gets all modules
 const { supervisor } = require('../../supervisor.js');
 const chalk = require('chalk');
-const { Client, Intents, Events, GatewayIntentBits, ModalBuilder, ActionRowBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle, ThreadChannel, ChannelType, ThreadAutoArchiveDuration, ThreadMemberManager, Message, CommandInteraction } = require("discord.js")
-const { token, guildID, verificationChannelID, ruleChannelID, supportChannelID, aiChannelID, botCommandChannelID } = require('../config.json');
-const { importDebug } = require('puppeteer');
+const { Client, GatewayIntentBits } = require("discord.js")
+const { token, guildID, verificationChannelID, ruleChannelID, supportChannelID, aiChannelID } = require('../config.json');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -96,9 +95,9 @@ const timmybot = {
             const supportChannel = await guild.channels.fetch(supportChannelID)
             const aiChannel = await guild.channels.fetch(aiChannelID)
 
-            //await functions.joinMessage(verificationChannel, 0)
-            //await functions.joinMessage(ruleChannel, 1)
-            //await functions.joinMessage(supportChannel, 2)
+            await functions.joinMessage(verificationChannel, 0)
+            await functions.joinMessage(ruleChannel, 1)
+            await functions.joinMessage(supportChannel, 2)
 
             await functions.ai.start()
                 .then(supervisor.succeed('AI successfully started'))
@@ -115,21 +114,19 @@ const timmybot = {
 
             timmy()
 
-            //setInterval(functions.verification.scanUsers, 60000)
+            setInterval(await functions.verification.scanUsers, 60000)
 
             client.on('interactionCreate', (i) => {
                 commands.run(i)
-                //functions.scoutskills.processInput(i)
-                //functions.quiz.answer(i)
+                functions.quiz.answer(i)
                 functions.supportTicket.answer(i)
             })
 
-            client.on('typingStart', (i) => {
-                console.log('Typing...');
+            /*client.on('typingStart', (i) => {
                 if (i.channel.id === aiChannelID) {
                     //*functions.ai.typing(i)
                 }
-            })
+            })*/
 
             client.on('messageCreate', async i => {
                 if (!i.author.bot) {
@@ -158,8 +155,7 @@ const timmybot = {
                     }
 
                     try {
-                        //if (i.channelId == botCommandChannelID) {
-                        if (i.channelId == '1248115163656360050') {
+                        if (i.channelId == botCommandChannelID) {
                             if (i.mentions.repliedUser.username == 'TimmyBot') {
                                 console.log(i);
                                 functions.madlibFunc.addWord(i)
@@ -169,38 +165,25 @@ const timmybot = {
                     } catch (err) { }
                 }
             })
-
-            //TODO: client.on 'guildMemberUpdate'
         })
     },
-    test: function () {
+    test: async function () {
 
         client.on('ready', async () => { //! Client Ready
+            const { functions } = require('./functions/functions.js')
             const { verification } = require("./functions/verification.js")
+            const { role } = require("./functions/role.js")
             const guild = await client.guilds.fetch(guildID)
-            const member = await guild.members.fetch('715043871503024218')
+            const member = await guild.members.fetch('1225976620452413551')
+            const { moderatorLogsChannelID } = require('../config.json')
+
             
-            // client.on('guildMemberUpdate', (previousMemberStatus, currentMemberStatus) => {
-            //      console.log(previousMemberStatus.roles.cache);
-            //      console.log("----------------------");
-            //      console.log(currentMemberStatus.roles.cache);
-            //      updateUsersRole(currentMemberStatus)
-                
-            // });
 
-            while (true) {
-                const channel = await guild.channels.fetch("1347982554476843171")
-
-                channel.send('KILL <@1258964185782550631>')
-
-                await new Promise(resolve => setTimeout(resolve, 1500));
-            }
-
-            try {
+            function pass() {
                 console.log(chalk.green("--TEST PASSED--"));
-            } catch (error) {
-                console.log(chalk.red("--TEST FAILED--"));
-                throw new Error(error)
+            }
+            function fail() {
+                console.log(chalk.red("--TEST FAILED--"))
             }
         })
     }

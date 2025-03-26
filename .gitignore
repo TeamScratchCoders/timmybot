@@ -7,4 +7,6 @@ timmybot v1.0/assets/users/message/*
 !timmybot v1.0/assets/users/message/example.json
 timmybot v1.0/assets/users/roles/*
 !timmybot v1.0/assets/users/roles/example.json
+timmybot v1.0/assets/users/profile/*
+!timmybot v1.0/assets/users/profile/example.json
 EAI.js

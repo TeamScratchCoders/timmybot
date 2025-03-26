@@ -1,25 +1,38 @@
 const fs = require('fs')
-const { guildID } = require('../../config.json');
+const { guildID, youthRoleID, adultRoleID } = require('../../config.json');
+const { GuildMember } = require('discord.js');
 const path = require('path');
+const { type } = require('os');
 const rolePath = "timmybot v1.0/assets/users/roles/"
 
 const role = {
-    unverify: async (id) => {
+    /**
+     * Removes the youth and adult roles from a user. If the user is not a GuildMember object, then a TypeError is thrown. If the youthRoleID or adultRoleID in config.json is not a valid role ID, then a TypeError is thrown.
+     * @param {import('discord.js').GuildMember} memberOBJ - The guild member object
+     * @throws {TypeError} If the memberObj is not a GuildMember object
+     * @throws {TypeError} If the youthRoleID or adultRoleID in config.json is not a valid role ID
+     * @throws {Error} If an error occurs while removing the roles
+     */
+    unverify: async (memberOBJ) => {
         try {
-            const guild = await client.guilds.fetch(guildID);
-            const member = await guild.members.fetch(id);
+            const youthRole = memberOBJ.guild.roles.cache.get(youthRoleID)
+            const adultRole = memberOBJ.guild.roles.cache.get(adultRoleID)
 
-            const roles = member.roles.cache;
-            for (const [roleId, role] of roles) {
-                await member.roles.remove(role)
-                console.log(`Removed role ${role.name} from user ${member.user.tag}`)
+            if (!(memberOBJ instanceof GuildMember)) {
+                throw new TypeError(`Expected memberObj to be a GuildMember object. Received: ${typeof memberOBJ}`);
             }
-        } catch (error) {
-            console.error(`Error removing roles from user with ID ${id}:`)
+
+            if (!youthRole) {
+                throw new TypeError(`youthRoleID form config.json is not a valid role ID. (ID: ${youthRoleID})`);
+            } else if (!adultRole) {
+                throw new TypeError(`adultRoleID form config.json is not a valid role ID. (ID: ${adultRoleID})`);
+            }
+
+            await memberOBJ.roles.remove(youthRoleID)
+            await memberOBJ.roles.remove(adultRoleID)
+        } catch (err) {
+            throw new Error(`Error: ${err}`)
         }
-    },
-    updateUsersRole: (currentMemberStatus) => {
-        const usersRoles = JSON.parse(fs.readFileSync(`${rolePath}/${currentMemberStatus.user.id}.json`, 'utf8'))
     }
 }
 

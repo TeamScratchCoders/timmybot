@@ -17,5 +17,7 @@
     "emailHost": "",
     "emailservice": "",
     "adminEmail": "",
-    "testMode": false
+    "youthRole": "",
+    "adultRole": "",
+    "testMode": true
 }

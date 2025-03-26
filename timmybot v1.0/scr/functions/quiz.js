@@ -1,157 +1,161 @@
-const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js')
+const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ButtonInteraction, ModalSubmitInteraction } = require('discord.js')
 const { verification } = require('./verification.js')
 const fs = require('fs')
-const quizMessage = JSON.parse(fs.readFileSync('timmybot v1.0/assets/quiz/quizMessage.json', 'utf8'))
-const { guildID } = require('../../config.json')
-let questionnaireProgress = {
-  bob: [
-    's-001',
-    'm-001'
-  ]
-}
+const { notify } = require('./peepingTom.js')
+const { adultRoleID, youthRoleID } = require('../../config.json')
+
 const quiz = {
-    answer: async function(i) {
-        if (!questionnaireProgress[i.user.id]) {
-          questionnaireProgress[i.user.id] = [];
-        }
-
-        if (i.customId === 'b-000') { //* initial interaction
-          if (await verification.checkUserPreVerification(i)) {
-            i.reply(quizMessage.message[0])
-          }
-        }
-        if (i.customId === 'S-000') { //* adult or youth
-          if (await verification.checkUserPreVerification(i)) {
-            if (i.values == 's-000') { //* adult
-              questionnaireProgress[i.user.id] = []
-              i.update(quizMessage.message[1])
-              questionnaireProgress[i.user.id].push('s-000')
-            } else { //* youth
-              questionnaireProgress[i.user.id] = []
-              i.update(quizMessage.message[4])
-              questionnaireProgress[i.user.id].push('s-001')
+    answer: async (interactionOBJ) => {
+        function buttonInteraction(interactionOBJ) {
+            if (!(interactionOBJ instanceof ButtonInteraction)) {
+                throw new Error(`Expected parameter of quiz.answer() to be a ButtonInteraction object. Received: ${typeof interactionOBJ}`);
             }
-          }
+            const modal = new ModalBuilder()
+                .setCustomId('M-000')
+                .setTitle('Verification');
+
+            const firstNameInput = new TextInputBuilder()
+                .setCustomId('m-000')
+                .setLabel('First Name:')
+                .setPlaceholder('Johnny')
+                .setStyle(TextInputStyle.Short)
+                .setRequired(true)
+
+            const lastNameInput = new TextInputBuilder()
+                .setCustomId('m-001')
+                .setLabel('Last Name:')
+                .setPlaceholder('Scout')
+                .setStyle(TextInputStyle.Short)
+                .setRequired(true)
+
+            const birthDateInput = new TextInputBuilder()
+                .setCustomId('m-002')
+                .setLabel('Birth Date (MM/DD/YYYY):')
+                .setStyle(TextInputStyle.Short)
+                .setRequired(true)
+                .setPlaceholder('MM/DD/YYYY')
+                .setMaxLength(10)
+                .setMinLength(8)
+
+            const actionRow1 = new ActionRowBuilder().addComponents(firstNameInput)
+            const actionRow2 = new ActionRowBuilder().addComponents(lastNameInput)
+            const actionRow3 = new ActionRowBuilder().addComponents(birthDateInput)
+
+            modal.addComponents(actionRow1, actionRow2, actionRow3)
+
+            interactionOBJ.showModal(modal)
         }
-        if (i.customId === 'S-001') { //* adult achievements
-          if (!((i.values.includes('s-002') && i.values.length == 1))) {
-            if (await verification.checkUserPreVerification(i)) {
-              i.update(quizMessage.message[2])
+
+        async function modalInteraction(interactionOBJ) {
+            async function verifyMember(memberObj) {
+                verification.verifyUser(memberObj)
+                console.log(verification.getUserVerification(memberObj));
+                if (verification.getUserVerification(memberObj) !== true) {
+                    throw new Error("Failed to verify user")
+                }
             }
-          } else {
-            callHonorific(i)
-          }
-          questionnaireProgress[i.user.id] = [...questionnaireProgress[i.user.id], ...i.values]
-        }
-        if (i.customId === 'S-002') { //* adult would badge Patrol
-          if (i.values.includes('s-013')) {
-            if (await verification.checkUserPreVerification(i)) {
-              i.update(quizMessage.message[3])
+
+            async function makeProfile(memberObj, firstName, lastName, birthDay) {
+                const contents = { id:memberObj.user.id, firstName, lastName, birthDay, messages:null }
+                const json = JSON.stringify(contents)
+                const path = `timmybot v1.0/assets/users/profile/${memberObj.user.id}.json`
+                try {
+                    fs.writeFileSync(path, json)
+                } catch (err) {
+                    throw new Error("Failed to make profile. Error:" + err)
+                }
             }
-          } else {
-            callHonorific(i)
-          }
-          questionnaireProgress[i.user.id] = [...questionnaireProgress[i.user.id], ...i.values]
-        }
-        if (i.customId === 'S-003') { //* adult Honorific
-          callHonorific(i)
-          questionnaireProgress[i.user.id] = [...questionnaireProgress[i.user.id], ...i.values]
-        }
-        if (i.customId === 'S-004') { //* youth Patrol
-          if (await verification.checkUserPreVerification(i)) {
-            i.update(quizMessage.message[5])
-            questionnaireProgress[i.user.id] = [...questionnaireProgress[i.user.id], ...i.values]
-          }
-        }
-        if (i.customId === 'S-005') { //* Youth position
-          if (await verification.checkUserPreVerification(i)) {
-            i.update(quizMessage.message[6])
-            questionnaireProgress[i.user.id] = [...questionnaireProgress[i.user.id], ...i.values]
-          }
-        }
-        if (i.customId === 'S-006') { //*Youth rank
-          if (await verification.checkUserPreVerification(i)) {
-            i.update(quizMessage.message[7])
-            questionnaireProgress[i.user.id] = [...questionnaireProgress[i.user.id], ...i.values]
-          }
-        }
-        if (i.customId === 'S-007') { //*Youth achievements
-          if (await verification.checkUserPreVerification(i)) {
-            i.update(quizMessage.message[8])
-            questionnaireProgress[i.user.id] = [...questionnaireProgress[i.user.id], ...i.values]
-          }
-        }
-        if (i.customId === 'S-008') { //*Youth achievements
-          if (await verification.checkUserPreVerification(i)) {
-            callModal(i)
-            questionnaireProgress[i.user.id] = [...questionnaireProgress[i.user.id], ...i.values]
-          }
-        }
 
+            async function validInput() {
+                let invalidInputs = []
 
-        if (i.isModalSubmit()) {
-          if (await verification.checkUserPreVerification(i)) {
-            const guild = await client.guilds.fetch(guildID)
-            const member = await guild.members.fetch(i.user.id)
+                if (!/^[a-z]*$/i.test(firstName)) {
+                    invalidInputs.push('`Invalid First Name`')
+                }
+                if (!/^[a-z]*$/i.test(lastName)) {
+                    invalidInputs.push('`Invalid Last Name`')
+                }
+                if (!/^(0?[1-9](?=\D)|1[0-2])\D(?:0?[1-9]|[1-2]\d|3[0-1])\D\d{4}$/.test(rawbirthDay)) {
+                    invalidInputs.push('`Invalid Birth Date`')
+                }                
+                if (!(await verification.checkUserSecurity(memberObj))) {
+                    invalidInputs.push('`You haven\'t disabled your DM\'s`')
+                }
 
-            const honorific = quizMessage.rolls[(questionnaireProgress[i.user.id][questionnaireProgress[i.user.id].length - 1])]
+                if (invalidInputs.length > 0) {
+                    return invalidInputs.reduce((a, b, i) => a + `${i == 0 ? '' : ', '}` + b, '')
+                }
 
-            const firstName = i.components[0].components[0].value
-            const lastName = i.components[1].components[0].value
+                return true
+            }
 
-            if (honorific === null) {
-              await member.setNickname(`${firstName} ${lastName[0]}.`)
+            async function addRole(member, birthDate, firstName, lastName) {
+                const eighteenYearsAgo = (Date.now() - 18 * 365.25 * 24 * 60 * 60 * 1000) / 1000
+                
+                if (eighteenYearsAgo > birthDate) {
+                    await member.setNickname(`Mr. ${lastName}`)
+                    await member.roles.add(adultRoleID)
+                } else {
+                    await member.setNickname(`${firstName} ${lastName[0]}.`)
+                    await member.roles.add(youthRoleID)
+                }
+            }
+
+            function getBirthDay(birthDate) {
+                const regexMonth = /^(?:0?[1-9](?=\D)|1[0-2])/
+                const regexDay = /(?<=\D)(0?[1-9]|[1-2]\d|3[0-1])(?=\D)/
+                const regexYear = /(?<=\D)\d{4}/
+
+                const month = parseInt(birthDate.match(regexMonth))
+                const day = parseInt(birthDate.match(regexDay))
+                const year = parseInt(birthDate.match(regexYear))
+                
+                const date = new Date(Date.UTC(year, month - 1, day));
+                return Math.floor(date.getTime() / 1000);
+            }
+
+            const memberObj = interactionOBJ.guild.members.cache.get(interactionOBJ.user.id)
+
+            const firstName = interactionOBJ.fields.getTextInputValue('m-000')
+            const lastName = interactionOBJ.fields.getTextInputValue('m-001')
+            const rawbirthDay = interactionOBJ.fields.getTextInputValue('m-002')
+            const birthDay = getBirthDay(rawbirthDay)
+            
+            const validInputResult = await validInput()
+
+            if (validInputResult == true) {
+                await verifyMember(memberObj)
+                    .catch((err) => {
+                        console.error(err)
+                        interactionOBJ.reply({ content: '### Failed to verify your account. Contact Support', flags: 64 })
+                        notify(`Verification Error: Failed to verify ${memberObj.user.username}(${memberObj.id}) Error:${err}`);
+                    })
+                await makeProfile(memberObj, firstName, lastName, birthDay)
+                    .catch(err => {
+                        console.error(err)
+                        interactionOBJ.reply({ content: '### Failed to Create your Profile. Contact Support', flags: 64 })
+                        notify(`Profile Error: Failed to make Profile ${memberObj.user.username}(${memberObj.id}) Error:${err}`);
+                    })
+
+                await addRole(memberObj, birthDay, firstName, lastName)
+                    .catch(err => {
+                        console.error(err)
+                        interactionOBJ.reply({ content: '### Failed to add your role. Contact Support', flags: 64 })
+                        notify(`Role Error: Failed to add role ${memberObj.user.username}(${memberObj.id}) Error:${err}`);
+                    })
+
+                interactionOBJ.reply({ content: '### Successfully verified your account.', flags: 64 })
             } else {
-              await member.setNickname(`${honorific}. ${lastName}`)
+                interactionOBJ.reply({ content: `### Failed to verify your account.\n**Reason**: ${await validInputResult}`, flags: 64 })
             }
-
-            i.update(quizMessage.message[10])
-            calculateRoles(questionnaireProgress[i.user.id])
-            verification.verifyUser(i)
-          }
         }
 
-        if (i.customId === 'S-009') {
-          questionnaireProgress[i.user.id] = [...questionnaireProgress[i.user.id], ...i.values]
-          callModal(i)
+        if (interactionOBJ.customId === 'b-000') {
+            buttonInteraction(interactionOBJ)
+        } else if (interactionOBJ.customId === 'M-000') {
+            modalInteraction(interactionOBJ)
         }
-
-        async function callHonorific(i) {
-          i.update(quizMessage.message[9])
-        }
-
-        async function callModal(i) {
-          const modal = new ModalBuilder()
-            .setCustomId('M-000')
-            .setTitle('My Modal');
-
-          const fNameInput = new TextInputBuilder()
-            .setCustomId('m-000')
-            .setLabel('What is you\'r first Name?')
-            .setStyle(TextInputStyle.Short)
-
-          const lNameInput = new TextInputBuilder()
-            .setCustomId('m-001')
-            .setLabel('What is you\'r last Name?')
-            .setStyle(TextInputStyle.Short)
-
-          const actionRow1 = new ActionRowBuilder().addComponents(fNameInput)
-          const actionRow2 = new ActionRowBuilder().addComponents(lNameInput)
-
-          modal.addComponents(actionRow1, actionRow2)
-
-          await i.showModal(modal)
-        }
-
-        async function calculateRoles(r) {
-          for (let i2 = 0; i2 < r.length; i2++) {
-            const e = r[i2]
-            if (/^\d{19}$/.test(quizMessage.rolls[e])) {
-              i.member.roles.add(quizMessage.rolls[e])
-            }
-          }
-        }
-    },
+    }
 }
 
 

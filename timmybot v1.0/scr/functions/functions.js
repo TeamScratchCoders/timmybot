@@ -3,7 +3,7 @@ const { supervisor } = require('../../../supervisor.js')
 const functionNames = [
     'joinMessage',
     'quiz',
-    //'verification',
+    'verification',
     'supportTicket',
     'ai',
     'role',
