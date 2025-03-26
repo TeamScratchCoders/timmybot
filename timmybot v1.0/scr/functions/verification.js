@@ -87,7 +87,7 @@ const verification = {
                 const embed = new EmbedBuilder()
                     .setColor(0xFF0000)
                     .setAuthor({
-                        name: `${member.nickname}`,
+                        name: `${member.user.nickname}`,
                         iconURL: `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.webp?size=128`
                     })
                     .setTitle('A User has been Unverified.')
@@ -111,7 +111,7 @@ const verification = {
                 }
             } catch (err) {
                 console.error(err)
-                modCannnel.send({ content: `\`Failed to scan ${member}. Error: ${err}\`` })
+                modCannnel.send({ content: `\`Failed to scan <@${member.user.id}>. Error: ${err}\`` })
             }
         })
     }
