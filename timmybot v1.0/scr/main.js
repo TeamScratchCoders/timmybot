@@ -136,9 +136,6 @@ const timmybot = {
                     if (/lol|lmfao|lmao/gi.test(i.content)) {
                         i.reply({ content: "I know right." })
                     }
-                    if (/(shut[^a-z]*up)?[^a-z]*(timmy|<@1223785889704972358>)[^a-z]*(shut[^a-z]*up)?/gi.test(i.content)) {
-                        i.reply({ content: "no." })
-                    }
 
 
                     functions.messageTracking(i)
