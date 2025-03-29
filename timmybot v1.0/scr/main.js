@@ -114,7 +114,7 @@ const timmybot = {
 
             timmy()
 
-            setInterval(await functions.verification.scanUsers, 60000)
+            setInterval(await functions.verification.scanUsers, 15000)
 
             client.on('interactionCreate', (i) => {
                 commands.run(i)
@@ -124,11 +124,11 @@ const timmybot = {
                 functions.profile.modalHandler(i)
             })
 
-            // client.on('typingStart', (i) => {
-            //     if (i.channel.id === aiChannelID) {
-            //         functions.ai.typing(i)
-            //     }
-            // })
+            client.on('typingStart', (i) => {
+                if (i.channel.id === aiChannelID) {
+                    functions.ai.setTimer(5000)
+                }
+            })
 
             client.on('messageCreate', async i => {
                 if (!i.author.bot) {

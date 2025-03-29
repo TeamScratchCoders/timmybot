@@ -4,7 +4,6 @@ const { client } = require('../main.js')
 const { EmbedBuilder } = require('discord.js');
 const { guildID, moderatorLogsChannelID } = require('../../config.json');
 const verifiedMembersPath = 'timmybot v1.0/assets/verirfication/verifiedMembers.json'
-const { profile } = require('./profile.js')
 let verifiedMembers = JSON.parse(fs.readFileSync(verifiedMembersPath, 'utf8'))
 
 const verification = {
@@ -13,29 +12,49 @@ const verification = {
      * @param {import('discord.js').GuildMember} member - The guild member object
      * @throws {Error} If the fs falles to wright.
      */
-    verifyUser: (memberObj) => {
+    verifyUser: async (memberObj) => {
+        const guild = await client.guilds.fetch(guildID)
+        const modCannnel = await guild.channels.fetch(moderatorLogsChannelID)
+        const member = await guild.members.fetch(memberObj.id)
+
         if (!verifiedMembers.members.includes(memberObj.id)) {
             verifiedMembers.members.push(memberObj.id)
             try {
                 fs.writeFileSync(verifiedMembersPath, JSON.stringify(verifiedMembers))
+                const embed = new EmbedBuilder()
+                    .setColor(0x00FF00)
+                    .setTitle('A User has been Verified')
+                    .setDescription(`<@${member.user.id}> has been verified by`)
+                    .setAuthor({
+                        name: `${member.nickname}`,
+                        iconURL: `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.webp?size=128`
+                    })
+                    .setTimestamp()
+
+                modCannnel.send({ embeds: [embed] })
             } catch (err) {
                 throw new Error(`Faled to write to verifiedMembers.json. Error: ${err}`)
             }
         }
     },
     /**
-     * This function removes a user from the list of verified users.
+     * Removes a user from the list of verified users.
      * @param {import('discord.js').GuildMember} memberObj - The guild member object
+     * @returns {Promise<boolean>} `True` if the user was successfully removed from the list of verified users, `false` if the operation failed.
      * @throws {Error} If the fs falles to wright.
      */
-    unverifyUser: (memberObj) => {
+    unverifyUser: async (memberObj) => {
         const removeMembers = verifiedMembers.members.filter(item => item !== memberObj.id)
         verifiedMembers.members = removeMembers;
         try {
-            profile.delete(memberObj.id)
-            fs.writeFileSync(verifiedMembersPath, JSON.stringify({ members: removeMembers }, null, 2))
+            if (await fs.existsSync(`timmybot v1.0/assets/users/profile/${memberObj.id}.json`)) {
+                await fs.unlinkSync(`timmybot v1.0/assets/users/profile/${memberObj.id}.json`)
+            }
+            await fs.writeFileSync(verifiedMembersPath, JSON.stringify({ members: removeMembers }, null, 2))
+            return true
         } catch (err) {
-            throw new Error(`Faled to write to verifiedMembers.json. Error: ${err}`)
+            console.log(err);
+            return false
         }
     },
     /**
@@ -71,13 +90,13 @@ const verification = {
     scanUsers: async () => {
         async function unverify(member, cannnel) {
             try {
-                verification.unverifyUser(member)
-                role.unverify(member)
+                await verification.unverifyUser(member)
+                await role.unverify(member)
 
                 const embed = new EmbedBuilder()
                     .setColor(0xFF0000)
                     .setAuthor({
-                        name: `${member.user.nickname}`,
+                        name: `${member.nickname}`,
                         iconURL: `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.webp?size=128`
                     })
                     .setTitle('A User has been Unverified.')
@@ -97,7 +116,8 @@ const verification = {
                 const memberObj = await guild.members.fetch(member)
 
                 if (!(await verification.checkUserSecurity(memberObj))) {
-                    unverify(memberObj, modCannnel)
+                    await unverify(memberObj, modCannnel)
+                } else {
                 }
             } catch (err) {
                 console.error(err)

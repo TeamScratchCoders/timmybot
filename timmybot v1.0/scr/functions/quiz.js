@@ -19,17 +19,14 @@ function getBirthDay(birthDate) {
 const quiz = {
     answer: async (interactionOBJ) => {
         if (interactionOBJ.customId === 'profileModal' && interactionOBJ.channelId === verificationChannelID) {
-            console.log(interactionOBJ);
             verification.verifyUser(interactionOBJ.user)
 
             const rawbirthDay = interactionOBJ.fields.getTextInputValue('m-002')
             const birthDate = getBirthDay(rawbirthDay)
 
             if (birthDate - 567648000 >= 0) {
-                console.log("youth");
                 interactionOBJ.member.roles.add(youthRoleID);
             } else {
-                console.log("adult");
                 interactionOBJ.member.roles.add(adultRoleID);
             }
         }
