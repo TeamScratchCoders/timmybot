@@ -49,8 +49,20 @@ const profile = {
         const path = `timmybot v1.0/assets/users/profile/${id}.json`
         try {
             fs.writeFileSync(path, json)
+            return true
         } catch (err) {
-            throw new Error("Failed to make profile. Error:" + err)
+            console.error(err)
+            return false
+        }
+    },
+    delete: async (id) => {
+        const path = `timmybot v1.0/assets/users/profile/${id}.json`
+        try {
+            await fs.unlinkSync(path)
+            return true
+        } catch (err) {
+            console.error(err)
+            return false
         }
     },
     /**
@@ -157,7 +169,13 @@ const profile = {
 
             if (validInputs == true) {
                 profile.make(i.user.id, firstName, lastName, birthDay)
-                i.reply({ content: 'Profile made!', flags: 64 })
+                    .then((result) => {
+                        if (result) {
+                            i.reply({ content: 'Profile made!', flags: 64 })
+                        } else {
+                            i.reply({ content: 'Something went wrong.', flags: 64 })   
+                        }
+                    })
             } else {
                 i.reply({ content: `Invalid inputs: ${validInputs}`, flags: 64 })
             }
@@ -171,6 +189,7 @@ const profile = {
             }
             const modal = profile.modal(i)
             await i.showModal(modal)
+            return
         }
     },
     handleNoProfile: async (i) => {

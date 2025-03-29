@@ -4,6 +4,7 @@ const { client } = require('../main.js')
 const { EmbedBuilder } = require('discord.js');
 const { guildID, moderatorLogsChannelID } = require('../../config.json');
 const verifiedMembersPath = 'timmybot v1.0/assets/verirfication/verifiedMembers.json'
+const { profile } = require('./profile.js')
 let verifiedMembers = JSON.parse(fs.readFileSync(verifiedMembersPath, 'utf8'))
 
 const verification = {
@@ -31,6 +32,7 @@ const verification = {
         const removeMembers = verifiedMembers.members.filter(item => item !== memberObj.id)
         verifiedMembers.members = removeMembers;
         try {
+            profile.delete(memberObj.id)
             fs.writeFileSync(verifiedMembersPath, JSON.stringify({ members: removeMembers }, null, 2))
         } catch (err) {
             throw new Error(`Faled to write to verifiedMembers.json. Error: ${err}`)
