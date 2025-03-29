@@ -120,6 +120,8 @@ const timmybot = {
                 commands.run(i)
                 functions.quiz.answer(i)
                 functions.supportTicket.answer(i)
+                functions.profile.buttonHandler(i)
+                functions.profile.modalHandler(i)
             })
 
             /*client.on('typingStart', (i) => {
@@ -140,7 +142,9 @@ const timmybot = {
 
                     functions.messageTracking(i)
                     if (i.channelId == aiChannelID) {
-                        try {
+                        if (await functions.profile.get(i.author.id) == undefined) {
+                            functions.profile.handleNoProfile(i)
+                        } else {
                             const message = await functions.ai.msg(i, guild.members.cache.get(i.author.id).nickname, imageToUrl(i))
                             if (message) {
                                 aiChannel.send(message)

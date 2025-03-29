@@ -9,7 +9,8 @@ const functionNames = [
     'role',
     'messageTracking',
     'madlibFunc',
-    'peepingTom'
+    'peepingTom',
+    'profile'
 ]
 let functions = {};
 
