@@ -1,7 +1,7 @@
 const fs = require('fs')
 const { role } = require('./role.js')
 const { client } = require('../main.js')
-const { GuildMember, EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const { guildID, moderatorLogsChannelID } = require('../../config.json');
 const verifiedMembersPath = 'timmybot v1.0/assets/verirfication/verifiedMembers.json'
 let verifiedMembers = JSON.parse(fs.readFileSync(verifiedMembersPath, 'utf8'))
@@ -13,9 +13,6 @@ const verification = {
      * @throws {Error} If the fs falles to wright.
      */
     verifyUser: (memberObj) => {
-        if (!(memberObj instanceof GuildMember)) {
-            throw new Error(`Expected memberObj to be a GuildMember object. Received: ${typeof memberObj}`);
-        }
         if (!verifiedMembers.members.includes(memberObj.id)) {
             verifiedMembers.members.push(memberObj.id)
             try {
@@ -31,9 +28,6 @@ const verification = {
      * @throws {Error} If the fs falles to wright.
      */
     unverifyUser: (memberObj) => {
-        if (!(memberObj instanceof GuildMember)) {
-            throw new Error(`Expected memberObj to be a GuildMember object. Received: ${typeof memberObj}`);
-        }
         const removeMembers = verifiedMembers.members.filter(item => item !== memberObj.id)
         verifiedMembers.members = removeMembers;
         try {
@@ -49,9 +43,6 @@ const verification = {
      * @throws {Error} If the memberObj is not a GuildMember object
      */
     getUserVerification: (memberObj) => {
-        if (!(memberObj instanceof GuildMember)) {
-            throw new Error(`Expected memberObj to be a GuildMember object. Received: ${typeof memberObj}`);
-        }
         return verifiedMembers.members.includes(memberObj.id)
     },
     /**
@@ -61,9 +52,6 @@ const verification = {
      * @throws {Error} If the check fails
      */
     checkUserSecurity: async (memberObj) => {
-        if (!(memberObj instanceof GuildMember)) {
-            throw new Error(`Expected memberObj to be a GuildMember object. Received: ${typeof memberObj}`);
-        }
         let secure
         await memberObj.send("If you are seeing this than that is not good. Go back to the server to get further instructions.")
             .then(secure = false)

@@ -124,11 +124,11 @@ const timmybot = {
                 functions.profile.modalHandler(i)
             })
 
-            /*client.on('typingStart', (i) => {
-                if (i.channel.id === aiChannelID) {
-                    //*functions.ai.typing(i)
-                }
-            })*/
+            // client.on('typingStart', (i) => {
+            //     if (i.channel.id === aiChannelID) {
+            //         functions.ai.typing(i)
+            //     }
+            // })
 
             client.on('messageCreate', async i => {
                 if (!i.author.bot) {

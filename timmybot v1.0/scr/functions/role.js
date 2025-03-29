@@ -1,9 +1,5 @@
-const fs = require('fs')
-const { guildID, youthRoleID, adultRoleID } = require('../../config.json');
+const { youthRoleID, adultRoleID } = require('../../config.json');
 const { GuildMember } = require('discord.js');
-const path = require('path');
-const { type } = require('os');
-const rolePath = "timmybot v1.0/assets/users/roles/"
 
 const role = {
     /**
