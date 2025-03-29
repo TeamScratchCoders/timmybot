@@ -15,6 +15,7 @@ const fs = require('fs')
 const { profile } = require('./profile.js')
 const { aiChat, aiCookieValue, guildID, aiChannelID } = require('../../config.json')
 const { supervisor } = require('../../../supervisor')
+const { client } = require('../main.js')
 const regex = /\bfucker|damn|shit|bastard|bitch|cock\b|Blowjob|fuck|cunt|dick\b|fagget|faggot|feck\b|pussy|slut|nigga|nigger|prick|hell\b(?!o)|twat|whore\b/gi
 
 //* Functions:
@@ -139,6 +140,10 @@ const ai = {
     },
     msg: async (i, nickname, imageUrl) => {
         //*Dysfunction communicates with the AI on behalf of Discord users. This allows for prompt engineering.
+
+        const guild = await client.guilds.fetch(guildID)
+        const channel = await guild.channels.fetch(aiChannelID)
+
         async function checkResponseStatus() {
             const buttonSelector = 'button[aria-label="Send a message..."].pointer-events-none';
 
@@ -230,7 +235,7 @@ const ai = {
 
         msgTimer = 3000
 
-        if (!talking) {
+        if (talking === false) {
             while (msgTimer > 0) {
                 talking = true
                 if (msgTimer > 100) {
@@ -243,7 +248,9 @@ const ai = {
                 console.log("msgTimer Time left: " + msgTimer);
             }
 
-            talking = false
+            talking = null
+
+            channel.sendTyping()
 
             await aiText.type('.text-lg,.text-lg-chat', `${prompt(msgAccumulator, lastMsgTimestamp, getAge(await profile.get(i.author.id)))}\n`)
 
@@ -257,7 +264,7 @@ const ai = {
                 await delay(100)
             }
 
-            await delay(1000)
+            await delay(1500)
 
             const output = await getlastMsg()
 
@@ -265,6 +272,9 @@ const ai = {
             
 
             lastMsgTimestamp = Math.floor(Date.now() / 1000)
+
+            talking = false
+            
             return output
         }
 

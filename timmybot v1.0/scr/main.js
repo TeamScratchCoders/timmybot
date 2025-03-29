@@ -126,7 +126,7 @@ const timmybot = {
 
             client.on('typingStart', (i) => {
                 if (i.channel.id === aiChannelID) {
-                    functions.ai.setTimer(5000)
+                    functions.ai.setTimer(10000)
                 }
             })
 
