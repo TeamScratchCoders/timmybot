@@ -9,7 +9,8 @@ const commandsNames = [
     'verifyuser',
     'unverifyuser',
     'madlib',
-    'timeout'
+    'timeout',
+    'makeid'
 ]
 const commandsDescription = {
     "ping": 'pings the bot',
@@ -19,6 +20,7 @@ const commandsDescription = {
     "unverifyuser": 'removes an user from the verified list',
     "madlib": 'Creates a Mad Lib you can fill out.',
     "timeout": 'Times out people.',
+    "makeid": 'Makes you a ID'
 }
 
 let commandAccumulator = []
@@ -70,6 +72,84 @@ const commands = {
                                 .setName('reason')
                                 .setDescription('Reason for the timeout')
                                 .setRequired(false)
+                        )
+                } else if (e == 'makeid') {
+                    tempcammand
+                        .addStringOption(option =>
+                            option
+                                .setName('first-name')
+                                .setDescription('Set the first name')
+                                .setRequired(true)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('last-name')
+                                .setDescription('Set the last name')
+                                .setRequired(true)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('birthday-date')
+                                .setDescription('Foremat:(MM/DD/YYYY). Set the Birthday')
+                                .setRequired(true)
+                                .setMinLength(10)
+                                .setMaxLength(10)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('position')
+                                .setDescription('Set the Position')
+                                .setRequired(true)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('position-date')
+                                .setDescription('Foremat:(MM/DD/YYYY). Set the Position Start Date')
+                                .setRequired(true)
+                                .setMinLength(10)
+                                .setMaxLength(10)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('rank')
+                                .setDescription('Set the Rank')
+                                .setRequired(true)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('patrol')
+                                .setDescription('Set the Patrol')
+                                .setRequired(true)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('issued-date')
+                                .setDescription('Foremat:(MM/DD/YYYY). The Date the ID was issued.')
+                                .setRequired(true)
+                                .setMinLength(10)
+                                .setMaxLength(10)
+                        )
+                        .addAttachmentOption(option =>
+                            option
+                                .setName('photo')
+                                .setDescription('Set the Photo of the ID')
+                                .setRequired(true)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('position-end-date')
+                                .setDescription('Foremat:(MM/DD/YYYY). If left out it will automatically set it to 6 months from start date.')
+                                .setRequired(false)
+                                .setMinLength(10)
+                                .setMaxLength(10)
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('expires-date')
+                                .setDescription('Foremat:(MM/DD/YYYY). If left out it will automatically set it to 6 months from start date.')
+                                .setRequired(false)
+                                .setMinLength(10)
+                                .setMaxLength(10)
                         )
                 }
                 commandAccumulator.push(tempcammand)
