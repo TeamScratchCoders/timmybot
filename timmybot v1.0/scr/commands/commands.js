@@ -10,6 +10,7 @@ const commandsNames = [
     'unverifyuser',
     'madlib',
     'timeout',
+    'level',
     'makeid'
 ]
 const commandsDescription = {
@@ -20,6 +21,7 @@ const commandsDescription = {
     "unverifyuser": 'removes an user from the verified list',
     "madlib": 'Creates a Mad Lib you can fill out.',
     "timeout": 'Times out people.',
+    "level": 'Checks your level',
     "makeid": 'Makes you a ID'
 }
 
@@ -154,7 +156,9 @@ const commands = {
                 }
                 commandAccumulator.push(tempcammand)
             }
+            supervisor.succeed('Perpare to PUSH commands to discord')
             await client.application.commands.set(commandAccumulator)
+            supervisor.succeed('commands successfully pushed to discord')
         } catch (err) {
             console.log(err);
         }
