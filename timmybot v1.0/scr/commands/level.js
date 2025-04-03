@@ -1,4 +1,5 @@
 const { profile } = require('./../functions/profile.js')
+const { botCommandChannelID } = require('../../config.json')
 
 function getlevel(currentXP, baseXP = 100) {
     let count = 0;
@@ -16,8 +17,12 @@ const level = async (i) => {
     }
     await profile.setMessages(i.user.id)
     const memberProfile = await profile.get(i.user.id)
-
-    await i.reply({ content: `${getlevel(memberProfile.messages)}`, flags: 64 })
+    
+    if (botCommandChannelID == i.channelId) {
+        await i.reply({ content: `${getlevel(memberProfile.messages)}` })
+    } else {
+        await i.reply({ content: `${getlevel(memberProfile.messages)}`, flags: 64 })
+    }
 }
 
 module.exports = { level }
