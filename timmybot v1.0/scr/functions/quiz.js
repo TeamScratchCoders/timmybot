@@ -19,15 +19,17 @@ function getBirthDay(birthDate) {
 const quiz = {
     answer: async (interactionOBJ) => {
         if (interactionOBJ.customId === 'profileModal' && interactionOBJ.channelId === verificationChannelID) {
-            verification.verifyUser(interactionOBJ.user)
+            verification.verifyUser(interactionOBJ.user.id)
 
             const rawbirthDay = interactionOBJ.fields.getTextInputValue('m-002')
             const birthDate = getBirthDay(rawbirthDay)
 
             if (birthDate - 567648000 >= 0) {
                 interactionOBJ.member.roles.add(youthRoleID);
+                interactionOBJ.member.setNickname(`${interactionOBJ.fields.getTextInputValue('m-000')} ${interactionOBJ.fields.getTextInputValue('m-001')[0]}.`);
             } else {
                 interactionOBJ.member.roles.add(adultRoleID);
+                interactionOBJ.member.setNickname(`Mr. ${interactionOBJ.fields.getTextInputValue('m-001')}`);
             }
         }
     }

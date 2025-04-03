@@ -104,12 +104,11 @@ const timmybot = {
                 .catch((err) => supervisor.fail(1, err, 'AI failed to start'))
 
             await functions.peepingTom.initializeInstance()
-                .then(supervisor.succeed('AI successfully peepingTom'))
-                .catch((err) => supervisor.fail(1, err, 'AI peepingTom to start'))
+                .then(supervisor.succeed('successfully started peepingTom'))
+                .catch((err) => supervisor.fail(1, err, 'peepingTom failed to start'))
 
 
             await commands.initialize()
-                .then(supervisor.succeed('commands successfully started'))
                 .catch((err) => supervisor.fail(1, err, 'commands failed to start'))
 
             timmy()
@@ -131,7 +130,7 @@ const timmybot = {
             })
 
             client.on('messageCreate', async i => {
-                if (!i.author.bot) {
+                if (!i.author.bot && !i.system) {
                     if (/cook/gi.test(i.content)) {
                         i.reply({ content: "Jesse we need to cook." })
                     }

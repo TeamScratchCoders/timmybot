@@ -3,127 +3,73 @@ const { role } = require('./role.js')
 const { client } = require('../main.js')
 const { EmbedBuilder } = require('discord.js');
 const { guildID, moderatorLogsChannelID } = require('../../config.json');
-const verifiedMembersPath = 'timmybot v1.0/assets/verirfication/verifiedMembers.json'
-let verifiedMembers = JSON.parse(fs.readFileSync(verifiedMembersPath, 'utf8'))
+const { error } = require('console');
+const verifiedMembersPath = 'timmybot v1.0/assets/verification/verifiedMembers.json'
 
 const verification = {
-    /**
-     * This function adds a user to the list of verified users.
-     * @param {import('discord.js').GuildMember} member - The guild member object
-     * @throws {Error} If the fs falles to wright.
-     */
-    verifyUser: async (memberObj) => {
+    checkUserSecurity: async (memberID) => {
+        if ((!/^\d{18,19}$/.test(memberID))) {throw new Error("Invalid memberID")}
+        if (typeof memberID !== "string") {throw new TypeError("parameter for checkUserSecurity must be a string")}
+
         const guild = await client.guilds.fetch(guildID)
-        const modCannnel = await guild.channels.fetch(moderatorLogsChannelID)
-        const member = await guild.members.fetch(memberObj.id)
+        const member = await guild.members.fetch(memberID)
+        const result = await member.send("If you are seeing this than that is not good. Go back to the server to get further instructions.")
+            .then(() => false)
+            .catch((e) => e.rawError.code === 50007)
 
-        if (!verifiedMembers.members.includes(memberObj.id)) {
-            verifiedMembers.members.push(memberObj.id)
-            try {
-                fs.writeFileSync(verifiedMembersPath, JSON.stringify(verifiedMembers))
-                const embed = new EmbedBuilder()
-                    .setColor(0x00FF00)
-                    .setTitle('A User has been Verified')
-                    .setDescription(`<@${member.user.id}> has been verified by`)
-                    .setAuthor({
-                        name: `${member.nickname}`,
-                        iconURL: `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.webp?size=128`
-                    })
-                    .setTimestamp()
-
-                modCannnel.send({ embeds: [embed] })
-            } catch (err) {
-                throw new Error(`Faled to write to verifiedMembers.json. Error: ${err}`)
-            }
-        }
+        return result
     },
-    /**
-     * Removes a user from the list of verified users.
-     * @param {import('discord.js').GuildMember} memberObj - The guild member object
-     * @returns {Promise<boolean>} `True` if the user was successfully removed from the list of verified users, `false` if the operation failed.
-     * @throws {Error} If the fs falles to wright.
-     */
-    unverifyUser: async (memberObj) => {
-        const removeMembers = verifiedMembers.members.filter(item => item !== memberObj.id)
-        verifiedMembers.members = removeMembers;
-        try {
-            if (await fs.existsSync(`timmybot v1.0/assets/users/profile/${memberObj.id}.json`)) {
-                await fs.unlinkSync(`timmybot v1.0/assets/users/profile/${memberObj.id}.json`)
-            }
-            await fs.writeFileSync(verifiedMembersPath, JSON.stringify({ members: removeMembers }, null, 2))
-            return true
-        } catch (err) {
-            console.log(err);
-            return false
-        }
+    getUserVerification: (memberID) => {
+        if ((!/^\d{18,19}$/.test(memberID))) {throw new Error("Invalid memberID")}
+        if (typeof memberID !== "string") {throw new TypeError("parameter for getUserVerification must be a string")}
+
+        const verifiedMembers = JSON.parse(fs.readFileSync(verifiedMembersPath, 'utf8')).members
+        return verifiedMembers.includes(memberID)
     },
-    /**
-     * This function checks if a user is verified or not
-     * @param {import('discord.js').GuildMember} memberObj - The guild member object
-     * @returns {boolean} If the user is verified or not
-     * @throws {Error} If the memberObj is not a GuildMember object
-     */
-    getUserVerification: (memberObj) => {
-        return verifiedMembers.members.includes(memberObj.id)
-    },
-    /**
-     * Checks if a user can be direct messaged. If the user is able to be direct messaged, then it will return false. If the user is unable to be direct messaged, then it will return true. If the check fails, then it will throw an error.
-     * @param {import('discord.js').GuildMember} memberObj - The guild member object
-     * @returns {boolean} `True` if The user has passed the check
-     * @throws {Error} If the check fails
-     */
-    checkUserSecurity: async (memberObj) => {
-        let secure
-        await memberObj.send("If you are seeing this than that is not good. Go back to the server to get further instructions.")
-            .then(secure = false)
-            .catch((e) => e.rawError.code === 50007 ? secure = true : secure = null)
+    verifyUser: (memberID) => {
+        if ((!/^\d{18,19}$/.test(memberID))) {throw new Error("Invalid memberID")}
+        if (typeof memberID !== "string") {throw new TypeError("parameter for verifyUser must be a string")}
 
-        if (secure == null) {
-            throw new Error("Failed to run checkUserSecurity function, no information available")
+        const verifiedMembers = JSON.parse(fs.readFileSync(verifiedMembersPath, 'utf8')).members
+        if (verifiedMembers.includes(memberID)) {
+            return
         }
-        return secure
+        verifiedMembers.push(memberID)
+        fs.writeFileSync(verifiedMembersPath, JSON.stringify({members: verifiedMembers}))
     },
-    /**
-     * This function will go through all the verified users and check if they still have DMs disabled. If they don't, then it will unverify them and send a message to the moderator logs channel.
-     * @throws {Error} If the function fails to write to verifiedMembers.json
-     */
-    scanUsers: async () => {
-        async function unverify(member, cannnel) {
-            try {
-                await verification.unverifyUser(member)
-                await role.unverify(member)
+    unverifyUser: (memberID) => {
+        if ((!/^\d{18,19}$/.test(memberID))) {throw new Error("Invalid memberID")}
+        if (typeof memberID !== "string") {throw new TypeError("parameter for unverifyUser must be a string")}
 
-                const embed = new EmbedBuilder()
-                    .setColor(0xFF0000)
-                    .setAuthor({
-                        name: `${member.nickname}`,
-                        iconURL: `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.webp?size=128`
-                    })
-                    .setTitle('A User has been Unverified.')
-                    .setDescription(`<@${member.user.id}> has been unverified.`)
-                    .setTimestamp()
-
-                cannnel.send({ embeds: [embed] })
-            } catch (err) {
-                throw new Error(`Faled to write to verifiedMembers.json. Error: ${err}`)
-            }
+        if (fs.existsSync(`timmybot v1.0/assets/users/profile/${memberID}.json`)) {
+            fs.unlinkSync(`timmybot v1.0/assets/users/profile/${memberID}.json`)
         }
-        const guild = await client.guilds.fetch(guildID)
-        const modCannnel = await guild.channels.fetch(moderatorLogsChannelID)
+        const verifiedMembers = JSON.parse(fs.readFileSync(verifiedMembersPath, 'utf8'))
+        const removeMembers = verifiedMembers.members.filter(item => item !== memberID)
+        fs.writeFileSync(verifiedMembersPath, JSON.stringify({members: removeMembers}))
+    },
+    scanUser: async (memberID) => {
+        if ((!/^\d{18,19}$/.test(memberID))) {throw new Error("Invalid memberID")}
+        if (typeof memberID !== "string") {throw new TypeError("parameter for scanUser must be a string")}
 
-        await verifiedMembers.members.forEach(async (member) => {
-            try {
-                const memberObj = await guild.members.fetch(member)
-
-                if (!(await verification.checkUserSecurity(memberObj))) {
-                    await unverify(memberObj, modCannnel)
-                } else {
+        verification.checkUserSecurity(memberID)
+            .then((result) => {
+                if (!result) {
+                    verification.unverifyUser(memberID)
                 }
-            } catch (err) {
-                console.error(err)
-                modCannnel.send({ content: `\`Failed to scan <@${member.user.id}>. Error: ${err}\`` })
-            }
-        })
+            })
+            .catch((error) => error(error))
+    },
+    scanUsers: async (memberIDs = false) => {
+        const guild = await client.guilds.fetch(guildID)
+        const moderatorLogsChannel = await guild.channels.fetch(moderatorLogsChannelID)
+        if (memberIDs == false) {
+            const verifiedMembers = JSON.parse(fs.readFileSync(verifiedMembersPath, 'utf8')).members
+            memberIDs = verifiedMembers
+        }
+        memberIDs.forEach(ID => {
+            verification.scanUser(ID)
+        });
     }
 }
 

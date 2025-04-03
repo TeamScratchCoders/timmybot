@@ -2,6 +2,7 @@ const { GuildMember, ModalBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle,
 const { verification } = require('./verification.js')
 const { client } = require('../main.js')
 const fs = require('fs');
+const { type } = require('os');
 
 const profile = {
     /**
@@ -20,7 +21,7 @@ const profile = {
                 }
                 const profile = JSON.parse(fs.readFileSync(path + member.id + ".json", 'utf8'))
                 return profile
-            } else if (typeof member === 'string') {
+            } else if (/\d{18}/.test(member)) {
                 if (!fs.existsSync(path + member + ".json")) {
                     return undefined
                 }
@@ -43,8 +44,8 @@ const profile = {
      * @returns {undefined}
      * @throws {Error} If there is an error writing the user's profile file.
      */
-    make: async (id, firstName, lastName, birthDay) => {
-        const contents = { id, firstName, lastName, birthDay, messages: null }
+    make: async (id, firstName, lastName, birthDay, messages) => {
+        const contents = { id, firstName, lastName, birthDay, messages }
         const json = JSON.stringify(contents)
         const path = `timmybot v1.0/assets/users/profile/${id}.json`
         try {
@@ -128,7 +129,7 @@ const profile = {
             return Math.floor(date.getTime() / 1000);
         }
 
-        async function validInput(firstName, lastName, rawbirthDay, memberObj) {
+        async function validInput(firstName, lastName, rawbirthDay, memberID) {
             let invalidInputs = []
 
             if (!/^[a-z]*$/i.test(firstName)) {
@@ -140,7 +141,7 @@ const profile = {
             if (!/^(0?[1-9](?=\D)|1[0-2])\D(?:0?[1-9]|[1-2]\d|3[0-1])\D\d{4}$/.test(rawbirthDay)) {
                 invalidInputs.push('\n`Invalid Birth Date`')
             }
-            if (!(await verification.checkUserSecurity(memberObj))) {
+            if (!(await verification.checkUserSecurity(memberID))) {
                 invalidInputs.push('\n`You haven\'t disabled your DM\'s`')
             }
 
@@ -158,9 +159,8 @@ const profile = {
             const birthDay = getBirthDay(rawbirthDay)
 
             const guild = client.guilds.cache.get(i.guildId)
-            const member = guild.members.cache.get(i.user.id)
 
-            const validInputs = await validInput(firstName, lastName, rawbirthDay, member)
+            const validInputs = await validInput(firstName, lastName, rawbirthDay, i.user.id)
 
             if (await profile.get(i.user.id)) {
                 i.reply({ content: 'You already have a profile.', flags: 64 })
@@ -168,7 +168,7 @@ const profile = {
             }
 
             if (validInputs == true) {
-                profile.make(i.user.id, firstName, lastName, birthDay)
+                profile.make(i.user.id, firstName, lastName, birthDay, null)
                     .then((result) => {
                         if (result) {
                             i.reply({ content: 'Profile made!', flags: 64 })
@@ -192,6 +192,11 @@ const profile = {
             return
         }
     },
+        /**
+         * Handles a message from a user without a profile. If the message is a bot message with the same content, it deletes the message. Otherwise, it sends a message with a button to create a profile.
+         * @param {Interaction} i - The interaction object representing the message.
+         * @returns {Promise<void>}
+         */
     handleNoProfile: async (i) => {
         const guild = client.guilds.cache.get(i.guildId)
         const channel = guild.channels.cache.get(i.channelId)
@@ -213,6 +218,12 @@ const profile = {
 
         await i.reply({ content: `<@${i.author.id}>, You do not have a profile yet. you can't talk to Timmy.`, components: [row] })
         await i.delete()
+    },
+    setMessages: async (id) => {
+        const memberProfile = await profile.get(id)
+
+        const memberMessages = await JSON.parse(fs.readFileSync(`timmybot v1.0/assets/users/message/${id}.json`, 'utf-8'))
+        profile.make(id, memberProfile.firstName, memberProfile.lastName, memberProfile.birthDay, Object.keys(memberMessages.messages).length)
     }
 }
 
