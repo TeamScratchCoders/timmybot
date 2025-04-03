@@ -47,6 +47,7 @@ const verification = {
         const verifiedMembers = JSON.parse(fs.readFileSync(verifiedMembersPath, 'utf8'))
         const removeMembers = verifiedMembers.members.filter(item => item !== memberID)
         fs.writeFileSync(verifiedMembersPath, JSON.stringify({members: removeMembers}))
+        role.unverify(memberID)
     },
     scanUser: async (memberID) => {
         if ((!/^\d{18,19}$/.test(memberID))) {throw new Error("Invalid memberID")}

@@ -1,4 +1,4 @@
-const { youthRoleID, adultRoleID } = require('../../config.json');
+const { youthRoleID, adultRoleID, guildID } = require('../../config.json');
 const { GuildMember } = require('discord.js');
 
 const role = {
@@ -9,14 +9,13 @@ const role = {
      * @throws {TypeError} If the youthRoleID or adultRoleID in config.json is not a valid role ID
      * @throws {Error} If an error occurs while removing the roles
      */
-    unverify: async (memberOBJ) => {
+    unverify: async (memberID) => {
         try {
+            const guild = await client.guilds.fetch(guildID)
+            const memberOBJ = await guild.members.fetch(memberID)
+
             const youthRole = memberOBJ.guild.roles.cache.get(youthRoleID)
             const adultRole = memberOBJ.guild.roles.cache.get(adultRoleID)
-
-            if (!(memberOBJ instanceof GuildMember)) {
-                throw new TypeError(`Expected memberObj to be a GuildMember object. Received: ${typeof memberOBJ}`);
-            }
 
             if (!youthRole) {
                 throw new TypeError(`youthRoleID form config.json is not a valid role ID. (ID: ${youthRoleID})`);
