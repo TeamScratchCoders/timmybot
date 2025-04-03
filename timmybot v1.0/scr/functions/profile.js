@@ -198,12 +198,14 @@ const profile = {
          * @returns {Promise<void>}
          */
     handleNoProfile: async (i) => {
+        let isCammand
+        if (i.isCommand()) {isCammand = true}
         const guild = client.guilds.cache.get(i.guildId)
         const channel = guild.channels.cache.get(i.channelId)
 
         const messages = await channel.messages.fetch({ limit: 2 })
         const message = messages.last()
-        if (message.author.bot && message.content == `<@${i.author.id}>, You do not have a profile yet. you can't talk to Timmy.`) {
+        if (message.author.bot && message.content == `<@${i.author.id}>, You do not have a profile yet.`) {
             await i.delete()
             return
         }
@@ -216,14 +218,18 @@ const profile = {
         const row = new ActionRowBuilder()
             .addComponents(button)
 
-        await i.reply({ content: `<@${i.author.id}>, You do not have a profile yet. you can't talk to Timmy.`, components: [row] })
-        await i.delete()
+        await i.reply({ content: `<@${isCammand ? i.user.id : i.author?.id}>, You do not have a profile yet.`, components: [row], flags: 64 })
+        if (!isCammand) {
+            await i.delete()
+        }
     },
     setMessages: async (id) => {
         const memberProfile = await profile.get(id)
 
-        const memberMessages = await JSON.parse(fs.readFileSync(`timmybot v1.0/assets/users/message/${id}.json`, 'utf-8'))
-        profile.make(id, memberProfile.firstName, memberProfile.lastName, memberProfile.birthDay, Object.keys(memberMessages.messages).length)
+        if (memberProfile !== undefined) {
+            const memberMessages = await JSON.parse(fs.readFileSync(`timmybot v1.0/assets/users/message/${id}.json`, 'utf-8'))
+            profile.make(id, memberProfile.firstName, memberProfile.lastName, memberProfile.birthDay, Object.keys(memberMessages.messages).length)
+        }
     }
 }
 
