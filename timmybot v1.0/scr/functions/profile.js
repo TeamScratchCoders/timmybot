@@ -44,8 +44,8 @@ const profile = {
      * @returns {undefined}
      * @throws {Error} If there is an error writing the user's profile file.
      */
-    make: async (id, firstName, lastName, birthDay, messages) => {
-        const contents = { id, firstName, lastName, birthDay, messages }
+    make: async (id, firstName, lastName, birthDay, messages, description) => {
+        const contents = { id, firstName, lastName, birthDay, messages, description }
         const json = JSON.stringify(contents)
         const path = `timmybot v1.0/assets/users/profile/${id}.json`
         try {
@@ -168,7 +168,7 @@ const profile = {
             }
 
             if (validInputs == true) {
-                profile.make(i.user.id, firstName, lastName, birthDay, null)
+                profile.make(i.user.id, firstName, lastName, birthDay, null, null)
                     .then((result) => {
                         if (result) {
                             i.reply({ content: 'Profile made!', flags: 64 })
@@ -199,7 +199,8 @@ const profile = {
          */
     handleNoProfile: async (i) => {
         let isCammand
-        if (i.isCommand()) {isCammand = true}
+        console.log(i);
+        if (i.commandType != undefined) {isCammand = true}
         const guild = client.guilds.cache.get(i.guildId)
         const channel = guild.channels.cache.get(i.channelId)
 
@@ -218,7 +219,7 @@ const profile = {
         const row = new ActionRowBuilder()
             .addComponents(button)
 
-        await i.reply({ content: `<@${isCammand ? i.user.id : i.author?.id}>, You do not have a profile yet.`, components: [row], flags: 64 })
+        await i.reply({ content: `<@${isCammand ? i.user.id : i.author.id}>, You do not have a profile yet.`, components: [row], flags: 64 })
         if (!isCammand) {
             await i.delete()
         }
@@ -228,7 +229,7 @@ const profile = {
 
         if (memberProfile !== undefined) {
             const memberMessages = await JSON.parse(fs.readFileSync(`timmybot v1.0/assets/users/message/${id}.json`, 'utf-8'))
-            profile.make(id, memberProfile.firstName, memberProfile.lastName, memberProfile.birthDay, Object.keys(memberMessages.messages).length)
+            profile.make(id, memberProfile.firstName, memberProfile.lastName, memberProfile.birthDay, Object.keys(memberMessages.messages).length, memberProfile.description)
         }
     }
 }

@@ -17,8 +17,8 @@ const makeid = async (i) => {
             [input[5], regexWord, "rank"],
             [input[6], regexWord, "patrol"],
             [input[7], regexDate, "issued date"],
-            [input[9], regexDate, "position end date"],
-            [input[10], regexDate, "expiration date"],
+            [input[15], regexDate, "position end date"],
+            [input[16], regexDate, "expiration date"],
         ]
 
         let InvalidResponses = []
@@ -90,7 +90,7 @@ const makeid = async (i) => {
     async function makeCard() {
         const browser = await puppeteer.launch({
             executablePath: '/usr/bin/chromium',
-            headless: true,
+            headless: false,
             args: ['--allow-file-access-from-files']
         });
         const page = await browser.newPage();
@@ -112,7 +112,7 @@ const makeid = async (i) => {
                 { id: 'position', text: position },
                 { id: 'positionStart', text: positionStartDate },
                 { id: 'positionEnd', text: positionEndDate },
-                { id: 'signature', text: firstName + ' ' + lastName },
+                { id: 'signature', text: firstName },
                 { id: 'birthDay', text: birthDate },
                 { id: 'birthDay', text: birthDate },
             ];
@@ -125,9 +125,29 @@ const makeid = async (i) => {
             });
         }, rank, patrol, lastName, firstName, issuedDate, expirationDate, position, positionStartDate, positionEndDate, birthDate);
         
+        await page.evaluate((totinChit, firemanChit, cyberChit, nylt, woodBadge, oa) => {
+            const lists = [
+                { id: 'totenChit', style: `display: ${totinChit == 'true' ? 'block' : 'none'}` },
+                { id: 'firemanChit', style: `display: ${firemanChit == 'true' ? 'block' : 'none'}` },
+                { id: 'cyberChit', style: `display: ${cyberChit == 'true' ? 'block' : 'none'}` },
+                { id: 'nylt', style: `display: ${nylt == 'true' ? 'block' : 'none'}` },
+                { id: 'woodBadge', style: `display: ${woodBadge == 'true' ? 'block' : 'none'}` },
+                { id: 'oa', style: `display: ${oa == 'true' ? 'block' : 'none'}` },
+            ];
+            
+            lists.forEach(lists => {
+                const element = document.querySelectorAll(`#${lists.id}`);
+                element.forEach(element => {
+                    element.style = lists.style;
+                });
+            });
+        }, totinChit, firemanChit, cyberChit, nylt, woodBadge, oa)
+
+        await page.evaluate(async () => await document.fonts.ready);
+
         await page.screenshot({ path: process.cwd() + '/timmybot v1.0/assets/membershipcard/output.png' });
         
-        await browser.close();
+        //TODO: await browser.close();
     }
     
     const inputs = i.options._hoistedOptions.map(option => option.value);
@@ -141,6 +161,12 @@ const makeid = async (i) => {
         patrol,
         issuedDate,
         photo,
+        totinChit,
+        firemanChit,
+        cyberChit,
+        nylt,
+        woodBadge,
+        oa,
         positionEndDate,
         expirationDate
     ] = inputs;

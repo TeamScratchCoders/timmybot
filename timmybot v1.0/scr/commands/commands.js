@@ -139,6 +139,66 @@ const commands = {
                         )
                         .addStringOption(option =>
                             option
+                                .setName('totin-chit')
+                                .setDescription('A badge on the ID showing if you have a Totin Chit')
+                                .setRequired(true)
+                                .addChoices(
+                                    { name: 'True', value: 'true' },
+                                    { name: 'False', value: 'false' }
+                                )
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('fireman-chit')
+                                .setDescription('A badge on the ID showing if you have a Fireman Chit')
+                                .setRequired(true)
+                                .addChoices(
+                                    { name: 'True', value: 'true' },
+                                    { name: 'False', value: 'false' }
+                                )
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('cyber-chit')
+                                .setDescription('A badge on the ID showing if you have a Cyber Chit')
+                                .setRequired(true)
+                                .addChoices(
+                                    { name: 'True', value: 'true' },
+                                    { name: 'False', value: 'false' }
+                                )
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('nylt-training')
+                                .setDescription('A badge on the ID showing if you have NYLT Training')
+                                .setRequired(true)
+                                .addChoices(
+                                    { name: 'True', value: 'true' },
+                                    { name: 'False', value: 'false' }
+                                )
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('wood-badge-training')
+                                .setDescription('A badge on the ID showing if you have Wood Badge Training')
+                                .setRequired(true)
+                                .addChoices(
+                                    { name: 'True', value: 'true' },
+                                    { name: 'False', value: 'false' }
+                                )
+                        )
+                        .addStringOption(option =>
+                            option
+                                .setName('oa-membership')
+                                .setDescription('A badge on the ID showing if you are a OA Member')
+                                .setRequired(true)
+                                .addChoices(
+                                    { name: 'True', value: 'true' },
+                                    { name: 'False', value: 'false' }
+                                )
+                        )
+                        .addStringOption(option =>
+                            option
                                 .setName('position-end-date')
                                 .setDescription('Foremat:(MM/DD/YYYY). If left out it will automatically set it to 6 months from start date.')
                                 .setRequired(false)

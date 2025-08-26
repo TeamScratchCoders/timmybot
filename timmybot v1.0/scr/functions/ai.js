@@ -178,7 +178,7 @@ const ai = {
             return (await allText);
         }
 
-        function prompt(msgList, lastMsgTimestamp, age) {
+        async function prompt(msgList, lastMsgTimestamp, age) {
             /**
              * Generates a string of messages condensed.
              * @param {Array<{ nickname: string, content: string, image: boolean, imageDescription: string}>} msgList - List of messages objs
@@ -208,13 +208,11 @@ const ai = {
 
             let prompt = `Time: ${new Date().toLocaleTimeString()}, Date: ${new Date().toLocaleDateString()}, Last Message Received: ${generateTime(lastMsgTimestamp)}, `
 
-            console.log(prompt);
-            
-
-            condense(msgList).forEach((msg) => {
-                const image = msg.image ? `, *${msg.nickname} Sent an image: ${msg.imageDescription}*` : ''
-                prompt += `(${msg.nickname} | Age: ${age}): "${msg.content}"${image} `
-            })
+            for (const msg of condense(msgList)) {
+                const profileData = await profile.get(msg.id);
+                const image = msg.image ? `, *${msg.nickname} Sent an image: ${msg.imageDescription}*` : '';
+                prompt += `(${typeof profileData.description === "string" ? `*${profileData.description}*`: ``} ${profileData.firstName} ${profileData.lastName} | Age: ${age}): "${msg.content}"${image} `;
+            }
 
             return prompt
         }
@@ -227,10 +225,10 @@ const ai = {
         
         if (imageUrl.length > 0) {            
             imageUrl.forEach(async(image) => {
-                msgAccumulator.push({ nickname: nickname, content: i.content, image: true, imageDescription: await ai.describeImage(image) })  
+                msgAccumulator.push({ id: i.author.id, nickname: nickname, content: i.content, image: true, imageDescription: await ai.describeImage(image) })  
             })
         } else {
-            msgAccumulator.push({ nickname: nickname, content: i.content, image: false, imageDescription: null })
+            msgAccumulator.push({ id: i.author.id, nickname: nickname, content: i.content, image: false, imageDescription: null })
         }
 
         msgTimer = 3000
@@ -252,7 +250,7 @@ const ai = {
 
             channel.sendTyping()
 
-            await aiText.type('.text-lg,.text-lg-chat', `${prompt(msgAccumulator, lastMsgTimestamp, getAge(await profile.get(i.author.id)))}\n`)
+            await aiText.type('.text-lg,.text-lg-chat', `${await prompt(msgAccumulator, lastMsgTimestamp, getAge(await profile.get(i.author.id)))}\n`)
 
             msgAccumulator = []
 
@@ -267,9 +265,6 @@ const ai = {
             await delay(1500)
 
             const output = await getlastMsg()
-
-            console.log(output);
-            
 
             lastMsgTimestamp = Math.floor(Date.now() / 1000)
 
