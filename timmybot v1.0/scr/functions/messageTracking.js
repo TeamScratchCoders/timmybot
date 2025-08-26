@@ -1,3 +1,4 @@
+const {profile} = require('./profile.js')
 const fs = require('fs')
 const example = {
     user: {
@@ -21,6 +22,22 @@ function generateExample(id, username, nickname) {
     }
 }
 
+
+function level(currentXP, baseXP = 100) {
+    let count = 0;
+    let subtract = baseXP;
+    while (currentXP >= subtract) {
+        subtract += baseXP * Math.log(count + 1);
+        count++;
+    }
+    return count
+}
+
+function didLevel(currentXP) {
+    let lastXP = level(currentXP - 1);
+    return level(currentXP) !== lastXP
+}
+
 const messageTracking = async (i) => {
     try {
         let usermessage
@@ -38,7 +55,18 @@ const messageTracking = async (i) => {
             content: `${i.content}`
         }
 
+        const memberProfile = await profile.get(i.author.id)
         await fs.writeFileSync(`timmybot v1.0/assets/users/message/${i.author.id}.json`, JSON.stringify(usermessage, null, 2))
+
+        if (memberProfile == undefined) {
+            return
+        }
+
+        if (didLevel(memberProfile.messages)) {
+            await i.reply({ content: `You have leveled up to level ${level(memberProfile.messages)} :partying_face:`, flags: 64 })
+        }
+
+        await profile.setMessages(i.author.id)
     } catch (err) {
         console.log(err)
     }

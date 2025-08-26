@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+        }
+
+        .id {
+            width: 2100px;
+            height: 1200px;
+        }
+
+        .portrait {
+            width: 608px;
+            height: 786px;
+            top: 174px;
+            left: 111px;
+            object-fit: cover;
+        }
+
+        .seal {
+            top: 217px;
+            left: 589px;
+        }
+
+        .portrait2 {
+            width: 245px;
+            height: 317px;
+            top: 790px;
+            left: 1744px;
+            filter: grayscale();
+            opacity: 70%;
+            object-fit: cover;
+        }
+
+        .BSAwatermark {
+            top: 1045px;
+            left: 1741px;
+            font-size: 100px;
+            font-family: "Roboto Slab", serif;
+            font-size: 81px;
+            font-weight: 900;
+            color: #F00;
+        }
+
+        .signature {
+            /*font-size: 102px;*/
+            top: 948px;
+            left: 107px;
+            width: 618px;
+            text-align: center;
+            font-size: 70px;
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Pacifico", cursive;
+        }
+
+        .info {
+            display: flex;
+            font-size: 65px;
+            width: 1011px;
+            top: 514px;
+            left: 732px;
+            gap: 6px;
+        }
+
+        .info .labels {
+            width: 257px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 700;
+            text-align: right;
+            color: #920000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info .values {
+            font-family: "Roboto", sans-serif;
+            font-weight: 700;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-transform: uppercase;
+        }
+
+        .position {
+            display: flex;
+            top: 258px;
+            left: 1426px;
+        }
+
+        .position .labels {
+            font-family: "Roboto", sans-serif;
+            color: #920000;
+            width: 203px;
+            text-align: right;
+            font-size: 39px;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .position .values {
+            font-family: "Roboto", sans-serif;
+            font-size: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+            width: 362px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+        
+        .position .values li {
+            font-size: 39px;
+            font-weight: 600;
+        }
+
+        ul {
+            position: relative;
+            list-style-type: none;
+        }
+
+        li {
+            position: relative;
+        }
+        .bday {
+            top: 1040px;
+            left: 1231px;
+            font-size: 93px;
+            font-weight: 900;
+            font-family: "Roboto Slab", serif;
+        }
+
+        .accomplishments {
+            top: 1068px;
+            left: 107px;
+            width: 618px;
+            height: 132px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .accomplishments img {
+            width: 100px;
+            margin: 16px;
+            position: relative;
+        }
+        .troopSeal {
+            top: 757px;
+            left: 589px;
+            width: 200px;
+            margin: 32px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./201membershipCardV2blank.png" class="id">
+    <img src="./portrait.png" class="portrait">
+    <img src="./portrait.png" class="portrait2">
+    <img src="./BSA_Seal.png" class="seal">
+    <img src="./Troop_201_Seal.png" class="troopSeal">
+    <p class="BSAwatermark">BSA</p>
+    <p class="signature" id="signature"></p>
+    <div class="info">
+        <ul class="labels">
+            <li>RANK:</li>
+            <li>PATROL:</li>
+            <li>NAME:</li>
+            <li><br></li>
+            <li>ISS:</li>
+            <li>EXP:</li>
+        </ul>
+        <ul class="values">
+            <li id="rank"></li>
+            <li id="patrol"></li>
+            <li id="lastName"></li>
+            <li id="firstName"></li>
+            <li id="issued"></li>
+            <li id="expires"></li>
+        </ul>
+    </div>
+    <div class="position">
+        <ul class="labels">
+            <li>POSITION:</li>
+            <li>START:</li>
+            <li>END:</li>
+            <li>BIRTHDAY:</li>
+        </ul>
+        <ul class="values">
+            <li id="position" style="font-size: 30px; padding: 6px 0;"></li>
+            <li id="positionStart"></li>
+            <li id="positionEnd"></li>
+            <li id="birthDay"></li>
+        </ul>
+    </div>
+    <p class="bday" id="birthDay"></p>
+    <div class="accomplishments">
+        <img src="./axe.svg" id="totenChit">
+        <img src="./fire.svg" id="firemanChit">
+        <img src="./binary.svg" id="cyberChit">
+        <img src="./paw.svg" id="nylt">
+        <img src="./acorn.svg" id="woodBadge">
+        <img src="./feather.svg" id="oa">
+    </div>
+</body>
+
+</html>

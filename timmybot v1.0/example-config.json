@@ -8,6 +8,7 @@
     "supportChannelID": "",
     "aiChannelID": "",
     "webmasterRoleID" :"",
+    "moderatorLogsChannelID": "",
     "botCommandChannelID": "",
     "generalChannelID": "",
     "aiDnD": "",
@@ -15,5 +16,8 @@
     "email": "",
     "emailHost": "",
     "emailservice": "",
-    "adminEmail": ""
+    "adminEmail": "",
+    "youthRole": "",
+    "adultRole": "",
+    "testMode": true
 }

@@ -1,8 +1,5 @@
-const { supervisor, supervisorPermisses } = require('../../../supervisor.js')
-let supervisorPermissesBoolean = true
-supervisorPermisses.on('fail', () => {
-    supervisorPermissesBoolean = false
-})
+const { supervisor } = require('../../../supervisor.js')
+
 const functionNames = [
     'joinMessage',
     'quiz',
@@ -12,21 +9,18 @@ const functionNames = [
     'role',
     'messageTracking',
     'madlibFunc',
-    'scoutskills',
-    'peepingTom'
+    'peepingTom',
+    'profile'
 ]
 let functions = {};
 
-if (supervisorPermissesBoolean) {
-    for (let i = 0; i < functionNames.length; i++) {
-        const e = functionNames[i];
-        try {
-            functions[e] = require(`./${e}`)[e]
-            supervisor.succeed(`successfully loaded ${e} function`)
-        } catch (err) {
-            supervisor.fail(1, err, `failed to load ${e} function`)
-        }
-
+for (let i = 0; i < functionNames.length; i++) {
+    const e = functionNames[i];
+    try {
+        functions[e] = require(`./${e}`)[e]
+        supervisor.succeed(`successfully loaded ${e} function`)
+    } catch (err) {
+        supervisor.fail(1, err, `failed to load ${e} function`)
     }
 }
 
